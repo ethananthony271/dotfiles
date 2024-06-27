@@ -1,0 +1,17 @@
+set editor = "nvim"
+source gruvbox.muttrc
+
+# ethananthony271@gmail.com
+set smtp_url = "smtp://ethananthony271@gmail.com@smtp.gmail.com:587/"
+set smtp_pass = "ugnyxbwiwqehfhyt"
+
+set folder = "imaps://ethananthony271@gmail.com@imap.gmail.com:993"
+set imap_pass = "ugnyxbwiwqehfhyt"
+
+set spoolfile = "+INBOX"
+set record = "+Sent"
+set trash = "+Trash"
+mailboxes =INBOX =Sent =Trash =Junk =Other
+
+set from = "ethananthony271@gmail.com"
+set realname = "Ethan Anthony"

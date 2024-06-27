@@ -1,0 +1,219 @@
+#### GENERAL ####
+def_key "U"
+  dummy
+
+def_key "up"
+  dummy
+
+def_key "down"
+  dummy
+
+def_key "page_up"
+  dummy
+
+def_key "page_down"
+  dummy
+
+def_key "home"
+  dummy
+
+def_key "end"
+  dummy
+
+def_key "shift-tab"
+  dummy
+
+def_key "="
+  dummy
+
+def_key "right"
+  dummy
+
+def_key "left"
+  dummy
+
+def_key "+"
+  dummy
+
+def_key "f"
+  dummy
+
+def_key "b"
+  dummy
+
+def_key "T"
+  dummy
+
+#### NAVIGATION ####
+def_key "k"
+  scroll_up
+
+def_key "j"
+  scroll_down
+
+def_key "K"
+  scroll_up
+  scroll_up
+  scroll_up
+  scroll_up
+  scroll_up
+
+def_key "J"
+  scroll_down
+  scroll_down
+  scroll_down
+  scroll_down
+  scroll_down
+
+def_key "ctrl-k"
+  page_up
+
+def_key "ctrl-j"
+  page_down
+
+def_key "["
+  scroll_up_album
+
+def_key "]"
+  scroll_down_album
+
+def_key "{"
+  scroll_up_artist
+
+def_key "}"
+  scroll_down_artist
+
+def_key "g"
+  move_home
+
+def_key "G"
+  move_end
+
+def_key "l"
+  enter_directory
+
+def_key "l"
+  next_column
+
+def_key "l"
+  slave_screen
+
+def_key "h"
+  jump_to_parent_directory
+
+def_key "h"
+  previous_column
+
+def_key "h"
+  master_screen
+
+def_key "L"
+  next_screen
+
+def_key "H"
+  previous_screen
+
+def_key "1"
+  show_playlist
+
+def_key "2"
+  show_browser
+
+# def_key "2"
+#   change_browse_mode
+
+def_key "3"
+  show_search_engine
+
+def_key "3"
+  reset_search_engine
+
+def_key "4"
+  show_media_library
+
+def_key "4"
+  toggle_media_library_columns_mode
+
+def_key "5"
+  show_playlist_editor
+
+def_key "6"
+  show_tag_editor
+
+def_key "7"
+  show_outputs
+
+def_key "8"
+  show_visualizer
+
+def_key "9"
+  show_clock
+
+def_key "@"
+  show_server_info
+
+#### GLOBAL ####
+def_key "backspace"
+  play
+
+def_key "s"
+  stop
+
+def_key "p"
+  pause
+
+def_key ">"
+  next
+
+def_key "<"
+  previous
+
+def_key "."
+  seek_forward
+
+def_key ","
+  seek_backward
+
+def_key "up"
+  volume_up
+
+def_key "down"
+  volume_down
+
+#### MISCELLANEOUS ####
+def_key "space"
+  select_item
+  scroll_down
+
+def_key "enter"
+  toggle_output
+
+def_key "enter"
+  run_action
+
+def_key "enter"
+  play_item
+
+def_key "tab"
+  add_item_to_playlist
+
+def_key "tab"
+  toggle_lyrics_update_on_song_change
+
+def_key "tab"
+  toggle_visualization_type
+
+def_key "x"
+  delete_playlist_items
+
+def_key "x"
+  delete_browser_items
+
+def_key "x"
+  delete_stored_playlist
+
+def_key ":"
+  execute_command
+
+def_key "u"
+  update_database

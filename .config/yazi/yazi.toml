@@ -1,0 +1,38 @@
+[manager]
+ratio = [1, 4, 3]
+sort_by = "extension"
+set_dir_first = true
+show_symlink = true
+scrolloff = 10
+
+[opener]
+neovim = [
+  { run = 'nvim "$@"', block = true, desc = "neovim" },
+]
+mpv = [
+  { run = 'mpv "$@"', orphan = true, desc = "mpv" },
+]
+sxiv = [
+  { run = 'sxiv -a "$@"', block = true, desc = "sxiv" },
+]
+tdf = [
+  { run = 'tdf "$@"', block = true, desc = "tdf" },
+]
+librewolf = [
+  { run = 'librewolf "$@"', orphan = true, desc = "LibreWolf" },
+]
+libreoffice = [
+  { run = 'libreoffice "$@"', orphan = true, desc = "LibreOffice" },
+]
+xdg-open = [
+  { run = 'xdg-open "$@"', desc = "xdg-open" },
+]
+
+[open]
+rules = [
+  { mime = "text/*", use = ["neovim", "librewolf"] },
+  { mime = "video/*", use = ["mpv", "librewolf"] },
+  { mime = "audio'*", use = ["mpv", "librewolf"] },
+  { mime = "image/*", use = ["sxiv", "librewolf"] },
+  { mime = "application/pdf", use = ["tdf", "librewolf", "librewolf"] },
+]
