@@ -20,7 +20,7 @@ return {
       dashboard.button("g", "󰊄  Live grep", "<cmd>cd ~/Documents | Telescope live_grep<CR>"),
       dashboard.button("r", "  Recent files", ":Telescope oldfiles<CR>"),
       dashboard.button("s", "  School", "<cmd>cd ~/Documents/School/ | Yazi<CR>"),
-      dashboard.button("c", "  Configuration", "<cmd>cd ~/.config/ | Yazi<CR>"),
+      dashboard.button("c", "  Configuration", "<cmd>cd ~/.dotfiles/ | Yazi<CR>"),
       dashboard.button("p", "󰒠  Project Euler", "<cmd>cd ~/Documents/Personal/'Project Euler'/ | Yazi<CR>"),
       dashboard.button("l", "  Leet Code", "<cmd>cd ~/Documents/Personal/'Leet Code'/ | Yazi<CR>"),
       dashboard.button("u", "  Update plugins", "<cmd>Lazy sync<CR>"),
