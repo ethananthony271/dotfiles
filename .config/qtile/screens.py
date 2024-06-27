@@ -87,12 +87,6 @@ def init_screens():
                     widget.Clock(
                         format = "%Y-%m-%d %a %I:%M %p",
                     ),
-                    widget.TextBox(
-                        fmt = "",
-                        font = "FiraCode Nerd Font Mono Bold",
-                        fontsize = 20,
-                        mouse_callbacks = {"Button1": lazy.spawn("rofi -show p -modi p:rofi-power-menu")},
-                    )
                 ],
                 32,
                 background = c["bar"],
