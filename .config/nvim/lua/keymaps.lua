@@ -39,14 +39,14 @@ vim.keymap.set("n", "<leader>fb", ":Telescope buffers<CR>", { noremap = true, si
 vim.keymap.set("n", "<leader>fh", ":Telescope help_tags<CR>", { noremap = true, silent = true,    desc = "Telescope: Buffers" })
 
                                 -- INSERT MODE --
-vim.keymap.set("n", "<leader>ga", ":Git add .<CR>", { noremap = true, silent = true,              desc = "Git Add" })
-vim.keymap.set("n", "<leader>gs", ":Git status<CR>", { noremap = true, silent = true,             desc = "Git Status" })
-vim.keymap.set("n", "<leader>gd", ":Git diff<CR>", { noremap = true, silent = true,               desc = "Git Diff" })
-vim.keymap.set("n", "<leader>gc", ":Git commit<CR>", { noremap = true, silent = true,             desc = "Git Commit" })
-vim.keymap.set("n", "<leader>gb", ":Git branch<CR>", { noremap = true, silent = true,             desc = "Git Branch" })
-vim.keymap.set("n", "<leader>go", ":Git checkout<CR>", { noremap = true, silent = true,           desc = "Git Checkout" })
-vim.keymap.set("n", "<leader>gp", ":Git push<CR>", { noremap = true, silent = true,               desc = "Git Push" })
-vim.keymap.set("n", "<leader>gm", ":Git merge<CR>", { noremap = true, silent = true,              desc = "Git Merge" })
+-- vim.keymap.set("n", "<leader>ga", ":Git add .<CR>", { noremap = true, silent = true,              desc = "Git Add" })
+-- vim.keymap.set("n", "<leader>gs", ":Git status<CR>", { noremap = true, silent = true,             desc = "Git Status" })
+-- vim.keymap.set("n", "<leader>gd", ":Git diff<CR>", { noremap = true, silent = true,               desc = "Git Diff" })
+-- vim.keymap.set("n", "<leader>gc", ":Git commit<CR>", { noremap = true, silent = true,             desc = "Git Commit" })
+-- vim.keymap.set("n", "<leader>gb", ":Git branch<CR>", { noremap = true, silent = true,             desc = "Git Branch" })
+-- vim.keymap.set("n", "<leader>go", ":Git checkout<CR>", { noremap = true, silent = true,           desc = "Git Checkout" })
+-- vim.keymap.set("n", "<leader>gp", ":Git push<CR>", { noremap = true, silent = true,               desc = "Git Push" })
+-- vim.keymap.set("n", "<leader>gm", ":Git merge<CR>", { noremap = true, silent = true,              desc = "Git Merge" })
 vim.keymap.set("n", "<leader>gh", ":Gitsigns preview_hunk<CR>", { noremap = true, silent = true,  desc = "Git Preview Hunk" })
 
 
