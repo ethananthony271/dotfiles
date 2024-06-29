@@ -89,6 +89,7 @@ alias q='exit'
 alias m='neomutt'
 alias d='yazi'
 alias f='macchina'
+alias a='./a.out'
 
 alias convert='/usr/local/bin/convert_files.sh '
 
