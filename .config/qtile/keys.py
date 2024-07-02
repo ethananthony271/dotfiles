@@ -82,7 +82,7 @@ def init_keys():
         Key([mod], "space", lazy.spawn("rofi -modi drun,window,ssh,calc -show drun"), desc="Launch Rofi"),
 
         # Toggle light/dark mode
-        Key([mod], "grave", lazy.spawn(os.path.expanduser("~/.config/qtile/scripts/toggleTheme.sh"), shell=True), desc="Toggle light/dark mode"),
+        # Key([mod], "grave", lazy.spawn(os.path.expanduser("~/.config/qtile/scripts/toggleTheme.sh"), shell=True), desc="Toggle light/dark mode"),
 
         # Various Rofi menus
         Key([mod], "Delete", lazy.spawn("rofi -show p -modi p:rofi-power-menu.sh"), desc="Rofi power menu"),

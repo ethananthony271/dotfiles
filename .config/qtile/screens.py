@@ -43,7 +43,7 @@ def init_screens():
                         padding = 10,
                     ),
                     widget.Mpd2(
-                        status_format = "{artist} - {title} [{album}]",
+                        status_format = "{artist} - {title}",
                         idle_format = "{idle_message}", idle_message="--------------------",
                         interval = 1.0,
                         play_states = {"pause": "▶", "play": "󰏤", "stop": "■"},
@@ -103,8 +103,9 @@ def init_screens():
                         padding = 3,
                     ),
                     widget.TextBox( fmt = "|" ),
-                    widget.TextBox(
-                        fmt = "󱊣",
+                    widget.Battery(
+                        format = "󱊣",
+                        low_foreground = c["alt_red"],
                         fontsize = 15,
                         padding = 3,
                     ),
