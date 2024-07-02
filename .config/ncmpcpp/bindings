@@ -119,9 +119,6 @@ def_key "1"
 def_key "2"
   show_browser
 
-# def_key "2"
-#   change_browse_mode
-
 def_key "3"
   show_search_engine
 
@@ -217,3 +214,6 @@ def_key ":"
 
 def_key "u"
   update_database
+
+def_key "?"
+  show_help
