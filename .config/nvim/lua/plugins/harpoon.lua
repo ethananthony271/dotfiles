@@ -26,22 +26,22 @@ return {
     end
 
 
-    return {
-      {"<leader>1", function() harpoon:list():select(1) end, desc ="Harpoon buffer 1"},
-      {"<leader>2", function() harpoon:list():select(2) end, desc ="Harpoon buffer 2"},
-      {"<leader>3", function() harpoon:list():select(3) end, desc ="Harpoon buffer 3"},
-      {"<leader>4", function() harpoon:list():select(4) end, desc ="Harpoon buffer 4"},
-      {"<leader>5", function() harpoon:list():select(5) end, desc ="Harpoon buffer 5"},
-      {"<leader>6", function() harpoon:list():select(6) end, desc ="Harpoon buffer 6"},
-      {"<leader>s", function() harpoon:list():prev() end, desc ="Harpoon prev buffer"},
-      {"<leader>d", function() harpoon:list():next() end, desc ="Harpoon next buffer"},
+    -- return {
+    --   {"<leader>1", function() harpoon:list():select(1) end, desc ="Harpoon buffer 1"},
+    --   {"<leader>2", function() harpoon:list():select(2) end, desc ="Harpoon buffer 2"},
+    --   {"<leader>3", function() harpoon:list():select(3) end, desc ="Harpoon buffer 3"},
+    --   {"<leader>4", function() harpoon:list():select(4) end, desc ="Harpoon buffer 4"},
+    --   {"<leader>5", function() harpoon:list():select(5) end, desc ="Harpoon buffer 5"},
+    --   {"<leader>6", function() harpoon:list():select(6) end, desc ="Harpoon buffer 6"},
+    --   {"<leader>s", function() harpoon:list():prev() end, desc ="Harpoon prev buffer"},
+    --   {"<leader>d", function() harpoon:list():next() end, desc ="Harpoon next buffer"},
 
-      {"<leader>a", function() harpoon:list():add() end, desc ="Harpoon add file"},
-      {"<leader>A", function() harpoon:list():remove()  end, desc ="Harpoon remove file"},
+    --   {"<leader>a", function() harpoon:list():add() end, desc ="Harpoon add file"},
+    --   {"<leader>A", function() harpoon:list():remove()  end, desc ="Harpoon remove file"},
 
-      {"<tab>", function() toggle_telescope(harpoon:list() )end, desc ="Open Harpoon window"},
-      -- TODO: Add leader-tab to open just the harpoon menu
-    }
+    --   {"<tab>", function() toggle_telescope(harpoon:list() )end, desc ="Open Harpoon window"},
+    --   -- TODO: Add leader-tab to open just the harpoon menu
+    -- }
   end,
 
   -- ----------------------------------------------------------------------- }}}

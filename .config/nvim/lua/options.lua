@@ -9,6 +9,8 @@ vim.cmd("set nowrap")
 vim.cmd("set scrolloff=10")
 vim.cmd("set sidescrolloff=10")
 vim.cmd("set colorcolumn=90")
+vim.cmd("set ignorecase")
+vim.cmd("set smartcase")
 
 -- CODE FOLDING SETTINGS
 vim.cmd("set foldcolumn=1")
