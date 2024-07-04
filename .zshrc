@@ -91,6 +91,13 @@ alias d='yazi'
 alias f='macchina'
 alias a='./a.out'
 
+alias ta='todo add '
+alias tm='todo rm '
+alias td='todo done '
+alias tl='todo list'
+alias ts='todo sort'
+
+alias yt-dlp-a='yt-dlp --config-locations ~/.config/yt-dlp/albumconfig.conf '
 alias convert='/usr/local/bin/convert_files.sh '
 
 kitty-reload() {
