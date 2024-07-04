@@ -10,8 +10,8 @@ terminal = "kitty"
 browser = "librewolf"
 fileManager = "kitty -e yazi"
 musicPlayer = "kitty -e ncmpcpp"
-messager = "kitty"
-emailClient = "kitty -e neomutt"
+messager = "beeper"
+emailClient = "betterbird"
 
 def init_keys():
     keys = [
@@ -79,13 +79,14 @@ def init_keys():
         Key([], "Print", lazy.spawn("flameshot gui"), desc="Volume down"),
 
         # Launch Rofi
-        Key([mod], "space", lazy.spawn("rofi -modi drun,window,ssh,calc -show drun"), desc="Launch Rofi"),
+        Key([mod], "space", lazy.spawn("rofi -modi drun,window,calc -show drun"), desc="Launch Rofi"),
 
         # Toggle light/dark mode
         # Key([mod], "grave", lazy.spawn(os.path.expanduser("~/.config/qtile/scripts/toggleTheme.sh"), shell=True), desc="Toggle light/dark mode"),
 
         # Various Rofi menus
-        Key([mod], "Delete", lazy.spawn("rofi -show p -modi p:rofi-power-menu.sh"), desc="Rofi power menu"),
+        # Key([mod], "Delete", lazy.spawn("rofi -show p -modi p:rofi-power-menu.sh"), desc="Rofi power menu"),
+        Key([mod], "Delete", lazy.spawn("rofi -config ~/.config/rofi/themes/powermenu.rasi -show p -modi p:rofi-power-menu.sh"), desc="Rofi power menu"),
         Key([mod], "BackSpace", lazy.spawn("rofi-wifi-menu.sh"), desc="Rofi power menu"),
 
         # Fancy workspace management

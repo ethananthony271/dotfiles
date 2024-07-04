@@ -13,4 +13,5 @@ configuration {
   kb-mode-next: "Control+l";
   kb-mode-previous: "Control+h";
 }
-@theme "~/.config/rofi/themes/gruvbox-light-soft"
+
+@theme "~/.config/rofi/themes/main.rasi"
