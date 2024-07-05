@@ -43,6 +43,11 @@ vim.keymap.set("n", "<leader>oc", ":Copy ", { noremap = true, silent = true,   d
 vim.keymap.set("n", "<leader>od", ":Mkdir ", { noremap = true, silent = true,   desc = "Create directory" })
 vim.keymap.set("n", "<leader>op", ":pwd<CR>", { noremap = true, silent = true,   desc = "Print working directory" })
 
+-- LSP
+-- vim.keymap.set("n", "<leader>lh", vim.lsp.buf.hover, { noremap = true, silent = true,   desc = "Print working directory" })
+-- vim.keymap.set("n", "<leader>ld", "<cmd>tab split | lua vim.lsp.buf.definition()<CR>", { noremap = true, silent = true,   desc = "Print working directory" })
+-- vim.keymap.set("n", "<leader>lc", vim.lsp.buf.code_action, { noremap = true, silent = true,   desc = "Print working directory" })
+
                                 -- INSERT MODE --
 
 
