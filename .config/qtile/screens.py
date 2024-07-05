@@ -92,8 +92,10 @@ def init_screens():
                         update_interval = 10,
                     ),
                     widget.TextBox( fmt = "|" ),
-                    widget.TextBox(
-                        fmt = "",
+                    widget.Volume(
+                        fmt = "{}",
+                        unmute_format = "",
+                        mute_format = "󰝟",
                         fontsize = 20,
                         padding = 3,
                     ),
