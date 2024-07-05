@@ -3,3 +3,4 @@
 .config/mpd/state
 .config/zsh/.zsh_history
 .config/mpd/database
+.config/nvim/lazy-lock.json
