@@ -24,8 +24,8 @@ return {
       dashboard.button("c", "  Configuration", "<cmd>cd ~/.dotfiles/ | Yazi<CR>"),
       dashboard.button("p", "󰒠  Project Euler", "<cmd>cd ~/Documents/Personal/projectEuler/ | Yazi<CR>"),
       dashboard.button("l", "  Leet Code", "<cmd>cd ~/Documents/Personal/leetCode/ | Yazi<CR>"),
-      dashboard.button("p", "  Learn C", "<cmd>cd ~/Documents/Personal/learnC/ | Yazi<CR>"),
-      dashboard.button("u", "  Update plugins", "<cmd>Lazy sync<CR>"),
+      dashboard.button("p", "  Learn C", "<cmd>cd ~/Documents/Personal/learnC/ | Yazi<CR>"),
+      dashboard.button("u", "  Update plugins", "<cmd>Lazy sync<CR>"),
       dashboard.button("q", "󰅚  Quit", "<cmd>qa<CR>"),
     }
     local handle = io.popen('fortune')
