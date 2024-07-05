@@ -26,12 +26,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
-import keys, screens, colors, mouse, layouts, floating_layout
-import os
-from libqtile import bar, layout, qtile, widget
-from libqtile.config import Click, Drag, Group, Key, Match, Screen
-from libqtile.lazy import lazy
-from libqtile.utils import guess_terminal
+import keys
+import screens
+import colors
+import mouse
+import layouts
+import floating_layout
 
 mod = "mod4"
 terminal = "kitty"
