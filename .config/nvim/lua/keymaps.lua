@@ -35,6 +35,14 @@ vim.keymap.set("n", "<leader>fh", ":Telescope help_tags hidden=true<CR>", { nore
 -- GIT
 vim.keymap.set("n", "<leader>gh", ":Gitsigns preview_hunk<CR>", { noremap = true, silent = true,  desc = "Git Preview Hunk" })
 
+-- UNIX INTEGRATION
+vim.keymap.set("n", "<leader>od!", ":Delete!<CR>", { noremap = true, silent = true,   desc = "Delete file and buffer" })
+vim.keymap.set("n", "<leader>or", ":Rename ", { noremap = true, silent = true,   desc = "Rename file and buffer" })
+vim.keymap.set("n", "<leader>om", ":Move ", { noremap = true, silent = true,   desc = "Move file and buffer" })
+vim.keymap.set("n", "<leader>oc", ":Copy ", { noremap = true, silent = true,   desc = "Copy file and buffer" })
+vim.keymap.set("n", "<leader>od", ":Mkdir ", { noremap = true, silent = true,   desc = "Create directory" })
+vim.keymap.set("n", "<leader>op", ":pwd<CR>", { noremap = true, silent = true,   desc = "Print working directory" })
+
                                 -- INSERT MODE --
 
 
