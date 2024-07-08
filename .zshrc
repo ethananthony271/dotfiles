@@ -78,6 +78,7 @@ alias gb='git branch '
 alias go='git checkout '
 alias gp='git push '
 alias gm='git merge '
+alias gf='git fetch '
 
 alias cat='bat --theme gruvbox-dark '
 
