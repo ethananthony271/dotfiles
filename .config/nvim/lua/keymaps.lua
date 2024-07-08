@@ -10,7 +10,11 @@ vim.g.maplocalleader = " "
 vim.keymap.set("n", "<leader>h", ":nohl<CR>", { noremap = true, silent = true,                    desc = "Clear Highlighting" })
 vim.keymap.set("n", "U", "<C-r>", { noremap = true, silent = true,                                desc = "Redo" })
 vim.keymap.set("n", "<leader>fo", "<cmd>Yazi<CR>", { noremap = true, silent = true,               desc = "Toggle Yazi" })
+vim.keymap.set("n", "<leader>fO", "<cmd>Oil<CR>", { noremap = true, silent = true,               desc = "Toggle Yazi" })
 vim.keymap.set("n", ")", "$", { noremap = true, silent = true,                                    desc = "Go to end of line" })
+vim.keymap.set("n", "<C-'>", "<C-y>", { noremap = true, silent = true,                            desc = "Move screen up" })
+vim.keymap.set("n", "<C-;>", "<C-e>", { noremap = true, silent = true,                            desc = "Move screen down" })
+vim.keymap.set("n", "<BS>", "<C-o>", { noremap = true, silent = true,                        desc = "Move cursor to previous place" })
 
 -- WINDOW MANAGEMENT
 vim.keymap.set("n", "<C-h>", "<C-w>h", { noremap = true, silent = true,                           desc = "Move window focus left" })
@@ -40,7 +44,7 @@ vim.keymap.set("n", "<leader>od!", ":Delete!<CR>", { noremap = true, silent = tr
 vim.keymap.set("n", "<leader>or", ":Rename ", { noremap = true, silent = true,   desc = "Rename file and buffer" })
 vim.keymap.set("n", "<leader>om", ":Move ", { noremap = true, silent = true,   desc = "Move file and buffer" })
 vim.keymap.set("n", "<leader>oc", ":Copy ", { noremap = true, silent = true,   desc = "Copy file and buffer" })
-vim.keymap.set("n", "<leader>od", ":Mkdir ", { noremap = true, silent = true,   desc = "Create directory" })
+vim.keymap.set("n", "<leader>od", ":Mkdir ", { noremap = true, silent = true,    desc = "Create directory" })
 vim.keymap.set("n", "<leader>op", ":pwd<CR>", { noremap = true, silent = true,   desc = "Print working directory" })
 
 -- LSP
