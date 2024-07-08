@@ -1,4 +1,4 @@
-return  {
+return {
   {
     "DreamMaoMao/yazi.nvim",
     dependencies = {
