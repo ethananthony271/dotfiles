@@ -15,6 +15,7 @@ vim.keymap.set("n", ")", "$", { noremap = true, silent = true,                  
 vim.keymap.set("n", "<C-'>", "<C-y>", { noremap = true, silent = true,                            desc = "Move screen up" })
 vim.keymap.set("n", "<C-;>", "<C-e>", { noremap = true, silent = true,                            desc = "Move screen down" })
 vim.keymap.set("n", "<BS>", "<C-o>", { noremap = true, silent = true,                        desc = "Move cursor to previous place" })
+vim.keymap.set("n", "<leader>m", ":RenderMarkdownToggle<CR>", { noremap = true, silent = true,                        desc = "Move cursor to previous place" })
 
 -- WINDOW MANAGEMENT
 vim.keymap.set("n", "<C-h>", "<C-w>h", { noremap = true, silent = true,                           desc = "Move window focus left" })
