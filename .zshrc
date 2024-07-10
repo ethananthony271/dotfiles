@@ -67,7 +67,7 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 alias sudo='sudo '
 
 alias ls='eza --group-directories-first'
-alias la='eza -a --long --header --git --hyperlink --grid --group-directories-first'
+alias la='eza -a --long --header --git --hyperlink --group-directories-first'
 alias lt='eza --hyperlink --tree --group-directories-first --level=3'
 
 alias ga='git add '
