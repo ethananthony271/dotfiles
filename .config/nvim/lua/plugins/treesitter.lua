@@ -5,7 +5,13 @@ return {
   config = function()
     local config = require("nvim-treesitter.configs")
     config.setup({
-      ensure_installed = {"lua", "python", "c", "rasi"},
+      ensure_installed = {
+                "lua",
+                "python",
+                "c",
+                "cpp",
+                "rasi",
+            },
       highlight = {enable = true},
       indent = {enable = true},
     })
