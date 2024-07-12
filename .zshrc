@@ -89,7 +89,7 @@ alias c='clear'
 alias q='exit'
 alias m='neomutt'
 alias d='yazi'
-alias f='macchina'
+alias z='ncmpcpp'
 alias a='./a.out'
 
 alias ta='todo add '
