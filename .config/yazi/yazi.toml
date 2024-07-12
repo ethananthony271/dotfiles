@@ -7,32 +7,35 @@ scrolloff = 10
 
 [opener]
 neovim = [
-  { run = 'nvim "$@"', block = true, desc = "neovim" },
+    { run = 'nvim "$@"', block = true, desc = "neovim" },
 ]
 mpv = [
-  { run = 'mpv "$@"', orphan = true, desc = "mpv" },
+    { run = 'mpv "$@"', orphan = true, desc = "mpv" },
 ]
 sxiv = [
-  { run = 'sxiv -a "$@"', block = true, desc = "sxiv" },
+    { run = 'sxiv -a "$@"', block = true, desc = "sxiv" },
 ]
-tdf = [
-  { run = 'tdf "$@"', block = true, desc = "tdf" },
+# tdf = [
+    # { run = 'tdf "$@"', block = true, desc = "tdf" },
+# ]
+zathura = [
+    { run = 'zathura "$@"', block = true, desc = "zathura" },
 ]
 librewolf = [
-  { run = 'librewolf "$@"', orphan = true, desc = "LibreWolf" },
+    { run = 'librewolf "$@"', orphan = true, desc = "LibreWolf" },
 ]
 libreoffice = [
-  { run = 'libreoffice "$@"', orphan = true, desc = "LibreOffice" },
+    { run = 'libreoffice "$@"', orphan = true, desc = "LibreOffice" },
 ]
 xdg-open = [
-  { run = 'xdg-open "$@"', desc = "xdg-open" },
+    { run = 'xdg-open "$@"', desc = "xdg-open" },
 ]
 
 [open]
 rules = [
-  { mime = "text/*", use = ["neovim", "librewolf"] },
-  { mime = "video/*", use = ["mpv", "librewolf"] },
-  { mime = "audio'*", use = ["mpv", "librewolf"] },
-  { mime = "image/*", use = ["sxiv", "librewolf"] },
-  { mime = "application/pdf", use = ["tdf", "librewolf", "librewolf"] },
+    { mime = "text/*", use = ["neovim", "librewolf"] },
+    { mime = "video/*", use = ["mpv", "librewolf"] },
+    { mime = "audio'*", use = ["mpv", "librewolf"] },
+    { mime = "image/*", use = ["sxiv", "librewolf"] },
+    { mime = "application/pdf", use = ["zathura", "librewolf", "librewolf"] },
 ]
