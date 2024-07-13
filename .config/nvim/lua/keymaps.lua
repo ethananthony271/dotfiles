@@ -15,9 +15,12 @@ vim.keymap.set("n", ")", "$", { noremap = true, silent = true,                  
 vim.keymap.set("n", "<C-'>", "<C-y>", { noremap = true, silent = true,                            desc = "Move screen up" })
 vim.keymap.set("n", "<C-;>", "<C-e>", { noremap = true, silent = true,                            desc = "Move screen down" })
 vim.keymap.set("n", "<BS>", "<C-o>", { noremap = true, silent = true,                             desc = "Move cursor to previous place" })
-vim.keymap.set("n", "<leader>m", ":RenderMarkdownToggle<CR>", { noremap = true, silent = true,    desc = "Toggle markdown view" })
 vim.keymap.set("n", "+", "gg=G<C-o>", { noremap = true, silent = true,                            desc = "Indent entire document" })
 vim.keymap.set("n", "<leader>`", ":Alpha<CR>", { noremap = true, silent = true,                   desc = "Return to homepage" })
+
+-- VIEW MANAGEMENT
+vim.keymap.set("n", "<leader>vm", ":RenderMarkdownToggle<CR>", { noremap = true, silent = true,    desc = "Toggle markdown view" })
+vim.keymap.set("n", "<leader>vs", ":NeominimapToggle<CR>", { noremap = true, silent = true,    desc = "Toggle markdown view" })
 
 -- WINDOW MANAGEMENT
 vim.keymap.set("n", "<C-h>", "<C-w>h", { noremap = true, silent = true,                           desc = "Move window focus left" })
@@ -75,7 +78,7 @@ vim.keymap.set({ "i", "s" }, "<c-j>", function()
     end
 end, { noremap = true, silent = true, desc = "Change choice within snippet" })
 
-vim.keymap.set("n", "<leader><leader>s", "<cmd>source ~/.config/nvim/lua/plugins/luasnip.lua<CR>")
+-- vim.keymap.set("n", "<leader><leader>s", "<cmd>source ~/.config/nvim/lua/plugins/luasnip.lua<CR>", { desc = "Source luasnip snippets" })
 
                                 -- INSERT MODE --
 
