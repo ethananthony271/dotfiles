@@ -63,9 +63,9 @@ def init_screens():
                         highlight_color = c["background"],
                         block_highlight_text_color = c["foreground"],
 
-                        urgent_alert_method = "block",
-                        urgent_border = c["red"],
-                        urgent_text = c["background"],
+                        # urgent_alert_method = "block",
+                        # urgent_border = c["red"],
+                        # urgent_text = c["background"],
                         
                         padding = 10,
                     ),
