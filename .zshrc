@@ -114,5 +114,5 @@ export PATH
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 
-mpdscribble #temporary solution
+# mpdscribble #temporary solution
 xset r rate 200 30 #temporary solution
