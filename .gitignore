@@ -5,3 +5,4 @@
 .config/mpd/database
 .config/nvim/lazy-lock.json
 .config/mpd/playlists/
+.config/ncmpcpp/error.log
