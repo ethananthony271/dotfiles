@@ -16,6 +16,11 @@ function line_begin_or_non_letter(line_to_cursor, matched_trigger)
   return line_begin or non_letter
 end
 
+function non_letter(line_to_cursor, matched_trigger)
+  local non_letter = line_to_cursor:sub(-(#matched_trigger + 1), -(#matched_trigger + 1)):match("[^%a]")
+  return non_letter
+end
+
 local get_visual = function(args, parent)
   if (#parent.snippet.env.LS_SELECT_RAW > 0) then
     return sn(nil, i(1, parent.snippet.env.LS_SELECT_RAW))
@@ -45,7 +50,6 @@ return {
   s( -- env -> Generic Environment )
     {
       trig = "env",
-      snippetType = "autosnippet"
     },
     fmta(
       [[
@@ -59,14 +63,11 @@ return {
         rep(1),
       }
     ),
-    {
-      condition = line_begin
-    }
+    {}
   ),
-  s( -- tbl -> Longtable Environment )
+  s( -- Tb -> Longtable Environment )
     {
-      trig = "tbl",
-      snippetType = "autosnippet"
+      trig = "Tb",
     },
     fmta(
       [[
@@ -94,14 +95,33 @@ return {
         i(5, "Contents"),
       }
     ),
+    {}
+  ),
+  s( -- tb -> Tabular Environment )
     {
-      condition = line_begin
-    }
+      trig = "tb",
+    },
+    fmta(
+      [[
+        \begin{tabular}{<>}                                                                                                  
+          \toprule                                                                                                              
+          <> \\
+          \midrule                                                                                                              
+          <>
+          \bottomrule                                                                                                           
+        \end{tabular}
+      ]],
+      {
+        i(1, "Define Columns"),
+        i(2, "Name Columns"),
+        i(3, "Contents"),
+      }
+    ),
+    {}
   ),
   s( -- eq -> Equation Environment )
     {
       trig = "eq",
-      snippetType = "autosnippet"
     },
     fmta(
       [[
@@ -113,14 +133,11 @@ return {
         i(0),
       }
     ),
-    {
-      condition = line_begin
-    }
+    {}
   ),
   s( -- al -> Align Environment )
     {
       trig = "al",
-      snippetType = "autosnippet"
     },
     fmta(
       [[
@@ -132,62 +149,63 @@ return {
         i(0),
       }
     ),
-    {
-      condition = line_begin
-    }
+    {}
   ),
-  s( -- fig -> Figure Environment )
+  s( -- fg -> Figure Environment )
     -- TODO: Create options to cycle through for location [p], [b], etc.
     {
-      trig = "fig",
-      snippetType = "autosnippet"
+      trig = "fg",
     },
     fmta(
       [[
         \begin{figure}[h!]
-          \includegraphics[width=<>]{<>}
-          \caption{<>}
-          \label{figure:<>}
+          <>
         \end{figure}
       ]],
       {
-        i(1, "\\linewidth"),
-        i(2, "path"),
-        i(3, "caption"),
-        i(4, "label")
+        i(0),
       }
     ),
-    {
-      condition = line_begin
-    }
+    {}
   ),
-  s( -- sfig -> Subfigure Environment )
+  s( -- sfg -> Subfigure Environment )
     {
-      trig = "sfig",
-      snippetType = "autosnippet"
+      trig = "sfg",
     },
     fmta(
       [[
         \begin{subfigure}[b]{<>}
-          \includegraphics[width=<>]{<>}
-          \caption{<>}
+          <>
         \end{subfigure}
       ]],
       {
         i(1, "width"),
-        i(2, "\\linewidth"),
-        i(3, "path"),
-        i(4, "caption")
+        i(0),
       }
     ),
+    {}
+  ),
+  s( -- wfg -> Wrapfigure Environment )
     {
-      condition = line_begin
-    }
+      trig = "wfg",
+    },
+    fmta(
+      [[
+        \begin{wrapfigure}{<>}{<>}
+          <>
+        \end{wrapfigure}
+      ]],
+      {
+        i(1, "alignment"),
+        i(2, "width"),
+        i(0),
+      }
+    ),
+    {}
   ),
   s( -- tk -> TikZ Environment )
     {
       trig = "tk",
-      snippetType = "autosnippet"
     },
     fmta(
       [[
@@ -199,8 +217,6 @@ return {
         i(1)
       }
     ),
-    {
-      condition = line_begin
-    }
+    {}
   ),
 }
