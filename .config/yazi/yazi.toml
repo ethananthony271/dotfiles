@@ -19,7 +19,7 @@ sxiv = [
     # { run = 'tdf "$@"', block = true, desc = "tdf" },
 # ]
 zathura = [
-    { run = 'zathura "$@"', block = true, desc = "zathura" },
+    { run = 'zathura "$@"', orphan = true, desc = "zathura" },
 ]
 librewolf = [
     { run = 'librewolf "$@"', orphan = true, desc = "LibreWolf" },
