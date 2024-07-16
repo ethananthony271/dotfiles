@@ -4,6 +4,7 @@
 -- lualine
 -- markdown
 -- yazi
+-- leap
 
 return {
   {
@@ -59,4 +60,7 @@ return {
       },
     },
   },
+  {
+    "ggandor/leap.nvim",
+  }
 }
