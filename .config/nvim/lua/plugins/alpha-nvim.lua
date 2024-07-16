@@ -26,9 +26,8 @@ return {
       dashboard.button("g", "󰊄  Live grep", "<cmd>cd ~/Documents | Telescope live_grep<CR>"),
       dashboard.button("r", "  Recent files", ":Telescope oldfiles<CR>"),
       dashboard.button("s", "  School", "<cmd>cd ~/Documents/School/ | Yazi<CR>"),
+      dashboard.button("p", "  Personal", "<cmd>cd ~/Documents/Personal/ | Yazi<CR>"),
       dashboard.button("c", "  Configuration", "<cmd>cd ~/.dotfiles/ | Yazi<CR>"),
-      dashboard.button("p", "󰒠  Project Euler", "<cmd>cd ~/Documents/Personal/projectEuler/ | Yazi<CR>"),
-      dashboard.button("l", "  Leet Code", "<cmd>cd ~/Documents/Personal/leetCode/ | Yazi<CR>"),
       dashboard.button("u", "  Update plugins", "<cmd>Lazy sync<CR>"),
       dashboard.button("q", "󰅚  Quit", "<cmd>qa<CR>"),
     }
