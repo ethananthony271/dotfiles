@@ -21,6 +21,7 @@ vim.keymap.set("n", "<leader>h",    ":Telescope help_tags hidden=true<CR>",     
 vim.keymap.set("n", "<leader>vm",   ":RenderMarkdownToggle<CR>",                  { noremap = true, silent = true,            desc = "Toggle Markdown View" })
 vim.keymap.set("n", "<leader>vs",   ":NeominimapToggle<CR>",                      { noremap = true, silent = true,            desc = "Toggle Side Code View" })
 vim.keymap.set("n", "<leader>vh",   ":nohl<CR>",                                  { noremap = true, silent = true,            desc = "Clear Highlighting" })
+vim.keymap.set("n", "<leader>vu",   ":UndotreeToggle<CR>:UndotreeFocus<CR>",      { noremap = true, silent = true,            desc = "Toggle UndoTree" })
                                     
 -- WINDOW MANAGEMENT                
 vim.keymap.set("n", "<C-h>",        "<C-w>h",                                     { noremap = true, silent = true,            desc = "Move Window Focus Left" })
@@ -77,3 +78,8 @@ vim.keymap.set("n", "<leader><leader>s", "<cmd>source ~/.config/nvim/lua/plugins
 vim.keymap.set("x", ">",            ">gv",                                        { noremap = true, silent = true,            desc = "Increase line indent" })
 vim.keymap.set("x", "<",            "<gv",                                        { noremap = true, silent = true,            desc = "Decrease line indent" })
 vim.keymap.set("x", ")",            "$",                                          { noremap = true, silent = true,            desc = "Go to End of Line" })
+
+                                -- MULTI  MODE --
+vim.keymap.set({'n', 'x', 'o'}, '\'',  '<Plug>(leap-forward)',                    { noremap = true, silent = true,            desc = "Leap Forward" })
+vim.keymap.set({'n', 'x', 'o'}, ';',   '<Plug>(leap-backward)',                   { noremap = true, silent = true,            desc = "Leap Backward" })
+vim.keymap.set({'n', 'x', 'o'}, 'g\'',  '<Plug>(leap-from-window)',               { noremap = true, silent = true,            desc = "Leap From Window" })
