@@ -1,4 +1,7 @@
 #### GENERAL ####
+def_key "y"
+  dummy
+
 def_key "m"
   dummy
 
@@ -232,3 +235,14 @@ def_key "u"
 
 def_key "?"
   show_help
+
+#### SEARCH ENGINE ####
+def_key "w"
+  start_searching
+
+def_key "W"
+  reset_search_engine
+
+#### TAG EDITOR ####
+def_key "w"
+  save_tag_changes
