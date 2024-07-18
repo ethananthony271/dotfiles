@@ -5,6 +5,7 @@ local t = ls.text_node
 local i = ls.insert_node
 local f = ls.function_node
 local d = ls.dynamic_node
+local c = ls.choice_node
 local fmt = require("luasnip.extras.fmt").fmt
 local fmta = require("luasnip.extras.fmt").fmta
 local rep = require("luasnip.extras").rep
@@ -20,8 +21,30 @@ end
 return {
   s(
     {
-      trig = "f",
-      dscr = "Boilerplace for a C function",
+      trig = "pf",
+    },
+    fmta(
+      [[
+        printf("<>);
+      ]],
+      { 
+        c(1, {
+          sn(nil, {
+            i(1),
+            t("\", "),
+            i(2),
+          }),
+          sn(nil, {
+            i(1),
+            t("\""),
+          }),
+        })
+      }
+    )
+  ),
+  s(
+    {
+      trig = "fn",
     },
     fmta(
       [[
