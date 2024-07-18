@@ -11,9 +11,9 @@
 --       require("mason-lspconfig").setup({
 --         ensure_installed = {
 --           "clangd",
---           "pylsp",
---           "lua_ls",
---           "texlab",
+--           -- "pylsp",
+--           -- "lua_ls",
+--           -- "texlab",
 --         }
 --       })
 --     end
