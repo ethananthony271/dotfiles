@@ -5,6 +5,7 @@
 -- markdown
 -- yazi
 -- leap
+-- eyeliner
 
 return {
   {
@@ -62,5 +63,30 @@ return {
   },
   {
     "ggandor/leap.nvim",
-  }
+  },
+  {
+    "jinh0/eyeliner.nvim",
+    config = function()
+      require("eyeliner").setup({
+        highlight_on_key = true;
+        dim = true;
+      })
+    end
+  },
+  -- {
+  --   "folke/drop.nvim",
+  --   opts = {
+  --     -- ...
+  --   },
+  --   config = function()
+  --     require("drop").setup({
+  --       max = 100,
+  --       screensaver = 1000 * 60 * 5,
+  --       theme = "cards",
+  --       filetypes = {
+  --         "alpha",
+  --       }
+  --     })
+  --   end
+  -- }
 }
