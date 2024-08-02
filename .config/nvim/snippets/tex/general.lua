@@ -5,6 +5,7 @@ local t = ls.text_node
 local i = ls.insert_node
 local f = ls.function_node
 local d = ls.dynamic_node
+local c = ls.choice_node
 local fmt = require("luasnip.extras.fmt").fmt
 local fmta = require("luasnip.extras.fmt").fmta
 local rep = require("luasnip.extras").rep
@@ -47,57 +48,6 @@ local buffer_is_empty = function()
 end
 
 return {
-  s( -- bl -> LaTeX Document Boilerplate )
-    {
-      trig = "bl",
-      snippetType = "autosnippet"
-    },
-    fmta(
-      [[
-        \documentclass{<>}
-
-        \usepackage{ulem}
-        \usepackage{tikz}
-        \usepackage{fullpage}
-        \usepackage{graphicx}
-        \usepackage{subcaption}
-        % Table Formatting
-        \usepackage{multirow}
-        \usepackage{booktabs}
-        \usepackage{longtable}
-        \usepackage{siunitx}
-
-        \sisetup{
-          round-mode          = places, % Rounds numbers
-          round-precision     = 2, % to 2 places
-        }
-
-        \title{<>}
-        \date{<>}
-        \author{<>}
-
-        \begin{document}
-        \pagenumbering{arabic}
-        \maketitle
-        \tableofcontents
-        \newpage
-
-          <>
-
-        \end{document}
-      ]],
-      {
-        i(1, "article"),
-        i(2, "title"),
-        d(3, date_input, {}, { user_args = { "%B %d, %Y" } }),
-        i(4, "Ethan Anthony"),
-        i(0)
-      }
-    ),
-    {
-      condition = buffer_is_empty
-    }
-  ),
   s( -- pkg -> Usepackage )
     {
       trig = "pkg",

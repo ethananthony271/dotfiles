@@ -5,6 +5,7 @@ local t = ls.text_node
 local i = ls.insert_node
 local f = ls.function_node
 local d = ls.dynamic_node
+local c = ls.choice_node
 local fmt = require("luasnip.extras.fmt").fmt
 local fmta = require("luasnip.extras.fmt").fmta
 local rep = require("luasnip.extras").rep
@@ -50,7 +51,6 @@ return {
   s( -- -u -> Up Arrow )
     {
       trig = "-u",
-      snippetType = "autosnippet"
     },
     {
       t("\\uparrow")
@@ -62,7 +62,6 @@ return {
   s( -- -r -> Right Arrow )
     {
       trig = "-r",
-      snippetType = "autosnippet"
     },
     {
       t("\\rightarrow")
@@ -74,7 +73,6 @@ return {
   s( -- -d -> Down Arrow )
     {
       trig = "-d",
-      snippetType = "autosnippet"
     },
     {
       t("\\downarrow")
@@ -86,7 +84,6 @@ return {
   s( -- -l -> Left Arrow )
     {
       trig = "-l",
-      snippetType = "autosnippet"
     },
     {
       t("\\leftarrow")
@@ -98,7 +95,6 @@ return {
   s( -- -h -> Left-Right Arrow )
     {
       trig = "-h",
-      snippetType = "autosnippet"
     },
     {
       t("\\leftrightarrow")
@@ -110,7 +106,6 @@ return {
   s( -- -v -> Up-Down Arrow )
     {
       trig = "-v",
-      snippetType = "autosnippet"
     },
     {
       t("\\updownarrow")
@@ -122,7 +117,6 @@ return {
   s( -- -U -> Double Up Arrow )
     {
       trig = "-U",
-      snippetType = "autosnippet"
     },
     {
       t("\\Uparrow")
@@ -134,7 +128,6 @@ return {
   s( -- -R -> Double Right Arrow )
     {
       trig = "-R",
-      snippetType = "autosnippet"
     },
     {
       t("\\Rightarrow")
@@ -146,7 +139,6 @@ return {
   s( -- -D -> Double Down Arrow )
     {
       trig = "-D",
-      snippetType = "autosnippet"
     },
     {
       t("\\Downarrow")
@@ -158,7 +150,6 @@ return {
   s( -- -L -> Double Left Arrow )
     {
       trig = "-L",
-      snippetType = "autosnippet"
     },
     {
       t("\\Leftarrow")
@@ -170,7 +161,6 @@ return {
   s( -- -H -> Double Left-Right Arrow )
     {
       trig = "-H",
-      snippetType = "autosnippet"
     },
     {
       t("\\Leftrightarrow")
@@ -182,7 +172,6 @@ return {
   s( -- -V -> Double Up-Down Arrow )
     {
       trig = "-V",
-      snippetType = "autosnippet"
     },
     {
       t("\\Updownarrow")

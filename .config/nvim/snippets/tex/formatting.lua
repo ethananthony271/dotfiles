@@ -5,6 +5,7 @@ local t = ls.text_node
 local i = ls.insert_node
 local f = ls.function_node
 local d = ls.dynamic_node
+local c = ls.choice_node
 local fmt = require("luasnip.extras.fmt").fmt
 local fmta = require("luasnip.extras.fmt").fmta
 local rep = require("luasnip.extras").rep
@@ -50,7 +51,6 @@ return {
   s( -- p1 -> Paragraph )
     {
       trig = "p1",
-      snippetType = "autosnippet"
     },
     fmta(
       [[
@@ -67,7 +67,6 @@ return {
   s( -- p2 -> Subparagraph )
     {
       trig = "p2",
-      snippetType = "autosnippet"
     },
     fmta(
       [[
@@ -84,7 +83,6 @@ return {
   s( -- s1 -> Section )
     {
       trig = "s1",
-      snippetType = "autosnippet"
     },
     fmta(
       [[
@@ -101,7 +99,6 @@ return {
   s( -- s2 -> Subsection )
     {
       trig = "s2",
-      snippetType = "autosnippet"
     },
     fmta(
       [[
@@ -118,7 +115,6 @@ return {
   s( -- s3 -> Subsubsection )
     {
       trig = "s3",
-      snippetType = "autosnippet"
     },
     fmta(
       [[
@@ -151,29 +147,9 @@ return {
       condition = line_begin_or_non_letter
     }
   ),
-  s( -- dr -> TikZ Draw )
+  s( -- `r -> Upright Text )
     {
-      trig = "dr",
-      snippetType = "autosnippet"
-    },
-    fmta(
-      [[
-        <>\draw[<>] <> ;
-      ]],
-      {
-        f( function(_, snip) return snip.captures[1] end ),
-        i(1),
-        i(2),
-      }
-    ),
-    {
-      -- condition = line_begin_or_non_letter
-      condition = line_begin
-    }
-  ),
-  s( -- ,r -> Upright Text )
-    {
-      trig = ",r",
+      trig = "`r",
       snippetType = "autosnippet"
     },
     fmta(
@@ -187,9 +163,9 @@ return {
     ),
     {}
   ),
-  s( -- ,i -> Italic Text )
+  s( -- `i -> Italic Text )
     {
-      trig = ",i",
+      trig = "`i",
       snippetType = "autosnippet"
     },
     fmta(
@@ -203,9 +179,9 @@ return {
     ),
     {}
   ),
-  s( -- ,s -> Slanted Text )
+  s( -- `s -> Slanted Text )
     {
-      trig = ",s",
+      trig = "`s",
       snippetType = "autosnippet"
     },
     fmta(
@@ -219,9 +195,9 @@ return {
     ),
     {}
   ),
-  s( -- ,c -> Small Capitals Text )
+  s( -- `c -> Small Capitals Text )
     {
-      trig = ",c",
+      trig = "`c",
       snippetType = "autosnippet"
     },
     fmta(
@@ -235,9 +211,9 @@ return {
     ),
     {}
   ),
-  s( -- ,b -> Boldface Text )
+  s( -- `b -> Boldface Text )
     {
-      trig = ",b",
+      trig = "`b",
       snippetType = "autosnippet"
     },
     fmta(
@@ -251,9 +227,9 @@ return {
     ),
     {}
   ),
-  s( -- ,e -> Emphasized Text )
+  s( -- `e -> Emphasized Text )
     {
-      trig = ",e",
+      trig = "`e",
       snippetType = "autosnippet"
     },
     fmta(
@@ -267,9 +243,9 @@ return {
     ),
     {}
   ),
-  s( -- ,ul -> Underlined Text )
+  s( -- `ul -> Underlined Text )
     {
-      trig = ",ul",
+      trig = "`ul",
       snippetType = "autosnippet"
     },
     fmta(
@@ -283,9 +259,9 @@ return {
     ),
     {}
   ),
-  s( -- ,uul -> Double Underlined Text )
+  s( -- `uul -> Double Underlined Text )
     {
-      trig = ",uul",
+      trig = "`uul",
       snippetType = "autosnippet"
     },
     fmta(
@@ -299,9 +275,9 @@ return {
     ),
     {}
   ),
-  s( -- ,uw -> Wavy Underlined Text )
+  s( -- `uw -> Wavy Underlined Text )
     {
-      trig = ",uw",
+      trig = "`uw",
       snippetType = "autosnippet"
     },
     fmta(
@@ -315,9 +291,9 @@ return {
     ),
     {}
   ),
-  s( -- ,x -> Strikethrough Text )
+  s( -- `x -> Strikethrough Text )
     {
-      trig = ",x",
+      trig = "`x",
       snippetType = "autosnippet"
     },
     fmta(
@@ -331,9 +307,9 @@ return {
     ),
     {}
   ),
-  s( -- ,1 -> Tiny Text (Inline) )
+  s( -- `1 -> Tiny Text (Inline) )
     {
-      trig = ",1",
+      trig = "`1",
       snippetType = "autosnippet"
     },
     fmta(
@@ -346,9 +322,9 @@ return {
     ),
     {}
   ),
-  s( -- ,! -> Tiny Text (Environment) )
+  s( -- `! -> Tiny Text (Environment) )
     {
-      trig = ",!",
+      trig = "`!",
       snippetType = "autosnippet"
     },
     fmta(
@@ -363,9 +339,9 @@ return {
     ),
     {}
   ),
-  s( -- ,2 -> Small Text (Inline) )
+  s( -- `2 -> Small Text (Inline) )
     {
-      trig = ",2",
+      trig = "`2",
       snippetType = "autosnippet"
     },
     fmta(
@@ -378,9 +354,9 @@ return {
     ),
     {}
   ),
-  s( -- ,@ -> Small Text (Environment) )
+  s( -- `@ -> Small Text (Environment) )
     {
-      trig = ",@",
+      trig = "`@",
       snippetType = "autosnippet"
     },
     fmta(
@@ -395,9 +371,9 @@ return {
     ),
     {}
   ),
-  s( -- ,3 -> Normal Text (Inline) )
+  s( -- `3 -> Normal Text (Inline) )
     {
-      trig = ",3",
+      trig = "`3",
       snippetType = "autosnippet"
     },
     fmta(
@@ -410,9 +386,9 @@ return {
     ),
     {}
   ),
-  s( -- ,# -> Normal Text (Environment) )
+  s( -- `# -> Normal Text (Environment) )
     {
-      trig = ",#",
+      trig = "`#",
       snippetType = "autosnippet"
     },
     fmta(
@@ -427,9 +403,9 @@ return {
     ),
     {}
   ),
-  s( -- ,4 -> Large Text (Inline) )
+  s( -- `4 -> Large Text (Inline) )
     {
-      trig = ",4",
+      trig = "`4",
       snippetType = "autosnippet"
     },
     fmta(
@@ -442,9 +418,9 @@ return {
     ),
     {}
   ),
-  s( -- ,$ -> Large Text (Environment) )
+  s( -- `$ -> Large Text (Environment) )
     {
-      trig = ",$",
+      trig = "`$",
       snippetType = "autosnippet"
     },
     fmta(
@@ -459,9 +435,9 @@ return {
     ),
     {}
   ),
-  s( -- ,5 -> Huge Text (Inline) )
+  s( -- `5 -> Huge Text (Inline) )
     {
-      trig = ",5",
+      trig = "`5",
       snippetType = "autosnippet"
     },
     fmta(
@@ -474,9 +450,9 @@ return {
     ),
     {}
   ),
-  s( -- ,% -> Huge Text (Environment) )
+  s( -- `% -> Huge Text (Environment) )
     {
-      trig = ",%",
+      trig = "`%",
       snippetType = "autosnippet"
     },
     fmta(

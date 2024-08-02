@@ -37,4 +37,5 @@ return {
   s({ trig = ";P", snippetType = "autosnippet" }, { t("\\Psi") }),
   s({ trig = ";w", snippetType = "autosnippet" }, { t("\\omega") }),
   s({ trig = ";W", snippetType = "autosnippet" }, { t("\\Omega") }),
+  s({ trig = ";~", snippetType = "autosnippet" }, { t("\\sim") }),
 }

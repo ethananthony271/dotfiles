@@ -17,7 +17,6 @@ vim.keymap.set("n", "<leader>`",    ":Alpha<CR>",                               
 vim.keymap.set("n", "<leader>?",    ":WhichKey<CR>",                              { noremap = true, silent = true,            desc = "Display Keymaps" })
 vim.keymap.set("n", "<leader>h",    ":Telescope help_tags hidden=true<CR>",       { noremap = true, silent = true,            desc = "Search Help Tags" })
 vim.keymap.set("n", "\\",           ";",                                          { noremap = true, silent = true,            desc = "Search Help Tags" })
-                                    
 -- VIEW MANAGEMENT                  
 vim.keymap.set("n", "<leader>vm",   ":RenderMarkdownToggle<CR>",                  { noremap = true, silent = true,            desc = "Toggle Markdown View" })
 vim.keymap.set("n", "<leader>vs",   ":Neominimap bufToggle<CR>",                  { noremap = true, silent = true,            desc = "Toggle Side Code View" })
@@ -64,7 +63,7 @@ vim.keymap.set({ "i", "s" }, "<c-j>", function()
         require("luasnip").jump(-1)
     end
 end,                                                                              { noremap = true, silent = true,            desc = "Jump Back Within Snippet" })
-vim.keymap.set({ "i", "s" }, "<c-j>", function()
+vim.keymap.set({ "i", "s" }, "<c-i>", function()
     if require("luasnip").choice_active() then
         require("luasnip").change_choice(1)
     end

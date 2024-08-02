@@ -5,6 +5,7 @@ local t = ls.text_node
 local i = ls.insert_node
 local f = ls.function_node
 local d = ls.dynamic_node
+local c = ls.choice_node
 local fmt = require("luasnip.extras.fmt").fmt
 local fmta = require("luasnip.extras.fmt").fmta
 local rep = require("luasnip.extras").rep
@@ -65,9 +66,9 @@ return {
     ),
     {}
   ),
-  s( -- Tb -> Longtable Environment )
+  s( -- ttb -> Longtable Environment )
     {
-      trig = "Tb",
+      trig = "ttb",
     },
     fmta(
       [[
@@ -97,24 +98,31 @@ return {
     ),
     {}
   ),
-  s( -- tb -> Tabular Environment )
+  s( -- tb -> Table Environment )
     {
       trig = "tb",
     },
     fmta(
       [[
-        \begin{tabular}{<>}                                                                                                  
-          \toprule                                                                                                              
-          <> \\
-          \midrule                                                                                                              
-          <>
-          \bottomrule                                                                                                           
-        \end{tabular}
+        \begin{table}[htbp]
+          \centering
+          \caption{<>}
+          \begin{tabular}{<>}
+            \toprule
+            <>
+            \midrule
+            <>
+            \bottomrule
+          \end{tabular}
+          \label{<>}
+        \end{table}
       ]],
       {
-        i(1, "Define Columns"),
-        i(2, "Name Columns"),
-        i(3, "Contents"),
+        i(1, "Caption"),
+        i(3, "Define Columns"),
+        i(4, "Name Columns"),
+        i(5, "Contents"),
+        i(2, "Label")
       }
     ),
     {}
@@ -125,12 +133,17 @@ return {
     },
     fmta(
       [[
-        \begin{equation}
+        \begin{<>}
           <>
-        \end{equation}
+        \end{<>}
       ]],
       {
+        c(1, {
+          t("equation"),
+          t("equation*"),
+        }),
         i(0),
+        rep(1),
       }
     ),
     {}
@@ -152,34 +165,42 @@ return {
     {}
   ),
   s( -- fg -> Figure Environment )
-    -- TODO: Create options to cycle through for location [p], [b], etc.
     {
       trig = "fg",
     },
     fmta(
       [[
-        \begin{figure}[h!]
+        \begin{figure}[<>]
           <>
         \end{figure}
       ]],
       {
+        c(1, {
+          t("H"),
+          t("h!"),
+          t("b"),
+          t("p"),
+        }),
         i(0),
       }
     ),
     {}
   ),
-  s( -- sfg -> Subfigure Environment )
+  s( -- sfg -> Subcaptionblock Environment )
     {
       trig = "sfg",
     },
     fmta(
       [[
-        \begin{subfigure}[b]{<>}
+        \begin{subcaptionblock}{<>}
           <>
-        \end{subfigure}
+        \end{subcaptionblock}
       ]],
       {
-        i(1, "width"),
+        c(1, {
+          t("\\textwidth"),
+          i(2),
+        }),
         i(0),
       }
     ),
@@ -198,6 +219,23 @@ return {
       {
         i(1, "alignment"),
         i(2, "width"),
+        i(0),
+      }
+    ),
+    {}
+  ),
+  s( -- enu -> Enumerate Environment )
+    {
+      trig = "enu",
+    },
+    fmta(
+      [[
+        \begin{enumerate}
+          \itemsep0em
+          \item <>
+        \end{enumerate}
+      ]],
+      {
         i(0),
       }
     ),
