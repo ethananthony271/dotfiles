@@ -35,14 +35,17 @@ anchor=top-right
 background-color=#282828
 text-color=#F9F5D7
 border-color=#F9F5D7
+border-radius=5
 progress-color=#F9F5D7
 
 [urgency=low]
 border-color=#F9F5D7
+text-color=#F9F5D7
 default-timeout=2000
 
 [urgency=normal]
-border-color=#F9F5D7
+border-color=#FB4934
+text-color=#F9F5D7
 default-timeout=5000
 
 [urgency=high]
