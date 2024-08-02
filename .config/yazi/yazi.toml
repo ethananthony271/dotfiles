@@ -13,11 +13,8 @@ mpv = [
     { run = 'mpv "$@"', orphan = true, desc = "mpv" },
 ]
 sxiv = [
-    { run = 'sxiv -a "$@"', block = true, desc = "sxiv" },
+    { run = 'nsxiv -a "$@"', block = true, desc = "sxiv" },
 ]
-# tdf = [
-    # { run = 'tdf "$@"', block = true, desc = "tdf" },
-# ]
 zathura = [
     { run = 'zathura "$@"', orphan = true, desc = "zathura" },
 ]
@@ -33,7 +30,7 @@ xdg-open = [
 
 [open]
 rules = [
-    { mime = "text/*", use = ["neovim", "librewolf"] },
+    { mime = "text/*", use = ["neovim", "libreoffice", "xdg-open" ] },
     { mime = "video/*", use = ["mpv", "librewolf"] },
     { mime = "audio'*", use = ["mpv", "librewolf"] },
     { mime = "image/*", use = ["sxiv", "librewolf"] },
