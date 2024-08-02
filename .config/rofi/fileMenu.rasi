@@ -1,5 +1,5 @@
 configuration {
-  modi: "window,drun,ssh,filebrowser";
+  modi: "filebrowser";
   font: "FiraCode Nerd Font 10";
 
   // Keybindings
@@ -14,4 +14,4 @@ configuration {
   kb-mode-previous: "Control+h";
 }
 
-@theme "~/.config/rofi/themes/main.rasi"
+@theme "~/.config/rofi/themes/fileMenuTheme.rasi"
