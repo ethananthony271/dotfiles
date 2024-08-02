@@ -24,10 +24,19 @@ source "${ZINIT_HOME}/zinit.zsh"
 zinit ice depth=1; zinit light romkatv/powerlevel10k
 
 # Add in zsh plugins
-zinit light zsh-users/zsh-syntax-highlighting
-zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light softmoth/zsh-vim-mode
+zinit light zsh-users/zsh-completions
 zinit light Aloxaf/fzf-tab
+
+# ZSH Vim Mode Configuration
+MODE_CURSOR_VIINS="steady bar"
+MODE_CURSOR_REPLACE="steady underline"
+MODE_CURSOR_VICMD="steady block"
+MODE_CURSOR_SEARCH="steady underline"
+MODE_CURSOR_VISUAL="steady block"
+MODE_CURSOR_VLINE="steady block"
 
 # Load completions
 autoload -Uz compinit && compinit
@@ -40,6 +49,7 @@ zinit cdreplay -q
 # Keybindings
 bindkey '^f' autosuggest-accept
 bindkey '^k' history-search-backward
+bindkey '^p' history-search-backward
 bindkey '^j' history-search-forward
 bindkey '^[w' kill-region
 
@@ -83,7 +93,7 @@ alias gf='git fetch '
 alias cat='bat --theme gruvbox-dark '
 
 alias p='python3 '
-alias h='fc -ln 1 | fzf | xsel --clipboard'
+alias h='fc -ln 1 | fzf | wl-copy'
 alias v='nvim'
 alias c='clear'
 alias q='exit'
@@ -106,13 +116,12 @@ kitty-reload() {
 }
 
 # PATH
-path+=('/home/ea/tdf')
 path+=('/home/ea/.local/bin')
 export PATH
+
+export EDITOR=nvim
+export VISUAL=nvim
 
 # Shell integrations
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
-
-# mpdscribble #temporary solution
-xset r rate 200 30 #temporary solution
