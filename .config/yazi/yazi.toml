@@ -4,35 +4,53 @@ sort_by = "extension"
 set_dir_first = true
 show_symlink = true
 scrolloff = 10
+linemode = "mtime"
 
 [opener]
-neovim = [
-    { run = 'nvim "$@"', block = true, desc = "neovim" },
-]
-mpv = [
-    { run = 'mpv "$@"', orphan = true, desc = "mpv" },
-]
-sxiv = [
-    { run = 'nsxiv -a "$@"', block = true, desc = "sxiv" },
-]
-zathura = [
-    { run = 'zathura "$@"', orphan = true, desc = "zathura" },
-]
-librewolf = [
-    { run = 'librewolf "$@"', orphan = true, desc = "LibreWolf" },
-]
-libreoffice = [
-    { run = 'libreoffice "$@"', orphan = true, desc = "LibreOffice" },
-]
-xdg-open = [
-    { run = 'xdg-open "$@"', desc = "xdg-open" },
-]
-
-[open]
-rules = [
-    { mime = "text/*", use = ["neovim", "libreoffice", "xdg-open" ] },
-    { mime = "video/*", use = ["mpv", "librewolf"] },
-    { mime = "audio'*", use = ["mpv", "librewolf"] },
-    { mime = "image/*", use = ["sxiv", "librewolf"] },
-    { mime = "application/pdf", use = ["zathura", "librewolf", "librewolf"] },
+open = [
+  { run = 'nvim "$@"',                      block = true,         desc = "neovim" },
+  { run = 'zeditor "$@"',                   orphan = true,        desc = "Zed" },
+]                                           
+edit = [                                    
+  { run = 'nvim "$@"',                      block = true,         desc = "neovim" },
+  { run = 'zeditor "$@"',                   orphan = true,        desc = "Zed" },
+]                                           
+pdf = [                                     
+  { run = 'zathura "$@"',                   orphan = true,        desc = "zathura" },
+  { run = 'librewolf "$@"',                 orphan = true,        desc = "LibreWolf" },
+  { run = 'libreoffice "$@"',               orphan = true,        desc = "LibreOffice" },
+]                                           
+video = [                                   
+  { run = 'mpv "$@"',                       orphan = true,        desc = "mpv" },
+  { run = 'libreoffice "$@"',               orphan = true,        desc = "LibreOffice" },
+]                                           
+audio = [                                   
+  { run = 'mpv "$@"',                       orphan = true,        desc = "mpv" },
+  { run = 'libreoffice "$@"',               orphan = true,        desc = "LibreOffice" },
+]                                           
+image = [                                   
+  { run = 'nsxiv -a "$@"',                  orphan = true,        desc = "nsxiv" },
+  { run = 'libreoffice "$@"',               orphan = true,        desc = "LibreOffice" },
+]                                           
+office = [                                  
+  { run = 'libreoffice "$@"',               orphan = true,        desc = "LibreOffice" },
+  { run = 'librewolf "$@"',                 orphan = true,        desc = "LibreWolf" },
+]                                           
+                                            
+[open]                                      
+rules = [                                   
+  { name = "*/",                            use = [ "edit" ] },
+  { mime = "text/*",                        use = [ "edit" ] },
+  { mime = "video/*",                       use = [ "video" ] },
+  { mime = "audio/*",                       use = [ "video" ] },
+  { mime = "image/*",                       use = [ "image" ] },
+  { mime = "application/pdf",               use = [ "pdf" ] },
+                                            
+  # Microsoft Office Filetypes              
+  { mime = "application/msword",            use = [ "office" ] },
+  { mime = "application/vnd.ms*",           use = [ "office" ] },
+  { mime = "application/vnd.opemx*",        use = [ "office" ] },
+  
+  # Open Document Filetypes
+  { mime = "application/vnd.oasis.opend*",  use = [ "office" ] },
 ]
