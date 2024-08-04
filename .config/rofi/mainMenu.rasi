@@ -1,5 +1,4 @@
 configuration {
-  modi: "drun";
   font: "FiraCode Nerd Font 10";
 
   // Keybindings
