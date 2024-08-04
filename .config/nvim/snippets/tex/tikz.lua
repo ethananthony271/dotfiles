@@ -55,21 +55,65 @@ return {
     },
     fmta(
       [[
-        <>\<>[<>] <> ;
+        <> <>;
       ]],
       {
-        f( function(_, snip) return snip.captures[1] end ),
         c(1, {
-          t("draw"),
-          t("fill"),
-          t("filldraw"),
+          fmta(
+            [[
+              \draw[draw=<>]
+            ]],
+            {
+              i(1, "black"),
+            }
+          ),
+          fmta(
+            [[
+              \fill[fill=<>]
+            ]],
+            {
+              i(1, "black"),
+            }
+          ),
+          fmta(
+            [[
+              \filldraw[fill=<>, draw=<>]
+            ]],
+            {
+              i(1, "black"),
+              i(2, "black"),
+            }
+          ),
         }),
-        i(2),
-        i(3),
+        i(0),
       }
     ),
     {
-      -- condition = line_begin_or_non_letter
+      condition = line_begin
+    }
+  ),
+  s( -- ap -> Add Plot )
+    {
+      trig = "ap",
+      snippetType = "autosnippet"
+    },
+    fmta(
+      [[
+        \addplot [
+          domain=<>:<>,
+          samples=<>,
+          color=<>,
+        ] {<>};
+      ]],
+      {
+        i(1),
+        i(2),
+        i(3),
+        i(4),
+        i(5),
+      }
+    ),
+    {
       condition = line_begin
     }
   ),
@@ -79,10 +123,10 @@ return {
     },
     fmta(
       [[
-        \foreach \<> in {<>} {
-          <>
-        }
-      ]],
+    \foreach \<> in {<>} {
+    <>
+    }
+    ]],
       {
         i(1, "x"),
         i(2),
@@ -100,28 +144,28 @@ return {
     },
     fmta(
       [[
-        % Sine Wave
-        \def \amplitude{<>}
-        \def \frequency{<>}
-        \def \periods{<>}
+    % Sine Wave
+    \def \amplitude{<>}
+    \def \frequency{<>}
+    \def \periods{<>}
 
-        \pgfmathsetmacro{\n}{(\periods * 4) - 1}
-        \foreach \i in {0,...,\n} {
-          \ifthenelse{\isodd \i}{
-            \pgfmathsetmacro{\xi}{((\i * pi) / 2) / \frequency}
-            \pgfmathsetmacro{\xf}{(((\i + 1) * pi) / 2) / \frequency}
-            \pgfmathsetmacro{\yi}{(sin((\frequency * \xi * 180 / (pi))) * \amplitude}
-            \pgfmathsetmacro{\yf}{(sin((\frequency * \xf * 180 / (pi))) * \amplitude}
-            \draw[<>] (\xi,\yi) cos (\xf,\yf) ;
-          }{
-            \pgfmathsetmacro{\xi}{((\i * pi) / 2) / \frequency}
-            \pgfmathsetmacro{\xf}{(((\i + 1) * pi) / 2) / \frequency}
-            \pgfmathsetmacro{\yi}{(sin((\frequency * \xi * 180 / (pi))) * \amplitude}
-            \pgfmathsetmacro{\yf}{(sin((\frequency * \xf * 180 / (pi))) * \amplitude}
-            \draw[<>] (\xi,\yi) sin (\xf,\yf) ;
-          }
-        }
-      ]],
+    \pgfmathsetmacro{\n}{(\periods * 4) - 1}
+    \foreach \i in {0,...,\n} {
+    \ifthenelse{\isodd \i}{
+    \pgfmathsetmacro{\xi}{((\i * pi) / 2) / \frequency}
+    \pgfmathsetmacro{\xf}{(((\i + 1) * pi) / 2) / \frequency}
+    \pgfmathsetmacro{\yi}{(sin((\frequency * \xi * 180 / (pi))) * \amplitude}
+    \pgfmathsetmacro{\yf}{(sin((\frequency * \xf * 180 / (pi))) * \amplitude}
+    \draw[<>] (\xi,\yi) cos (\xf,\yf) ;
+    }{
+    \pgfmathsetmacro{\xi}{((\i * pi) / 2) / \frequency}
+    \pgfmathsetmacro{\xf}{(((\i + 1) * pi) / 2) / \frequency}
+    \pgfmathsetmacro{\yi}{(sin((\frequency * \xi * 180 / (pi))) * \amplitude}
+    \pgfmathsetmacro{\yf}{(sin((\frequency * \xf * 180 / (pi))) * \amplitude}
+    \draw[<>] (\xi,\yi) sin (\xf,\yf) ;
+    }
+    }
+    ]],
       {
         i(1, "1"),
         i(2, "1"),
@@ -138,28 +182,28 @@ return {
     },
     fmta(
       [[
-        % Cosine Wave
-        \def \amplitude{<>}
-        \def \frequency{<>}
-        \def \periods{<>}
+    % Cosine Wave
+    \def \amplitude{<>}
+    \def \frequency{<>}
+    \def \periods{<>}
 
-        \pgfmathsetmacro{\n}{(\periods * 4) - 1}
-        \foreach \i in {0,...,\n} {
-          \ifthenelse{\isodd \i}{
-            \pgfmathsetmacro{\xi}{((\i * pi) / 2) / \frequency}
-            \pgfmathsetmacro{\xf}{(((\i + 1) * pi) / 2) / \frequency}
-            \pgfmathsetmacro{\yi}{(cos((\frequency * \xi * 180 / (pi))) * \amplitude}
-            \pgfmathsetmacro{\yf}{(cos((\frequency * \xf * 180 / (pi))) * \amplitude}
-            \draw[<>] (\xi,\yi) sin (\xf,\yf) ;
-          }{
-            \pgfmathsetmacro{\xi}{((\i * pi) / 2) / \frequency}
-            \pgfmathsetmacro{\xf}{(((\i + 1) * pi) / 2) / \frequency}
-            \pgfmathsetmacro{\yi}{(cos((\frequency * \xi * 180 / (pi))) * \amplitude}
-            \pgfmathsetmacro{\yf}{(cos((\frequency * \xf * 180 / (pi))) * \amplitude}
-            \draw[<>] (\xi,\yi) cos (\xf,\yf) ;
-          }
-        }
-      ]],
+    \pgfmathsetmacro{\n}{(\periods * 4) - 1}
+    \foreach \i in {0,...,\n} {
+    \ifthenelse{\isodd \i}{
+    \pgfmathsetmacro{\xi}{((\i * pi) / 2) / \frequency}
+    \pgfmathsetmacro{\xf}{(((\i + 1) * pi) / 2) / \frequency}
+    \pgfmathsetmacro{\yi}{(cos((\frequency * \xi * 180 / (pi))) * \amplitude}
+    \pgfmathsetmacro{\yf}{(cos((\frequency * \xf * 180 / (pi))) * \amplitude}
+    \draw[<>] (\xi,\yi) sin (\xf,\yf) ;
+    }{
+    \pgfmathsetmacro{\xi}{((\i * pi) / 2) / \frequency}
+    \pgfmathsetmacro{\xf}{(((\i + 1) * pi) / 2) / \frequency}
+    \pgfmathsetmacro{\yi}{(cos((\frequency * \xi * 180 / (pi))) * \amplitude}
+    \pgfmathsetmacro{\yf}{(cos((\frequency * \xf * 180 / (pi))) * \amplitude}
+    \draw[<>] (\xi,\yi) cos (\xf,\yf) ;
+    }
+    }
+    ]],
       {
         i(1, "1"),
         i(2, "1"),
@@ -176,22 +220,22 @@ return {
     },
     fmta(
       [[
-        % 2D Moving Particle
-        \def \velocity {<>}
-        \def \angle {<>}
-        \def \xPosition {<>}
-        \def \yPosition {<>}
-        \def \maxRadius {<>}
-        \def \n {<>}
-        \foreach \i in {1,...,\n} {
-          \pgfmathsetmacro \v {\velocity / 5}
-          \pgfmathsetmacro \colorValue {(100 / \n) * \i}
-          \pgfmathsetmacro \r {(\maxRadius * \i) / \n}
-          \pgfmathsetmacro \x {\xPosition + (cos(\angle) * (\i * \v))}
-          \pgfmathsetmacro \y {\yPosition + (sin(\angle) * (\i * \v))}
-          \filldraw[red!\colorValue!white] (\x,\y) circle (\r cm);
-        }
-      ]],
+    % 2D Moving Particle
+    \def \velocity {<>}
+    \def \angle {<>}
+    \def \xPosition {<>}
+    \def \yPosition {<>}
+    \def \maxRadius {<>}
+    \def \n {<>}
+    \foreach \i in {1,...,\n} {
+    \pgfmathsetmacro \v {\velocity / 5}
+    \pgfmathsetmacro \colorValue {(100 / \n) * \i}
+    \pgfmathsetmacro \r {(\maxRadius * \i) / \n}
+    \pgfmathsetmacro \x {\xPosition + (cos(\angle) * (\i * \v))}
+    \pgfmathsetmacro \y {\yPosition + (sin(\angle) * (\i * \v))}
+    \filldraw[red!\colorValue!white] (\x,\y) circle (\r cm);
+    }
+    ]],
       {
         i(1),
         i(2),
@@ -209,25 +253,25 @@ return {
     },
     fmta(
       [[
-        % 3D Moving Particle
-        \def \velocity {<>}
-        \def \polarAngle {<>}
-        \def \azimuthalAngle {<>}
-        \def \xPosition {<>}
-        \def \yPosition {<>}
-        \def \zPosition {<>}
-        \def \maxRadius {<>}
-        \def \n {<>}
-        \foreach \i in {1,...,\n} {
-          \pgfmathsetmacro \v {\velocity / 5}
-          \pgfmathsetmacro \colorValue {(100 / \n) * \i}
-          \pgfmathsetmacro \r {(\maxRadius * \i) / \n}
-          \pgfmathsetmacro \x {\xPosition + (sin(\polarAngle) * cos(\azimuthalAngle) * (\i * \v))}
-          \pgfmathsetmacro \y {\yPosition + (sin(\polarAngle) * sin(\azimuthalAngle) * (\i * \v))}
-          \pgfmathsetmacro \z {\zPosition + (cos(\azimuthalAngle) * (\i * \v))}
-          \filldraw[red!\colorValue!white] (\x,\y,\z) circle (\r cm);
-        }
-      ]],
+    % 3D Moving Particle
+    \def \velocity {<>}
+    \def \polarAngle {<>}
+    \def \azimuthalAngle {<>}
+    \def \xPosition {<>}
+    \def \yPosition {<>}
+    \def \zPosition {<>}
+    \def \maxRadius {<>}
+    \def \n {<>}
+    \foreach \i in {1,...,\n} {
+    \pgfmathsetmacro \v {\velocity / 5}
+    \pgfmathsetmacro \colorValue {(100 / \n) * \i}
+    \pgfmathsetmacro \r {(\maxRadius * \i) / \n}
+    \pgfmathsetmacro \x {\xPosition + (sin(\polarAngle) * cos(\azimuthalAngle) * (\i * \v))}
+    \pgfmathsetmacro \y {\yPosition + (sin(\polarAngle) * sin(\azimuthalAngle) * (\i * \v))}
+    \pgfmathsetmacro \z {\zPosition + (cos(\azimuthalAngle) * (\i * \v))}
+    \filldraw[red!\colorValue!white] (\x,\y,\z) circle (\r cm);
+    }
+    ]],
       {
         i(1),
         i(2),
@@ -247,46 +291,46 @@ return {
     },
     fmta(
       [[
-        % 3D Rectangular Prism
-        \def \x {<>}
-        \def \y {<>}
-        \def \z {<>}
-        \def \xLen {<>}
-        \def \yLen {<>}
-        \def \zLen {<>}
-        \def \gridStep {<>}
+    % 3D Rectangular Prism
+    \def \x {<>}
+    \def \y {<>}
+    \def \z {<>}
+    \def \xLen {<>}
+    \def \yLen {<>}
+    \def \zLen {<>}
+    \def \gridStep {<>}
 
-        \pgfmathsetmacro \xi {\x - \gridStep}
-        \pgfmathsetmacro \xf {\xLen + \gridStep}
-        \pgfmathsetmacro \yi {\y - \gridStep}
-        \pgfmathsetmacro \yf {\yLen + \gridStep}
-        \pgfmathsetmacro \negGridStep {\gridStep * -1}
-        \foreach \a in {\xi,\x,...,\xf} {
-          \foreach \b in {\yi,\y,...,\yf} {
-            \draw[gridLines] (\a,\yi,\z) -- (\a,\yf,\z);
-            \draw[gridLines] (\xi,\b,\z) -- (\xf,\b,\z);
-          }
-        }
+    \pgfmathsetmacro \xi {\x - \gridStep}
+    \pgfmathsetmacro \xf {\xLen + \gridStep}
+    \pgfmathsetmacro \yi {\y - \gridStep}
+    \pgfmathsetmacro \yf {\yLen + \gridStep}
+    \pgfmathsetmacro \negGridStep {\gridStep * -1}
+    \foreach \a in {\xi,\x,...,\xf} {
+    \foreach \b in {\yi,\y,...,\yf} {
+    \draw[gridLines] (\a,\yi,\z) -- (\a,\yf,\z);
+    \draw[gridLines] (\xi,\b,\z) -- (\xf,\b,\z);
+    }
+    }
 
-        \pgfmathsetmacro \X {\x + \xLen}
-        \pgfmathsetmacro \Y {\y + \yLen}
-        \pgfmathsetmacro \Z {\z + \zLen}
-        \draw[cubeBorder] (\x,\Y,\z) -- (\x,\Y,\Z) -- (\X,\Y,\Z) -- (\X,\Y,\z) -- cycle;
-        \fill[cubeFilling] (\x,\Y,\z) -- (\x,\Y,\Z) -- (\X,\Y,\Z) -- (\X,\Y,\z) -- cycle;
-        \draw[cubeBorder] (\x,\y,\z) -- (\x,\Y,\z) -- (\X,\Y,\z) -- (\X,\y,\z) -- cycle;
-        \fill[cubeFilling] (\x,\y,\z) -- (\x,\Y,\z) -- (\X,\Y,\z) -- (\X,\y,\z) -- cycle;
-        \draw[cubeBorder] (\x,\y,\z) -- (\x,\Y,\z) -- (\x,\Y,\Z) -- (\x,\y,\Z) -- cycle;
-        \fill[cubeFilling] (\x,\y,\z) -- (\x,\Y,\z) -- (\x,\Y,\Z) -- (\x,\y,\Z) -- cycle;
+    \pgfmathsetmacro \X {\x + \xLen}
+    \pgfmathsetmacro \Y {\y + \yLen}
+    \pgfmathsetmacro \Z {\z + \zLen}
+    \draw[cubeBorder] (\x,\Y,\z) -- (\x,\Y,\Z) -- (\X,\Y,\Z) -- (\X,\Y,\z) -- cycle;
+    \fill[cubeFilling] (\x,\Y,\z) -- (\x,\Y,\Z) -- (\X,\Y,\Z) -- (\X,\Y,\z) -- cycle;
+    \draw[cubeBorder] (\x,\y,\z) -- (\x,\Y,\z) -- (\X,\Y,\z) -- (\X,\y,\z) -- cycle;
+    \fill[cubeFilling] (\x,\y,\z) -- (\x,\Y,\z) -- (\X,\Y,\z) -- (\X,\y,\z) -- cycle;
+    \draw[cubeBorder] (\x,\y,\z) -- (\x,\Y,\z) -- (\x,\Y,\Z) -- (\x,\y,\Z) -- cycle;
+    \fill[cubeFilling] (\x,\y,\z) -- (\x,\Y,\z) -- (\x,\Y,\Z) -- (\x,\y,\Z) -- cycle;
 
-        <>
+    <>
 
-        \draw[cubeBorder] (\X,\y,\z) -- (\X,\y,\Z) -- (\X,\Y,\Z) -- (\X,\Y,\z) -- cycle;
-        \fill[cubeFilling] (\X,\y,\z) -- (\X,\y,\Z) -- (\X,\Y,\Z) -- (\X,\Y,\z) -- cycle;
-        \draw[cubeBorder] (\x,\y,\Z) -- (\x,\Y,\Z) -- (\X,\Y,\Z) -- (\X,\y,\Z) -- cycle;
-        \fill[cubeFilling] (\x,\y,\Z) -- (\x,\Y,\Z) -- (\X,\Y,\Z) -- (\X,\y,\Z) -- cycle;
-        \draw[cubeBorder] (\x,\y,\z) -- (\x,\y,\Z) -- (\X,\y,\Z) -- (\X,\y,\z) -- cycle;
-        \fill[cubeFilling] (\x,\y,\z) -- (\x,\y,\Z) -- (\X,\y,\Z) -- (\X,\y,\z) -- cycle;
-      ]],
+    \draw[cubeBorder] (\X,\y,\z) -- (\X,\y,\Z) -- (\X,\Y,\Z) -- (\X,\Y,\z) -- cycle;
+    \fill[cubeFilling] (\X,\y,\z) -- (\X,\y,\Z) -- (\X,\Y,\Z) -- (\X,\Y,\z) -- cycle;
+    \draw[cubeBorder] (\x,\y,\Z) -- (\x,\Y,\Z) -- (\X,\Y,\Z) -- (\X,\y,\Z) -- cycle;
+    \fill[cubeFilling] (\x,\y,\Z) -- (\x,\Y,\Z) -- (\X,\Y,\Z) -- (\X,\y,\Z) -- cycle;
+    \draw[cubeBorder] (\x,\y,\z) -- (\x,\y,\Z) -- (\X,\y,\Z) -- (\X,\y,\z) -- cycle;
+    \fill[cubeFilling] (\x,\y,\z) -- (\x,\y,\Z) -- (\X,\y,\Z) -- (\X,\y,\z) -- cycle;
+    ]],
       {
         i(1),
         i(2),
@@ -306,22 +350,22 @@ return {
     },
     fmta(
       [[
-        % n Random 3D Particles
-        \def \n {<>}
-        \def \xMin {<>}
-        \def \yMin {<>}
-        \def \zMin {<>}
-        \def \xMax {<>}
-        \def \yMax {<>}
-        \def \zMax {<>}
-        \def \radius {<>}
-        \foreach \x in {1,...,\n} {
-          \pgfmathsetmacro \x {(rnd * (\xMax - \xMin)) + \xMin}
-          \pgfmathsetmacro \y {(rnd * (\yMax - \yMin)) + \yMin}
-          \pgfmathsetmacro \z {(rnd * (\zMax - \zMin)) + \zMin}
-          \filldraw[red!100!white] (\x,\y,\z) circle (\radius cm);
-        }
-      ]],
+    % n Random 3D Particles
+    \def \n {<>}
+    \def \xMin {<>}
+    \def \yMin {<>}
+    \def \zMin {<>}
+    \def \xMax {<>}
+    \def \yMax {<>}
+    \def \zMax {<>}
+    \def \radius {<>}
+    \foreach \x in {1,...,\n} {
+    \pgfmathsetmacro \x {(rnd * (\xMax - \xMin)) + \xMin}
+    \pgfmathsetmacro \y {(rnd * (\yMax - \yMin)) + \yMin}
+    \pgfmathsetmacro \z {(rnd * (\zMax - \zMin)) + \zMin}
+    \filldraw[red!100!white] (\x,\y,\z) circle (\radius cm);
+    }
+    ]],
       {
         i(1),
         i(2),

@@ -257,4 +257,27 @@ return {
     ),
     {}
   ),
+  s( -- ax -> Axis Environment )
+    {
+      trig = "ax",
+    },
+    fmta(
+      [[
+        \begin{axis}[
+          axis lines = <>,
+          xlabel = <>,
+          ylabel = <>,
+        ]
+          <>
+        \end{axis}
+      ]],
+      {
+        i(1),
+        i(2),
+        i(3),
+        i(0),
+      }
+    ),
+    {}
+  ),
 }

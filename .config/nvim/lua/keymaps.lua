@@ -63,7 +63,7 @@ vim.keymap.set({ "i", "s" }, "<c-j>", function()
         require("luasnip").jump(-1)
     end
 end,                                                                              { noremap = true, silent = true,            desc = "Jump Back Within Snippet" })
-vim.keymap.set({ "i", "s" }, "<c-i>", function()
+vim.keymap.set({ "i", "s" }, "<c-s-k>", function()
     if require("luasnip").choice_active() then
         require("luasnip").change_choice(1)
     end
