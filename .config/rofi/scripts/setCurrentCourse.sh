@@ -72,9 +72,9 @@ for i in ${!courses[@]}; do
 done
 
 declare -A commands
-commands[refresh]="changeCurrentCourse.sh"
+commands[refresh]="setCurrentCourse.sh"
 for i in ${!paths[@]}; do
-  commands[class$i]="changeCurrentCourse.sh ${paths[$i]}"
+  commands[class$i]="setCurrentCourse.sh ${paths[$i]}"
 done
 
 # Rofi Logic
