@@ -8,7 +8,8 @@ vim.g.maplocalleader = " "
                                 -- NORMAL MODE --
 -- MISCELLANEOUS
 vim.keymap.set("n", "U",            "<C-r>",                                      { noremap = true, silent = true,            desc = "Redo" })
-vim.keymap.set("n", ")",            "$",                                          { noremap = true, silent = true,            desc = "Go to End of Line" })
+vim.keymap.set("n", "L",            "$",                                          { noremap = true, silent = true,            desc = "Go to End of Line" })
+vim.keymap.set("n", "H",            "0",                                          { noremap = true, silent = true,            desc = "Go to Front of Line" })
 vim.keymap.set("n", "<C-'>",        "<C-y>",                                      { noremap = true, silent = true,            desc = "Move Screen Up" })
 vim.keymap.set("n", "<C-;>",        "<C-e>",                                      { noremap = true, silent = true,            desc = "Move Screen Down" })
 vim.keymap.set("n", "<BS>",         "<C-o>",                                      { noremap = true, silent = true,            desc = "Move Cursor to Previous Place" })
@@ -17,6 +18,7 @@ vim.keymap.set("n", "<leader>`",    ":Alpha<CR>",                               
 vim.keymap.set("n", "<leader>?",    ":WhichKey<CR>",                              { noremap = true, silent = true,            desc = "Display Keymaps" })
 vim.keymap.set("n", "<leader>h",    ":Telescope help_tags hidden=true<CR>",       { noremap = true, silent = true,            desc = "Search Help Tags" })
 vim.keymap.set("n", "\\",           ";",                                          { noremap = true, silent = true,            desc = "Search Help Tags" })
+
 -- VIEW MANAGEMENT                  
 vim.keymap.set("n", "<leader>vm",   ":RenderMarkdownToggle<CR>",                  { noremap = true, silent = true,            desc = "Toggle Markdown View" })
 vim.keymap.set("n", "<leader>vs",   ":Neominimap bufToggle<CR>",                  { noremap = true, silent = true,            desc = "Toggle Side Code View" })
@@ -31,10 +33,10 @@ vim.keymap.set("n", "<C-l>",        "<C-w>l",                                   
 vim.keymap.set("n", "<C-m>",        "<C-w>v",                                     { noremap = true, silent = true,            desc = "Open Window Horizontally Split" })
 vim.keymap.set("n", "<C-n>",        "<C-w>s",                                     { noremap = true, silent = true,            desc = "Open Window Vertically Split" })
 vim.keymap.set("n", "<C-q>",        "<C-w>q",                                     { noremap = true, silent = true,            desc = "Close Focused Window" })
-vim.keymap.set("n", "<C-Up>",       ":resize +2<CR>",                             { noremap = true, silent = true,            desc = "Horizontally Shrink Focused Window" })
-vim.keymap.set("n", "<C-Down>",     ":resize -2<CR>",                             { noremap = true, silent = true,            desc = "Vertically Shrink Focused Window" })
-vim.keymap.set("n", "<C-Left>",     ":vertical resize -2<CR>",                    { noremap = true, silent = true,            desc = "Horizontally Grow Focused Window" })
-vim.keymap.set("n", "<C-Right>",    ":vertical resize +2<CR>",                    { noremap = true, silent = true,            desc = "Vertically Grow Focused Window" })
+vim.keymap.set("n", "<C-S-k>",      ":resize +2<CR>",                             { noremap = true, silent = true,            desc = "Horizontally Shrink Focused Window" })
+vim.keymap.set("n", "<C-S-j>",      ":resize -2<CR>",                             { noremap = true, silent = true,            desc = "Vertically Shrink Focused Window" })
+vim.keymap.set("n", "<C-S-h>",      ":vertical resize -2<CR>",                    { noremap = true, silent = true,            desc = "Horizontally Grow Focused Window" })
+vim.keymap.set("n", "<C-S-l>",      ":vertical resize +2<CR>",                    { noremap = true, silent = true,            desc = "Vertically Grow Focused Window" })
                                     
 -- FILE MANAGEMENT                        
 vim.keymap.set("n", "<leader>ff",   ":Telescope find_files hidden=true<CR>",      { noremap = true, silent = true,            desc = "Find Files" })
