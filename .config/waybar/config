@@ -8,16 +8,16 @@
     "height": 0,
     "modules-left": [
       "hyprland/workspaces",
-      "mpd"
+    "mpd"
     ],
     "modules-center": [ "clock" ],
     "modules-right": [
       "network",
-      "bluetooth",
-      "battery",
-      "backlight",
-      "pulseaudio",
-      "pulseaudio#microphone"
+    "bluetooth",
+    "battery",
+    "backlight",
+    "pulseaudio",
+    "pulseaudio#microphone"
     ],
 
     "hyprland/workspaces": {
@@ -62,7 +62,7 @@
     },
 
     "clock": {
-      "format": "{:%A    %B-%d-%Y    %I:%M:%S %p}",
+      "format": "{:%A    %b-%d-%Y    %I:%M:%S %p}",
       "interval": 1,
       "rotate": 0,
       "tooltip-format": "<tt>{calendar}</tt>",
@@ -111,7 +111,7 @@
     "pulseaudio": {
       "format": "{icon}  {volume}%",
       "tooltip": false,
-      "format-muted": "  Muted",
+      "format-muted": "  ---",
       "on-click": "pamixer -t",
       "on-scroll-up": "pamixer -d 1",
       "on-scroll-down": "pamixer -i 1",
@@ -123,7 +123,7 @@
         "phone": "",
         "portable": "",
         "car": "",
-        "default": ["","", "", ""]
+        "default": ["","","",""]
       }
     },
 
@@ -164,7 +164,7 @@
     "network": {
       "tooltip": true,
       "format-wifi": "  {essid}",
-      "format-ethernet": "󰈀 ",
+      "format-ethernet": "󰈀 Ethernet",
       "tooltip-format": "Network: <big><b>{essid}</b></big>\nSignal strength: <b>{signaldBm}dBm ({signalStrength}%)</b>\nFrequency: <b>{frequency}MHz</b>\nInterface: <b>{ifname}</b>\nIP: <b>{ipaddr}/{cidr}</b>\nGateway: <b>{gwaddr}</b>\nNetmask: <b>{netmask}</b>",
       "format-linked": "󰈀 {ifname} (No IP)",
       "format-disconnected": "󰖪 ",
@@ -174,16 +174,16 @@
     },
 
     "mpd": {
-      "format": "  {albumArtist} - {title}",
-      "format-disconnected": "  -------------------",
-      "format-stopped": "  -------------------",
+      "format": "{stateIcon}  {title}",
+      "format-disconnected": "MPD (disconnected)",
+      "format-stopped": "  --------------------------------",
       "interval": 10,
-      "max-length": 25,
+      "max-length": 35,
       "state-icons": {
         "paused": "",
         "playing": ""
       },
-      "tooltip-format": "{albumArtist} - {title} [{album}] ({elapsedTime:%M:%S}/{totalTime:%M:%S})",
+      "tooltip-format": "{artist} - [{album}]\n({elapsedTime:%M:%S}/{totalTime:%M:%S}) [{songPosition}/{queueLength}]",
       "tooltip-format-disconnected": "MPD (disconnected)"
     }
 }

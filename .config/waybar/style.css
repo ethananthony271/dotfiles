@@ -27,14 +27,18 @@ bright7:  #BDAE93; bright white
   font-family: FiraCode Nerd Font, monospace;
   font-weight: bold;
   font-size: 14px;
-  min-height: 0;
+  min-height: 20px;
 }
 
 tooltip {
   background-color: #282828;
-  color: #F9F5D7;
-  border: 2px solid #a89984;
+  border: 2px solid #d3869b;
   text-shadow: none;
+}
+
+tooltip label {
+  font-size: 12px;
+  color: #F9F5D7;
 }
 
 window#waybar {
@@ -43,7 +47,7 @@ window#waybar {
 }
 
 #workspaces button {
-  padding: 5px;
+  padding: 5px 3px 5px 3px;
   color: #F9F5D7;
   margin-right: 5px;
 }
@@ -61,8 +65,10 @@ window#waybar {
 }
 
 #workspaces button:hover {
-  background: #282828;
-  color: #282828; 
+  box-shadow: none;
+  text-shadow: none;
+  background: none;
+  color: #8EC07C;
 }
 
 #mpd,
@@ -75,7 +81,7 @@ window#waybar {
 #backlight {
   background: #282828;
   padding: 0px 10px;
-  margin: 3px 0px;
+  margin: 3px 0px 0px 0px;
   margin-top: 5px;
   color: #F9F5D7;
 }
@@ -83,7 +89,7 @@ window#waybar {
 #workspaces {
   border-radius: 10px;
   margin-left: 10px;
-  padding-right: 0px;
+  padding-right: 5px;
   padding-left: 5px;
 }
 
