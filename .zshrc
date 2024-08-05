@@ -100,7 +100,7 @@ alias q='exit'
 alias m='neomutt'
 alias d='yazi'
 alias z='ncmpcpp'
-alias a='./a.out'
+alias f='fzf --preview "bat --color=always {}"'
 
 alias ta='todo add '
 alias tm='todo rm '
