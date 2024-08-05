@@ -23,7 +23,6 @@ bright7:  #BDAE93; bright white
 
 * {
   border: none;
-  border-radius: 0;
   font-family: FiraCode Nerd Font, monospace;
   font-weight: bold;
   font-size: 14px;
@@ -87,49 +86,49 @@ window#waybar {
 }
 
 #workspaces {
-  border-radius: 10px;
+  border-radius: 5px;
   margin-left: 10px;
   padding-right: 5px;
   padding-left: 5px;
 }
 
 #clock {
-  border-radius: 10px 10px 10px 10px;
+  border-radius: 5px 5px 5px 5px;
   margin-left: 5px;
   border-right: 0px;
 }
 
 #mpd {
-  border-radius: 10px 10px 10px 10px;
+  border-radius: 5px 5px 5px 5px;
   margin-left: 10px;
 }
 
 #network {
-  border-radius: 10px 0px 0px 10px;
+  border-radius: 5px 0px 0px 5px;
 }
 
 #bluetooth {
-  border-radius: 0px 10px 10px 0px;
+  border-radius: 0px 5px 5px 0px;
 }
 
 #battery {
-  border-radius: 10px 0px 0px 10px;
+  border-radius: 5px 0px 0px 5px;
   margin-left: 10px;
 }
 
 #backlight {
-  border-radius: 0px 10px 10px 0px;
+  border-radius: 0px 5px 5px 0px;
   margin-right: 10px;
 }
 
 #pulseaudio {
-  border-radius: 10px 0px 0px 10px;
+  border-radius: 5px 0px 0px 5px;
   border-left: 0px;
   border-right: 0px;
 }
 
 #pulseaudio.microphone {
-  border-radius: 0px 10px 10px 0px;
+  border-radius: 0px 5px 5px 0px;
   border-left: 0px;
   border-right: 0px;
   margin-right: 5px;
