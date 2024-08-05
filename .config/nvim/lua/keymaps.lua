@@ -17,7 +17,7 @@ vim.keymap.set("n", "+",            "gg=G<C-o>",                                
 vim.keymap.set("n", "<leader>`",    ":Alpha<CR>",                                 { noremap = true, silent = true,            desc = "Return to Homepage" })
 vim.keymap.set("n", "<leader>?",    ":WhichKey<CR>",                              { noremap = true, silent = true,            desc = "Display Keymaps" })
 vim.keymap.set("n", "<leader>h",    ":Telescope help_tags hidden=true<CR>",       { noremap = true, silent = true,            desc = "Search Help Tags" })
-vim.keymap.set("n", "\\",           ";",                                          { noremap = true, silent = true,            desc = "Search Help Tags" })
+vim.keymap.set("n", "<C-S-f>",      ";",                                          { noremap = true, silent = true,            desc = "Repeat Find in Line" })
 
 -- VIEW MANAGEMENT                  
 vim.keymap.set("n", "<leader>vm",   ":RenderMarkdownToggle<CR>",                  { noremap = true, silent = true,            desc = "Toggle Markdown View" })
