@@ -55,7 +55,7 @@
       "format": " {status}",
       "format-on": "󰂯 ---",
       "format-disabled": "",
-      "format-connected": " {num_connections}",
+      "format-connected": " {device_alias}",
       "tooltip-format": "{controller_alias}\t{controller_address}",
       "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
       "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}"
@@ -174,14 +174,14 @@
     },
 
     "mpd": {
-      "format": "{stateIcon}  {title}",
+      "format": "{stateIcon} {title} - {albumArtist}",
       "format-disconnected": "MPD (disconnected)",
       "format-stopped": "  --------------------------------",
       "interval": 10,
       "max-length": 35,
       "state-icons": {
-        "paused": "",
-        "playing": ""
+        "paused": "",
+        "playing": ""
       },
       "tooltip-format": "{artist} - [{album}]\n({elapsedTime:%M:%S}/{totalTime:%M:%S}) [{songPosition}/{queueLength}]",
       "tooltip-format-disconnected": "MPD (disconnected)"
