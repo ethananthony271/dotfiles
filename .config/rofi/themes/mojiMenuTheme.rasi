@@ -10,7 +10,6 @@ window {
     height:                      218px; //27px increments per list item
     x-offset:                    0px;
     y-offset:                    0px;
-    prompt:                      "Clipboard";
 
     enabled:                     true;
     margin:                      0px;
