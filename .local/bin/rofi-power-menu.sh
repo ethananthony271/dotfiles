@@ -18,7 +18,7 @@ all=(shutdown reboot suspend hibernate logout lockscreen)
 # By default, show all (i.e., just copy the array)
 # show=("${all[@]}")
 
-show=(shutdown reboot suspend logout)
+show=(shutdown suspend hibernate logout lockscreen)
 
 declare -A texts
 texts[lockscreen]="lock screen"
@@ -30,13 +30,13 @@ texts[reboot]="reboot"
 texts[shutdown]="shut down"
 
 declare -A icons
-icons[lockscreen]="\Uf033e"
+icons[lockscreen]=""
 # icons[switchuser]="\Uf0019"
-icons[logout]="\Uf0343"
-icons[suspend]="\Uf04b2"
-icons[hibernate]="\Uf02ca"
-icons[reboot]="\Uf0709"
-icons[shutdown]="\Uf0425"
+icons[logout]="󰍃"
+icons[suspend]="󰒲"
+icons[hibernate]=""
+icons[reboot]=""
+icons[shutdown]=""
 icons[cancel]="\Uf0156"
 
 declare -A actions
@@ -180,7 +180,7 @@ fi
 function write_message {
   if [ -z ${symbols_font+x} ];
   then
-    icon="<span font_size='large'>$1</span>"
+    icon="<span font_size='medium'>$1</span>"
   else
     icon="<span font=\"${symbols_font}\" font_size=\"medium\">$1</span>"
   fi
