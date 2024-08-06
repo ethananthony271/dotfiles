@@ -79,7 +79,8 @@ vim.keymap.set("n", "<leader><leader>s", "<cmd>source ~/.config/nvim/lua/plugins
 -- MISCELLANEOUS
 vim.keymap.set("x", ">",            ">gv",                                        { noremap = true, silent = true,            desc = "Increase line indent" })
 vim.keymap.set("x", "<",            "<gv",                                        { noremap = true, silent = true,            desc = "Decrease line indent" })
-vim.keymap.set("x", ")",            "$",                                          { noremap = true, silent = true,            desc = "Go to End of Line" })
+vim.keymap.set("x", "L",            "$",                                          { noremap = true, silent = true,            desc = "Go to End of Line" })
+vim.keymap.set("x", "H",            "0",                                          { noremap = true, silent = true,            desc = "Go to Front of Line" })
 
                                 -- MULTI  MODE --
 vim.keymap.set({'n', 'x', 'o'}, '\'',  '<Plug>(leap-forward)',                    { noremap = true, silent = true,            desc = "Leap Forward" })
