@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
-quarterDirectory="$HOME/Documents/School/quarter04"
-
 # Options
-p=$(find $quarterDirectory -mindepth 1 -maxdepth 1 -type d)
+p=$(find $CURRQUARTER -mindepth 1 -maxdepth 1 -type d)
 paths=()
 for path in $p; do
   if [[ ! $path =~ "xlatex" ]]; then
-    paths+=($path);
+    if [[ $path =~ ^/home/ea/(.*)$ ]]; then
+      paths+=("${BASH_REMATCH[1]}");
+    fi
   fi
 done
 
@@ -28,9 +28,9 @@ for i in ${!courses[@]}; do
 done
 
 declare -A commands
-commands[refresh]="setCurrentCourse.sh"
+commands[refresh]="setCurrentCourse.sh -a"
 for i in ${!paths[@]}; do
-  commands[class$i]="setCurrentCourse.sh ${paths[$i]}"
+  commands[class$i]="setCurrentCourse.sh -s ${paths[$i]}"
 done
 
 # Rofi Logic
