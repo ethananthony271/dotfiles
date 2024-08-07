@@ -7,3 +7,5 @@
 .config/mpd/playlists/
 .config/mpd/playlists
 .config/ncmpcpp/error.log
+.config/beets/library.db
+.config/state.pickle
