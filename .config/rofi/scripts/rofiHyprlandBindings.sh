@@ -15,13 +15,13 @@ for i in "${!modmasks[@]}"; do
   if [[ "${modmasks[$i]}" =~ 0 ]]; then
     modmasks[$i]=""
   elif [[ "${modmasks[$i]}" =~ 64 ]]; then
-    modmasks[$i]="Super + "
+    modmasks[$i]="\$mod + "
   elif [[ "${modmasks[$i]}" =~ 65 ]]; then
-    modmasks[$i]="Super Shift + "
+    modmasks[$i]="\$mod Shift + "
   elif [[ "${modmasks[$i]}" =~ 68 ]]; then
-    modmasks[$i]="Super Ctrl + "
+    modmasks[$i]="\$mod Ctrl + "
   elif [[ "${modmasks[$i]}" =~ 69 ]]; then
-    modmasks[$i]="Super Shift Ctrl + "
+    modmasks[$i]="\$mod Shift Ctrl + "
   else
     modmasks[$i]="Modmask + "
   fi
