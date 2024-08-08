@@ -59,15 +59,15 @@ createFile () {
     line=$(cat $templatePath | rg \title)
     title=$(echo $line | sed 's/\\title{\(.*\)}/\1/')
 
-    notify-send "Created New $templateType" "$title
+    notify-send "New $templateType Created" "$title
 $(basename $newFilePath) in $(getCurrentCourseInfo -s) - $(getCurrentCourseInfo -t)
 "
   else
-    notify-send "Did Not Create New $templateType" "$newFilePath"
+    notify-send "New $templateType Not Created" "$newFilePath"
   fi
 }
 
-while getopts 'l:f:h' opt; do
+while getopts 'l:f:LFh' opt; do
   case "$opt" in
     l)
       tp="$OPTARG"
@@ -79,6 +79,26 @@ while getopts 'l:f:h' opt; do
       tp="$OPTARG"
       tt="Figure"
       createFile "$tp" "$tt"
+      ;;
+
+    L)
+      tp="$CURRQUARTER/xlatex/templates/lecture/basic_lecture.tex"
+      tt="Lecture"
+      if [[ -n $(find $CURRQUARTER -wholename "$CURRQUARTER/xlatex/templates/lecture/basic_lecture.tex") ]]; then
+        createFile "$tp" "$tt"
+      else
+        notify-send "New $tt Not Created" "basic_lecture.tex template does not exist"
+      fi
+      ;;
+
+    F)
+      tp="$CURRQUARTER/xlatex/templates/figure/basic_figure.tex"
+      tt="Figure"
+      if [[ -n $(find $CURRQUARTER -wholename "$CURRQUARTER/xlatex/templates/figure/basic_figure.tex") ]]; then
+        createFile "$tp" "$tt"
+      else
+        notify-send "New $tt Not Created" "basic_figure.tex template does not exist"
+      fi
       ;;
 
     h)
