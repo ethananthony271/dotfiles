@@ -21,9 +21,9 @@ for i in ${!types[@]}; do
     title=$(getTemplateName "${temp[$j]}")
     messages[$i$j]="$type: $title"
     if [[ "$type" = "Figure" ]]; then
-      commands[$i$j]="createLatexFromTemplate.sh -f '${temp[$j]}'"
+      commands[$i$j]="createLatexFromTemplate -f '${temp[$j]}'"
     elif [[ "$type" = "Lecture" ]]; then
-      commands[$i$j]="createLatexFromTemplate.sh -l '${temp[$j]}'"
+      commands[$i$j]="createLatexFromTemplate -l '${temp[$j]}'"
     else
       commands[$i$j]="notify-send 'New File Not Created'"
     fi

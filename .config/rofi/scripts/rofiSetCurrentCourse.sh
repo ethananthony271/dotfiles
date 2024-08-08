@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 # Options
+options=() # refresh
+
 p=$(find $CURRQUARTER -mindepth 1 -maxdepth 1 -type d)
 paths=()
 for path in $p; do
@@ -18,8 +20,6 @@ for path in ${paths[@]}; do
   courses+=("$courseShort - $courseTitle")
 done
 
-options=(refresh)
-
 declare -A messages
 messages[refresh]="Refresh Current Course"
 for i in ${!courses[@]}; do
@@ -28,9 +28,9 @@ for i in ${!courses[@]}; do
 done
 
 declare -A commands
-commands[refresh]="setCurrentCourse.sh -a"
+commands[refresh]="setCurrentCourse -a"
 for i in ${!paths[@]}; do
-  commands[class$i]="setCurrentCourse.sh -s ${paths[$i]}"
+  commands[class$i]="setCurrentCourse -s ${paths[$i]}"
 done
 
 # Rofi Logic
