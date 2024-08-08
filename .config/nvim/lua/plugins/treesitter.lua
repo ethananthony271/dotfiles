@@ -11,7 +11,7 @@ return {
         "c",
         "cpp",
         "rasi",
-        -- "latex",
+        "hyprlang",
       },
       highlight = {
         enable = true,

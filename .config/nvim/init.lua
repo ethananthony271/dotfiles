@@ -28,3 +28,7 @@ require("luasnip.loaders.from_lua").load({
 })
 
 vim.cmd("unmap <CR>")
+
+vim.filetype.add({
+  pattern = { [".*/hypr/.*%.conf"] = "hyprlang" },
+})
