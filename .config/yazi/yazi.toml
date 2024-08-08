@@ -50,7 +50,7 @@ rules = [
   # Microsoft Office Filetypes              
   { mime = "application/msword",            use = [ "office" ] },
   { mime = "application/vnd.ms*",           use = [ "office" ] },
-  { mime = "application/vnd.opemx*",        use = [ "office" ] },
+  { mime = "application/vnd.openx*",        use = [ "office" ] },
   
   # Open Document Filetypes
   { mime = "application/vnd.oasis.opend*",  use = [ "office" ] },
