@@ -90,8 +90,8 @@
       "device": "intel_backlight",
       "format": "{icon} {percent}%",
       "format-icons": ["󰃞", "󰃟", "󰃠"],
-      "on-scroll-up": "brightnessctl set 1%+",
-      "on-scroll-down": "brightnessctl set 1%-",
+      "on-scroll-up": "brightnessctl set 1%-",
+      "on-scroll-down": "brightnessctl set 1%+",
       "min-length": 6
     },
 
@@ -130,10 +130,10 @@
     "pulseaudio#microphone": {
       "format": "{format_source}",
       "format-source": " {volume}%",
-      "format-source-muted": "  Muted",
+      "format-source-muted": "  ---",
       "on-click": "pamixer --default-source -t",
-      "on-scroll-up": "pamixer --default-source -i 5",
-      "on-scroll-down": "pamixer --default-source -d 5",
+      "on-scroll-up": "pamixer --default-source -d 5",
+      "on-scroll-down": "pamixer --default-source -i 5",
       "scroll-step": 5
     },
 
