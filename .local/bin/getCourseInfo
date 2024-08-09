@@ -36,6 +36,9 @@ echoHelpMessage () {
   echo "                      of three letter days, eg. \"Mon Wed Fri\". Returns -1"
   echo "                      no lab section exists. From info.json"
   echo "  -p, --path          Absolute path to the course. From file structure"
+  echo "  -l, --last-lecture  Absolute path to the most recent lecture file in the"
+  echo "                      course. Lecture files are any file in the notes/"
+  echo "                      subdirectory named in the \"lec_XXX.tex\" format."
   echo "  -h, --help          Displays this help message"
 }
 
@@ -51,7 +54,7 @@ else
   courseInfo=$CURRCOURSE/info.json
 fi
 
-VALID_ARGS=$(getopt -o tscnredLREDph --long title,short,code,number,start,end,days,has-lab,lab-start,lab-end,lab-days,path,help -- "$@")
+VALID_ARGS=$(getopt -o tscnredLREDplh --long title,short,code,number,start,end,days,has-lab,lab-start,lab-end,lab-days,path,last-lecture,help -- "$@")
 if [[ $? -ne 0 ]]; then
   exit 1;
 fi
@@ -128,6 +131,12 @@ while [ : ]; do
 
     -p | --path)
       echo $(readlink -n $CURRCOURSE)
+      shift
+      ;;
+
+    -l | --last-lecture)
+      mapfile -t lectures < <(find $CURRCOURSE/notes -regextype posix-extended -regex '.*lec_[0-9]{3}\.tex.*')
+      echo ${lectures[${#lectures[@]} - 1]}
       shift
       ;;
 
