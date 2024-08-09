@@ -1,0 +1,143 @@
+#!/usr/bin/env bash
+
+echoHelpMessage () {
+  echo "getCourseInfo - get information about the currently active course"
+  echo
+  echo "Using both the info.json file in each course directory as well as the"
+  echo "file structure of the quarter directory, getCourseInfo can be used"
+  echo "to get information such as the title or directory or the current course"
+  echo
+  echo "Usage: getCourseInfo [DIRECTORY] [options]"
+  echo "  Specifying the directory of the course is optional, and if no directory"
+  echo "  is specified, the program will work with the current course information."
+  echo "  Specified directories should be the direct parent of the info.json file."
+  echo
+  echo "  Each option will output the corresponding informationa about the"
+  echo "  current course. Passing multiple options will output each value in"
+  echo "  consecutive lines in order. No native formatting is supported."
+  echo
+  echo "Available Options:"
+  echo "  -t, --title         Title of the course. From info.json"
+  echo "  -s, --short         Short title of the course. From info.json"
+  echo "  -c, --code          Four letter code of the course. From info.json"
+  echo "  -n, --number        Number code of the course. From info.json"
+  echo "  -r, --start         Start time in 24 hour format. From info.json"
+  echo "  -e, --end           End time in 24 hour format. From info.json"
+  echo "  -d, --days          Days of the week the course meets. Formatted as a"
+  echo "                      string of three letter days, eg. \"Mon Wed Fri\"."
+  echo "                      From info.json"
+  echo "  -L, --has-lab       Returns true if a lab section exists, and false"
+  echo "                      otherwise. From info.json"
+  echo "  -R, --lab-start     Start time of lab in 24 hour format. Returns -1 if"
+  echo "                      no lab section exists. From info.json"
+  echo "  -R, --lab-start     End time of lab in 24 hour format. Returns -1 if no"
+  echo "                      lab section exists. From info.json"
+  echo "  -D, --lab-days      Days of the week the lab meets. Formatted as a string"
+  echo "                      of three letter days, eg. \"Mon Wed Fri\". Returns -1"
+  echo "                      no lab section exists. From info.json"
+  echo "  -p, --path          Absolute path to the course. From file structure"
+  echo "  -h, --help          Displays this help message"
+}
+
+if [[ -d "$1" ]]; then
+  if [[ $(find $1 -maxdepth 1 -mindepth 1 -type f -name info.json | wc -l) = 1 ]]; then
+    courseInfo="$(pwd)/$1"/info.json
+    shift
+  else
+    echo "Invalid directory: Specified directory must be direct parent to info.json file"
+    exit 1
+  fi
+else
+  courseInfo=$CURRCOURSE/info.json
+fi
+
+VALID_ARGS=$(getopt -o tscnredLREDph --long title,short,code,number,start,end,days,has-lab,lab-start,lab-end,lab-days,path,help -- "$@")
+if [[ $? -ne 0 ]]; then
+  exit 1;
+fi
+
+eval set -- "$VALID_ARGS"
+while [ : ]; do
+  case "$1" in
+    -t | --title)
+      echo $(cat "$courseInfo" | jq -r .name.title)
+      shift
+      ;;
+
+    -s | --short)
+      echo $(cat "$courseInfo" | jq -r .name.short)
+      shift
+      ;;
+
+    -c | --code)
+      echo $(cat "$courseInfo" | jq -r .name.code)
+      shift
+      ;;
+
+    -n | --number)
+      echo $(cat "$courseInfo" | jq -r .name.number)
+      shift
+      ;;
+
+    -r | --start)
+      echo $(cat "$courseInfo" | jq -r .schedule.start)
+      shift
+      ;;
+
+    -e | --end)
+      echo $(cat "$courseInfo" | jq -r .schedule.end)
+      shift
+      ;;
+
+    -d | --days)
+      echo $(cat "$courseInfo" | jq -r .schedule.days)
+      shift
+      ;;
+
+    -L | --has-lab)
+      echo $(cat "$courseInfo" | jq -r .hasLab)
+      shift
+      ;;
+
+    -R | --lab-start)
+      if [[ $(cat "$courseInfo" | jq -r .hasLab) = true ]]; then
+        echo $(cat "$courseInfo" | jq -r .schedule.labStart)
+      else
+        echo -1
+      fi
+      shift
+      ;;
+
+    -E | --lab-end)
+      if [[ $(cat "$courseInfo" | jq -r .hasLab) = true ]]; then
+        echo $(cat "$courseInfo" | jq -r .schedule.labEnd)
+      else
+        echo -1
+      fi
+      shift
+      ;;
+
+    -D | --lab-days)
+      if [[ $(cat "$courseInfo" | jq -r .hasLab) = true ]]; then
+        echo $(cat "$courseInfo" | jq -r .schedule.labDays)
+      else
+        echo -1
+      fi
+      shift
+      ;;
+
+    -p | --path)
+      echo $(readlink -n $CURRCOURSE)
+      shift
+      ;;
+
+    -h | --help)
+      echoHelpMessage
+      shift
+      ;;
+
+    --) shift; 
+      break 
+      ;;
+  esac
+done
