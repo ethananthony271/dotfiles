@@ -236,6 +236,10 @@ def_key "u"
 def_key "?"
   show_help
 
+#### PLAYLISTS ####
+def_key "c"
+  toggle_playing_song_centering
+
 #### SEARCH ENGINE ####
 def_key "w"
   start_searching
