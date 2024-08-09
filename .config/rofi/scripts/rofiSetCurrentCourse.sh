@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
 # Options
-options=() # refresh
+all=(get refresh)
+
+options=(get)
 
 p=$(find $CURRQUARTER -mindepth 1 -maxdepth 1 -type d)
 paths=()
@@ -15,13 +17,14 @@ done
 
 courses=()
 for path in ${paths[@]}; do
-  courseShort=$(cat "$path/info.json" | jq -r .short)
-  courseTitle=$(cat "$path/info.json" | jq -r .title)
+  courseShort=$(getCourseInfo "$path" --short)
+  courseTitle=$(getCourseInfo "$path" --title)
   courses+=("$courseShort - $courseTitle")
 done
 
 declare -A messages
 messages[refresh]="Refresh Current Course"
+messages[get]="Get Current Course"
 for i in ${!courses[@]}; do
   messages[class$i]="${courses[$i]}"
   options+=(class$i)
@@ -29,6 +32,7 @@ done
 
 declare -A commands
 commands[refresh]="setCurrentCourse -a"
+commands[get]="setCurrentCourse -g"
 for i in ${!paths[@]}; do
   commands[class$i]="setCurrentCourse -s ${paths[$i]}"
 done
