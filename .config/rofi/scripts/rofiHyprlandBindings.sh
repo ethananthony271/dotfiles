@@ -1,44 +1,27 @@
 #!/bin/bash
 
-command="hyprctl binds"
 
-pattern="description"
-mapfile -t descriptions < <(hyprctl binds | grep ${pattern})
-for i in "${!descriptions[@]}"; do
-  temp=$(echo "${descriptions[$i]}" | sed -n "s/^.*${pattern}:\s*\(.*\)$/\1/p")
-  descriptions[$i]=$(echo $temp)
-done
+mapfile -t descriptions < <(hyprctl binds | rg --trim --replace="" description: )
+mapfile -t keys < <(hyprctl binds | rg --trim --replace="" key: )
+mapfile -t dispatchers < <(hyprctl binds | rg --trim --replace="" dispatcher: )
+mapfile -t args < <(hyprctl binds | rg --trim --replace="" arg: )
 
-pattern="modmask"
-mapfile -t modmasks < <(hyprctl binds | grep ${pattern})
+mapfile -t modmasks < <(hyprctl binds | rg --trim --replace="" modmask: )
 for i in "${!modmasks[@]}"; do
-  if [[ "${modmasks[$i]}" =~ 0 ]]; then
+  if [[ "${modmasks[$i]}" = 0 ]]; then
     modmasks[$i]=""
-  elif [[ "${modmasks[$i]}" =~ 64 ]]; then
+  elif [[ "${modmasks[$i]}" = 64 ]]; then
     modmasks[$i]="\$mod + "
-  elif [[ "${modmasks[$i]}" =~ 65 ]]; then
+  elif [[ "${modmasks[$i]}" = 65 ]]; then
     modmasks[$i]="\$mod Shift + "
-  elif [[ "${modmasks[$i]}" =~ 68 ]]; then
+  elif [[ "${modmasks[$i]}" = 68 ]]; then
     modmasks[$i]="\$mod Ctrl + "
-  elif [[ "${modmasks[$i]}" =~ 69 ]]; then
+  elif [[ "${modmasks[$i]}" = 69 ]]; then
     modmasks[$i]="\$mod Shift Ctrl + "
   else
     modmasks[$i]="Modmask + "
   fi
 done
-
-pattern="key:"
-mapfile -t keys < <(hyprctl binds | grep ${pattern})
-for i in "${!keys[@]}"; do
-  temp=$(echo "${keys[$i]}" | sed -n "s/^.*${keys}:\s*\(.*\)$/\1/p")
-  keys[$i]=$(echo $temp)
-done
-
-pattern="dispatcher"
-mapfile -t dispatchers < <(hyprctl binds | grep ${pattern})
-
-pattern="arg"
-mapfile -t args < <(hyprctl binds | grep ${pattern})
 
 # Rofi Logic
 if [[ $# = 0 ]]; then
@@ -50,8 +33,8 @@ if [[ $# = 0 ]]; then
 else
   for i in ${!descriptions[@]}; do
     if [[ $1 = "${modmasks[$i]}${keys[$i]}: ${descriptions[$i]}" ]]; then
-      dispatcher=$(echo "${dispatchers[$i]}" | sed -n "s/^.*dispatcher:\s*\(.*\)$/\1/p")
-      arg=$(echo "${args[$i]}" | sed -n "s/^.*arg:\s*\(.*\)$/\1/p")
+      dispatcher=${dispatchers[$i]}
+      arg=${args[$i]}
       hyprctl -q dispatch "$dispatcher" "$arg"
     fi
   done
