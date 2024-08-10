@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+
+echoHelpMessage () {
+  echo "courseTools - perform actions related to couses"
+  echo
+  echo "Manipulate course directories from the command line. Prioritizes performing"
+  echo "actions over fetching information."
+  echo
+  echo "Usage: courseTools [DIRECTORY] [options"
+  echo "  Specifying the directory of the course is optional, and if no directory"
+  echo "  is specified, the program will work with the current course information."
+  echo "  Specified directories should be the direct parent of the info.json file."
+  echo
+  echo "Available Options:"
+  echo "  -c, --clean         Remove all master files except for .pdf and .tex. These"
+  echo "                      usually come from compiling master.tex with pdflatex"
+  echo "  -C, --full-clean    Remove all master files except for and .tex. These usually"
+  echo "                      come from compiling master.tex with pdflatex"
+}
+
+if [[ -d "$1" ]]; then
+  if [[ $(find $1 -maxdepth 1 -mindepth 1 -type f -name info.json | wc -l) = 1 ]]; then
+    courseDirectory="$(pwd)/$1"
+    shift
+  else
+    echo "Invalid directory: Specified directory must be direct parent to info.json file"
+    exit 1
+  fi
+else
+  courseDirectory=$CURRCOURSE
+fi
+
+VALID_ARGS=$(getopt -o cC --long clean,full-clean -- "$@")
+if [[ $? -ne 0 ]]; then
+  exit 1;
+fi
+
+eval set -- "$VALID_ARGS"
+while [ : ]; do
+  case "$1" in
+    -c | --clean)
+      for file in $(find $courseDirectory/notes -mindepth 1 -maxdepth 1 -type f -name "master.*" ! -name "master.tex" ! -name "master.pdf"); do 
+        rm "$file"
+      done
+      shift
+      ;;
+
+    -C | --full-clean)
+      for file in $(find $courseDirectory/notes -mindepth 1 -maxdepth 1 -type f -name "master.*" ! -name "master.tex"); do 
+        rm "$file"
+      done
+      shift
+      ;;
+
+    -h | --help)
+      echoHelpMessage
+      shift
+      ;;
+
+    --) shift; 
+      break 
+      ;;
+  esac
+done
