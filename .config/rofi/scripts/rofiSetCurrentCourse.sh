@@ -17,8 +17,8 @@ done
 
 courses=()
 for path in ${paths[@]}; do
-  courseShort=$(getCourseInfo "$path" --short)
-  courseTitle=$(getCourseInfo "$path" --title)
+  courseShort=$(courseInfo "$path" --short)
+  courseTitle=$(courseInfo "$path" --title)
   courses+=("$courseShort - $courseTitle")
 done
 

@@ -9,19 +9,22 @@ for address in ${addresses[@]}; do
 done
 
 messages+=("Open in Terminal")
-commands+=("foot -D $(getCourseInfo --path)")
+commands+=("foot -D $(courseInfo --path)")
 
 messages+=("Open in File Browser")
-commands+=("foot -e yazi $(getCourseInfo --path)")
+commands+=("foot -e yazi $(courseInfo --path)")
 
 messages+=("Edit Last Lecture")
-commands+=("foot -e nvim $(getCourseInfo --last-lecture)")
+commands+=("foot -e nvim $(courseInfo --last-lecture)")
 
 messages+=("View Course Notes (Compile)")
-commands+=("cd $CURRCOURSE/notes && pdflatex ./master.tex && zathura ./master.pdf")
+commands+=("cd $CURRCOURSE/notes && pdflatex ./master.tex && courseTools -c && zathura ./master.pdf")
 
 messages+=("View Course Notes (Don't Compile)")
 commands+=("zathura $CURRCOURSE/notes/master.pdf")
+
+messages+=("Clean Directory")
+commands+=("cleanDirectory")
 
 # Rofi Logic
 if [[ $# = 0 ]]; then

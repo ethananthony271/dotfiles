@@ -16,19 +16,19 @@ getNewCourseDirectory () {
   done
 
   for path in ${coursePaths[@]}; do
-    start=$(getCourseInfo "$path" --start)
-    end=$(getCourseInfo "$path" --end)
-    days="$(getCourseInfo "$path" --days)"
+    start=$(courseInfo "$path" --start)
+    end=$(courseInfo "$path" --end)
+    days="$(courseInfo "$path" --days)"
 
     if [[ $start -le $time && $end -gt $time && $days =~ $day ]]; then
       echo $path
       return 0
     fi
 
-    if [[ "$(getCourseInfo "$path" --has-lab)" = true ]]; then
-      labStart=$(getCourseInfo "$path" --lab-start)
-      labEnd=$(getCourseInfo "$path" --lab-end)
-      labDays="$(getCourseInfo "$path" --lab-days)"
+    if [[ "$(courseInfo "$path" --has-lab)" = true ]]; then
+      labStart=$(courseInfo "$path" --lab-start)
+      labEnd=$(courseInfo "$path" --lab-end)
+      labDays="$(courseInfo "$path" --lab-days)"
 
       if [[ $labStart -le $time && $labEnd -gt $time && $labDays =~ $day ]]; then
         echo $path
@@ -75,8 +75,8 @@ while getopts 'qgas:h' opt; do
       ;;
 
     g)
-      title=$(getCourseInfo -t)
-      short=$(getCourseInfo -s)
+      title=$(courseInfo -t)
+      short=$(courseInfo -s)
       if [[ "$silent" = "false" ]]; then
         notify-send "Get Current Course" "$short - $title"
       fi
@@ -86,14 +86,14 @@ while getopts 'qgas:h' opt; do
       newCourseDirectory=$(getNewCourseDirectory)
       if [ -d "$newCourseDirectory" ]; then
         setCurrentCourse "$newCourseDirectory"
-        title=$(getCourseInfo -t)
-        short=$(getCourseInfo -s)
+        title=$(courseInfo -t)
+        short=$(courseInfo -s)
         if [[ "$silent" = "false" ]]; then
           notify-send "Current Course Changed" "$short - $title"
         fi
       else
-        title=$(getCourseInfo -t)
-        short=$(getCourseInfo -s)
+        title=$(courseInfo -t)
+        short=$(courseInfo -s)
         if [[ "$silent" = "false" ]]; then
           notify-send "Current Course Unchanged" "$short - $title"
         fi
@@ -105,14 +105,14 @@ while getopts 'qgas:h' opt; do
       result=$(find "$CURRQUARTER" -type d -wholename "$newCourseDirectory")
       if [[ -n $result ]]; then
         setCurrentCourse "$newCourseDirectory"
-        title=$(getCourseInfo -t)
-        short=$(getCourseInfo -s)
+        title=$(courseInfo -t)
+        short=$(courseInfo -s)
         if [[ "$silent" = "false" ]]; then
           notify-send "Current Course Changed" "$short - $title"
         fi
       else
-        title=$(getCourseInfo -t)
-        short=$(getCourseInfo -s)
+        title=$(courseInfo -t)
+        short=$(courseInfo -s)
         if [[ "$silent" = "false" ]]; then
           notify-send "Current Course Unchanged" "$short - $title"
         fi
