@@ -9,10 +9,10 @@ for address in ${addresses[@]}; do
 done
 
 messages+=("Open in Terminal")
-commands+=("foot -D $CURRCOURSE")
+commands+=("foot -D $(getCourseInfo --path)")
 
 messages+=("Open in File Browser")
-commands+=("foot -e yazi $CURRCOURSE")
+commands+=("foot -e yazi $(getCourseInfo --path)")
 
 messages+=("Edit Last Lecture")
 commands+=("foot -e nvim $(getCourseInfo --last-lecture)")
