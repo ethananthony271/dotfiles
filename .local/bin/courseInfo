@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
 echoHelpMessage () {
-  echo "getCourseInfo - get information about the currently active course"
+  echo "courseInfo - get information about the currently active course"
   echo
   echo "Using both the info.json file in each course directory as well as the"
-  echo "file structure of the quarter directory, getCourseInfo can be used"
+  echo "file structure of the quarter directory, courseInfo can be used"
   echo "to get information such as the title or directory or the current course"
   echo
-  echo "Usage: getCourseInfo [DIRECTORY] [options]"
+  echo "Usage: courseInfo [DIRECTORY] [options]"
   echo "  Specifying the directory of the course is optional, and if no directory"
   echo "  is specified, the program will work with the current course information."
   echo "  Specified directories should be the direct parent of the info.json file."
