@@ -1,45 +1,34 @@
 #!/usr/bin/env bash
 
-getTemplateName () {
-  line=$(cat $1 | rg \title)
-  title=$(echo $line | sed 's/\\title{\(.*\)}/\1/')
-  echo $title
-}
+TEMPLATES=$CURRQUARTER/xlatex/templates
 
-templateDirectory=$HOME/Documents/School/quarter04/xlatex/templates
-
-mapfile -t types < <(find $templateDirectory -mindepth 1 -maxdepth 1 -type d)
-
-options=()
-declare -A messages
-declare -A commands
-for i in ${!types[@]}; do
-  mapfile -t temp < <(find "${types[$i]}" -mindepth 1 -maxdepth 1 -type f)
-  for j in ${!temp[@]}; do
-    type="$(basename $(dirname "${temp[$j]}"))"
-    type="${type^}"
-    title=$(getTemplateName "${temp[$j]}")
-    messages[$i$j]="$type: $title"
-    if [[ "$type" = "Figure" ]]; then
-      commands[$i$j]="createLatexFromTemplate -f '${temp[$j]}'"
-    elif [[ "$type" = "Lecture" ]]; then
-      commands[$i$j]="createLatexFromTemplate -l '${temp[$j]}'"
-    else
-      commands[$i$j]="notify-send 'New File Not Created'"
-    fi
-    options+=($i$j)
-  done
+mapfile -t paths < <(find $TEMPLATES -mindepth 2 -maxdepth 2 -type f)
+declare -a messages
+declare -a commands
+for i in ${!paths[@]}; do
+  type=$(basename $(dirname "${paths[$i]}") | sed 's/\(...\).*/\1/')
+  name="$(echo $(cat "${paths[$i]}" | rg \title) | sed 's/\\title{\(.*\)}/\1/')"
+  messages+=("$type: $name <span weight='light' style='italic'>($(basename ${paths[$i]}))</span>")
+  if [[ $type = "fig" ]]; then
+    commands+=("cp '${paths[$i]}' '$(courseInfo -F)' && notify-send 'Figure Created in $(courseInfo -s)' '$name as $(basename $(courseInfo -f))'")
+  elif [[ $type = "lec" ]]; then
+    commands+=("cp '${paths[$i]}' '$(courseInfo -L)' && notify-send 'Lecture Created in $(courseInfo -s)' '$name as $(basename $(courseInfo -l))'")
+  else
+    notify-send "Unsupported Template Type: $type" "${paths[$i]}"
+    exit 1
+  fi
 done
 
-# Rofi Logic
+# # Rofi Logic
 if [[ $# = 0 ]]; then
-  for option in ${options[@]}; do
-    echo "${messages[$option]}"
+  for i in ${!messages[@]}; do
+    echo -en "\0markup-rows\x1ftrue\n"
+    echo -en "${messages[$i]}"
   done
 else
-  for option in ${options[@]}; do
-    if [[ $1 = "${messages[$option]}" ]]; then
-      bash -c "${commands[$option]}"
+  for i in ${!messages[@]}; do
+    if [[ $1 = "${messages[$i]}" ]]; then
+      bash -c "${commands[$i]}"
     fi
   done
 fi
