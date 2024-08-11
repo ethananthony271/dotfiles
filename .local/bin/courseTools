@@ -12,10 +12,10 @@ echoHelpMessage () {
   echo "  Specified directories should be the direct parent of the info.json file."
   echo
   echo "Available Options:"
-  echo "  -c, --clean         Remove all master files except for .pdf and .tex. These"
-  echo "                      usually come from compiling master.tex with pdflatex"
-  echo "  -C, --full-clean    Remove all master files except for and .tex. These usually"
-  echo "                      come from compiling master.tex with pdflatex"
+  echo "  -c, --clean             Remove all master files except for .pdf and .tex. These"
+  echo "                          usually come from compiling master.tex with pdflatex"
+  echo "  -C, --full-clean        Remove all master files except for and .tex. These usually"
+  echo "                          come from compiling master.tex with pdflatex"
 }
 
 if [[ -d "$1" ]]; then
@@ -30,7 +30,7 @@ else
   courseDirectory=$CURRCOURSE
 fi
 
-VALID_ARGS=$(getopt -o cC --long clean,full-clean -- "$@")
+VALID_ARGS=$(getopt -o bcC --long clean,full-clean,add-boilerplate -- "$@")
 if [[ $? -ne 0 ]]; then
   exit 1;
 fi

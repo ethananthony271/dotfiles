@@ -36,8 +36,19 @@ echoHelpMessage () {
   echo "                      of three letter days, eg. \"Mon Wed Fri\". Returns -1"
   echo "                      no lab section exists. From info.json"
   echo "  -p, --path          Absolute path to the course. From file structure"
+  echo "  -f, --last-figure   Absolute path to the most recent figure file in the"
+  echo "                      course. Figure files are any file in the notes/figures/"
+  echo "                      subdirectory named in the \"fig_XXX_?.tex\" format."
+  echo "  -F, --next-figure   Absolute path to the next figure file in the course."
+  echo "                      Note that this file does not exist, and is only the"
+  echo "                      name of what would be the next figure file."
+  echo "                      subdirectory named in the \"lec_XXX.tex\" format."
   echo "  -l, --last-lecture  Absolute path to the most recent lecture file in the"
   echo "                      course. Lecture files are any file in the notes/"
+  echo "                      subdirectory named in the \"lec_XXX.tex\" format."
+  echo "  -L, --next-lecture  Absolute path to the next lecture file in the course."
+  echo "                      Note that this file does not exist, and is only the"
+  echo "                      name of what would be the next lecture file."
   echo "                      subdirectory named in the \"lec_XXX.tex\" format."
   echo "  -h, --help          Displays this help message"
 }
@@ -54,7 +65,7 @@ else
   courseInfo=$CURRCOURSE/info.json
 fi
 
-VALID_ARGS=$(getopt -o tscnredLREDplh --long title,short,code,number,start,end,days,has-lab,lab-start,lab-end,lab-days,path,last-lecture,help -- "$@")
+VALID_ARGS=$(getopt -o tscnredxREDpfFlLh --long title,short,code,number,start,end,days,has-lab,lab-start,lab-end,lab-days,path,last-figure,next-figure,last-lecture,next-lecture,help -- "$@")
 if [[ $? -ne 0 ]]; then
   exit 1;
 fi
@@ -97,7 +108,7 @@ while [ : ]; do
       shift
       ;;
 
-    -L | --has-lab)
+    -x | --has-lab)
       echo $(cat "$courseInfo" | jq -r .hasLab)
       shift
       ;;
@@ -134,9 +145,47 @@ while [ : ]; do
       shift
       ;;
 
+    -f | --last-figure)
+      mapfile -t figures < <(find $CURRCOURSE/notes/figures -regextype posix-extended -regex '.*fig_[0-9]{3}\.tex.*')
+      if [[ ${#figures[@]} -gt 0 ]]; then
+        echo "${figures[${#figures[@]} - 1]}"
+      else
+        echo -1
+      fi
+      shift
+      ;;
+
+    -F | --next-figure)
+      mapfile -t figures < <(find $CURRCOURSE/notes -regextype posix-extended -regex '.*fig_[0-9]{3}\.tex.*')
+      if [[ ${#figures[@]} -gt 0 ]]; then
+        lastNumber="$(echo ${figures[${#figures[@]} - 1]} | sed 's/.*\/fig_\([0-9]\{3\}\).tex/\1/')"
+        nextNumber=$(printf "%03d" $(($lastNumber + 1)))
+        echo "$CURRCOURSE/notes/figures/fig_$nextNumber.tex"
+      else
+        echo "$CURRCOURSE/notes/figures/fig_001.tex"
+      fi
+      shift
+      ;;
+
     -l | --last-lecture)
       mapfile -t lectures < <(find $CURRCOURSE/notes -regextype posix-extended -regex '.*lec_[0-9]{3}\.tex.*')
-      echo ${lectures[${#lectures[@]} - 1]}
+      if [[ ${#lectures[@]} -gt 0 ]]; then
+        echo "${lectures[${#lectures[@]} - 1]}"
+      else
+        echo -1
+      fi
+      shift
+      ;;
+
+    -L | --next-lecture)
+      mapfile -t lectures < <(find $CURRCOURSE/notes -regextype posix-extended -regex '.*lec_[0-9]{3}\.tex.*')
+      if [[ ${#lectures[@]} -gt 0 ]]; then
+        lastNumber="$(echo ${lectures[${#lectures[@]} - 1]} | sed 's/.*\/lec_\([0-9]\{3\}\).tex/\1/')"
+        nextNumber=$(printf "%03d" $(($lastNumber + 1)))
+        echo "$CURRCOURSE/notes/lec_$nextNumber.tex"
+      else
+        echo "$CURRCOURSE/notes/lec_001.tex"
+      fi
       shift
       ;;
 
