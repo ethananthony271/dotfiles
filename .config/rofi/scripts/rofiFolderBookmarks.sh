@@ -34,7 +34,7 @@ elif [[ i=$(isFolder $1) -ge 0 ]]; then
   mapfile -t urls < <(jq --sort-keys -r --arg i 1 ".[keys[$i]]" $BOOKMARKS | jq --sort-keys -r --arg i 1 ".[]")
   echo -e "<i>..</i>"
   for i in ${!names[@]}; do
-    echo -e "${names[$i]} <i>(${urls[$i]})</i>"
+    echo -e "${names[$i]} <span weight='light' style='italic'>(${urls[$i]})</span>"
   done
 else
   coproc ( bash -c "librewolf $(echo $1 | sed -E 's/.*\(([^)]*)\).*/\1/')"  > /dev/null  2>&1 )
