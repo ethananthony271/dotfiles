@@ -3,6 +3,8 @@
 BIFS="$IFS"
 IFS=$'\n'
 
+
+
 BOOKMARKS=$HOME/Documents/Personal/bookmarks.json
 
 declare -a names
@@ -14,15 +16,21 @@ for i in $(seq 0 $(($(jq -r "length" $BOOKMARKS)-1))); do
   urls+=("${tempUrls[@]}")
 done
 
+declare -a messages
+for i in ${!names[@]}; do
+  messages+=("${names[$i]} <span weight='light' style='italic'>(${urls[$i]})</span>")
+done
+
 # Rofi Logic
 if [[ $# = 0 ]]; then
   echo -en "\0markup-rows\x1ftrue\n"
   for i in ${!names[@]}; do
-    echo -e "${names[$i]} <i>(${urls[$i]})</i>"
+    # echo -e "${names[$i]} <i>(${urls[$i]})</i>"
+    echo -e "${messages[$i]}"
   done
 else
-  echo -en "\x00prompt\x1fChange prompt\n"
   coproc ( bash -c "librewolf $(echo $1 | sed -E 's/.*\(([^)]*)\).*/\1/')"  > /dev/null  2>&1 )
+  exit 0
 fi
 
 IFS="$BIFS"
