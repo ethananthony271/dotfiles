@@ -17,7 +17,8 @@
     "battery",
     "backlight",
     "pulseaudio",
-    "pulseaudio#microphone"
+    "pulseaudio#microphone",
+    "custom/powerButton"
     ],
 
     "hyprland/workspaces": {
@@ -51,14 +52,19 @@
       }
     },
 
-    "bluetooth": {
-      "format": " {status}",
-      "format-on": "󰂯 ---",
-      "format-disabled": "",
-      "format-connected": " {device_alias}",
-      "tooltip-format": "{controller_alias}\t{controller_address}",
-      "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
-      "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}"
+    "mpd": {
+      "format": "{stateIcon} {title} - {albumArtist}",
+      "format-disconnected": "MPD (disconnected)",
+      "format-stopped": "  --------------------------------",
+      "interval": 10,
+      "max-length": 35,
+      "state-icons": {
+        "paused": "",
+        "playing": ""
+      },
+      "tooltip-format": "{artist} - [{album}]\n({elapsedTime:%M:%S}/{totalTime:%M:%S}) [{songPosition}/{queueLength}]",
+      "tooltip-format-disconnected": "MPD (disconnected)",
+      "on-click": "mpc toggle"
     },
 
     "clock": {
@@ -86,13 +92,28 @@
       }
     },
 
-    "backlight": {
-      "device": "intel_backlight",
-      "format": "{icon} {percent}%",
-      "format-icons": ["󰃞", "󰃟", "󰃠"],
-      "on-scroll-up": "brightnessctl set 1%-",
-      "on-scroll-down": "brightnessctl set 1%+",
-      "min-length": 6
+    "network": {
+      "tooltip": true,
+      "format-wifi": "  {essid}",
+      "format-ethernet": "󰈀 Ethernet",
+      "tooltip-format": "Network: <big><b>{essid}</b></big>\nSignal strength: <b>{signaldBm}dBm ({signalStrength}%)</b>\nFrequency: <b>{frequency}MHz</b>\nInterface: <b>{ifname}</b>\nIP: <b>{ipaddr}/{cidr}</b>\nGateway: <b>{gwaddr}</b>\nNetmask: <b>{netmask}</b>",
+      "format-linked": "󰈀 {ifname} (No IP)",
+      "format-disconnected": "󰖪 ",
+      "tooltip-format-disconnected": "Disconnected",
+      "format-alt": "<span foreground='#99ffdd'> {bandwidthDownBytes}</span> <span foreground='#ffcc66'> {bandwidthUpBytes}</span>",
+      "interval": 2
+    },
+
+    "bluetooth": {
+      "format": "󰂯 {status}",
+      "format-on": "󰂯 ---",
+      "format-off": "󰂲 ---",
+      "format-disabled": " ---",
+      "format-connected": "󰂯 {device_alias}",
+      "tooltip-format": "{controller_alias}\t{controller_address}",
+      "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+      "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+      "on-click": "$HOME/.config/waybar/scripts/toggleBluetooth.sh"
     },
 
     "battery": {
@@ -104,8 +125,18 @@
       "format": "{icon} {capacity}%",
       "format-charging": " {capacity}%",
       "format-plugged": " {capacity}%",
-      "format-alt": "{time} {icon}",
+      "format-alt": "{icon} {time}",
       "format-icons": ["󰂃", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+    },
+
+    "backlight": {
+      "device": "intel_backlight",
+      "format": "{icon} {percent}%",
+      "format-icons": ["󰃞", "󰃟", "󰃠"],
+      "on-scroll-up": "brightnessctl set 1%-",
+      "on-scroll-down": "brightnessctl set 1%+",
+      "on-click": "$HOME/.config/waybar/scripts/toggleBrightness.sh",
+      "min-length": 6
     },
 
     "pulseaudio": {
@@ -137,53 +168,8 @@
       "scroll-step": 5
     },
 
-    "memory": {
-      "states": {
-        "c": 90, // critical
-        "h": 60, // high
-        "m": 30 // medium
-      },
-      "interval": 10,
-      "format": "󰾆 {used}GB",
-      "format-m": "󰾅 {used}GB",
-      "format-h": "󰓅 {used}GB",
-      "format-c": " {used}GB",
-      "format-alt": "󰾆 {percentage}%",
-      "max-length": 10,
-      "tooltip": true,
-      "tooltip-format": "󰾆 {percentage}%\n {used:0.1f}GB/{total:0.1f}GB"
-    },
-
-    "cpu": {
-      "interval": 10,
-      "format": "󰍛 {usage}%",
-      "format-alt": "{icon0}{icon1}{icon2}{icon3}",
-      "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"]
-    },
-
-    "network": {
-      "tooltip": true,
-      "format-wifi": "  {essid}",
-      "format-ethernet": "󰈀 Ethernet",
-      "tooltip-format": "Network: <big><b>{essid}</b></big>\nSignal strength: <b>{signaldBm}dBm ({signalStrength}%)</b>\nFrequency: <b>{frequency}MHz</b>\nInterface: <b>{ifname}</b>\nIP: <b>{ipaddr}/{cidr}</b>\nGateway: <b>{gwaddr}</b>\nNetmask: <b>{netmask}</b>",
-      "format-linked": "󰈀 {ifname} (No IP)",
-      "format-disconnected": "󰖪 ",
-      "tooltip-format-disconnected": "Disconnected",
-      "format-alt": "<span foreground='#99ffdd'> {bandwidthDownBytes}</span> <span foreground='#ffcc66'> {bandwidthUpBytes}</span>",
-      "interval": 2
-    },
-
-    "mpd": {
-      "format": "{stateIcon} {title} - {albumArtist}",
-      "format-disconnected": "MPD (disconnected)",
-      "format-stopped": "  --------------------------------",
-      "interval": 10,
-      "max-length": 35,
-      "state-icons": {
-        "paused": "",
-        "playing": ""
-      },
-      "tooltip-format": "{artist} - [{album}]\n({elapsedTime:%M:%S}/{totalTime:%M:%S}) [{songPosition}/{queueLength}]",
-      "tooltip-format-disconnected": "MPD (disconnected)"
+    "custom/powerButton": {
+      "format": "",
+      "on-click": "rofi -config ~/.config/rofi/mainMenu.rasi -show power-menu -modi power-menu:rofi-power-menu.sh",
     }
 }
