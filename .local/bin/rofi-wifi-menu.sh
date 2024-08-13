@@ -1,282 +1,96 @@
 #!/usr/bin/env bash
 
-# This script defines just a mode for rofi instead of being a self-contained
-# executable that launches rofi by itself. This makes it more flexible than
-# running rofi inside this script as now the user can call rofi as one pleases.
-# For instance:
-#
-#   rofi -show powermenu -modi powermenu:./rofi-power-menu
-#
-# See README.md for more information.
+configFile=$HOME/.config/rofi/mainMenu.rasi
 
-set -e
-set -u
+# DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+# if [ -r "$DIR/config" ]; then
+# 	source "$DIR/config"
+# elif [ -r "$HOME/.config/rofi/wifi" ]; then
+# 	source "$HOME/.config/rofi/wifi"
+# else
+# 	echo "WARNING: config file not found! Using default values."
+# fi
 
-# All supported choices
-all=(shutdown reboot suspend hibernate logout lockscreen)
+FIELDS=SSID,SECURITY
 
-# By default, show all (i.e., just copy the array)
-# show=("${all[@]}")
+notify-send "Rofi Wifi Menu" "Getting network information"
 
-show=(shutdown reboot suspend logout)
+LIST=$(nmcli --fields "$FIELDS" device wifi list | sed '/^--/d')
+# For some reason rofi always approximates character width 2 short... hmmm
+RWIDTH=$(($(echo "$LIST" | head -n 1 | awk '{print length($0); }')+2))
+# Dynamically change the height of the rofi menu
+LINENUM=$(echo "$LIST" | wc -l)
+# Gives a list of known connections so we can parse it later
+KNOWNCON=$(nmcli connection show)
+# Really janky way of telling if there is currently a connection
+CONSTATE=$(nmcli -fields WIFI g)
 
-declare -A texts
-texts[lockscreen]="lock screen"
-# texts[switchuser]="switch user"
-texts[logout]="log out"
-texts[suspend]="suspend"
-texts[hibernate]="hibernate"
-texts[reboot]="reboot"
-texts[shutdown]="shut down"
+CURRSSID=$(LANGUAGE=C nmcli -t -f active,ssid dev wifi | awk -F: '$1 ~ /^yes/ {print $2}')
 
-declare -A icons
-icons[lockscreen]="\Uf033e"
-# icons[switchuser]="\Uf0019"
-icons[logout]="\Uf0343"
-icons[suspend]="\Uf04b2"
-icons[hibernate]="\Uf02ca"
-icons[reboot]="\Uf0709"
-icons[shutdown]="\Uf0425"
-icons[cancel]="\Uf0156"
-
-declare -A actions
-actions[lockscreen]="hyprlock"
-#actions[switchuser]="???"
-actions[logout]="hyprctl dispatch exit"
-actions[suspend]="systemctl suspend"
-actions[hibernate]="systemctl hibernate"
-actions[reboot]="systemctl reboot"
-actions[shutdown]="systemctl poweroff"
-
-# By default, ask for confirmation for actions that are irreversible
-confirmations=(reboot shutdown logout)
-
-# By default, no dry run
-dryrun=false
-showsymbols=true
-showtext=true
-
-function check_valid {
-  option="$1"
-  shift 1
-  for entry in "${@}"
-  do
-    if [ -z "${actions[$entry]+x}" ]
-    then
-      echo "Invalid choice in $1: $entry" >&2
-      exit 1
-    fi
-  done
-}
-
-# Parse command-line options
-parsed=$(getopt --options=h --longoptions=help,dry-run,confirm:,choices:,choose:,symbols,no-symbols,text,no-text,symbols-font: --name "$0" -- "$@")
-if [ $? -ne 0 ]; then
-  echo 'Terminating...' >&2
-  exit 1
-fi
-eval set -- "$parsed"
-unset parsed
-while true; do
-  case "$1" in
-    "-h"|"--help")
-      echo "rofi-power-menu - a power menu mode for Rofi"
-      echo
-      echo "Usage: rofi-power-menu [--choices CHOICES] [--confirm CHOICES]"
-      echo "                       [--choose CHOICE] [--dry-run] [--symbols|--no-symbols]"
-      echo
-      echo "Use with Rofi in script mode. For instance, to ask for shutdown or reboot:"
-      echo
-      echo "  rofi -show menu -modi \"menu:rofi-power-menu --choices=shutdown/reboot\""
-      echo
-      echo "Available options:"
-      echo "  --dry-run            Don't perform the selected action but print it to stderr."
-      echo "  --choices CHOICES    Show only the selected choices in the given order. Use /"
-      echo "                       as the separator. Available choices are lockscreen,"
-      echo "                       logout,suspend, hibernate, reboot and shutdown. By"
-      echo "                       default, all available choices are shown."
-      echo "  --confirm CHOICES    Require confirmation for the gives choices only. Use / as"
-      echo "                       the separator. Available choices are lockscreen, logout,"
-      echo "                       suspend, hibernate, reboot and shutdown. By default, only"
-      echo "                       irreversible actions logout, reboot and shutdown require"
-      echo "                       confirmation."
-      echo "  --choose CHOICE      Preselect the given choice and only ask for a"
-      echo "                       confirmation (if confirmation is set to be requested). It"
-      echo "                       is strongly recommended to combine this option with"
-      echo "                       --confirm=CHOICE if the choice wouldn't require"
-      echo "                       confirmation by default. Available choices are"
-      echo "                       lockscreen, logout, suspend, hibernate, reboot and"
-      echo "                       shutdown."
-      echo "  --[no-]symbols       Show Unicode symbols or not. Requires a font with support"
-      echo "                       for the symbols. Use, for instance, fonts from the"
-      echo "                       Nerdfonts collection. By default, they are shown"
-      echo "  --[no-]text          Show text description or not."
-      echo "  --symbols-font FONT  Use the given font for symbols. By default, the symbols"
-      echo "                       use the same font as the text. That font is configured"
-      echo "                       with rofi."
-      echo "  -h,--help            Show this help text."
-      exit 0
-      ;;
-    "--dry-run")
-      dryrun=true
-      shift 1
-      ;;
-    "--confirm")
-      IFS='/' read -ra confirmations <<< "$2"
-      check_valid "$1" "${confirmations[@]}"
-      shift 2
-      ;;
-    "--choices")
-      IFS='/' read -ra show <<< "$2"
-      check_valid "$1" "${show[@]}"
-      shift 2
-      ;;
-    "--choose")
-      # Check that the choice is valid
-      check_valid "$1" "$2"
-      selectionID="$2"
-      shift 2
-      ;;
-    "--symbols")
-      showsymbols=true
-      shift 1
-      ;;
-    "--no-symbols")
-      showsymbols=false
-      shift 1
-      ;;
-    "--text")
-      showtext=true
-      shift 1
-      ;;
-    "--no-text")
-      showtext=false
-      shift 1
-      ;;
-    "--symbols-font")
-      symbols_font="$2"
-      shift 2
-      ;;
-    "--")
-      shift
-      break
-      ;;
-    *)
-      echo "Internal error" >&2
-      exit 1
-      ;;
-  esac
-done
-
-if [ "$showsymbols" = "false" -a "$showtext" = "false" ]
-then
-  echo "Invalid options: cannot have --no-symbols and --no-text enabled at the same time." >&2
-  exit 1
+if [[ ! -z $CURRSSID ]]; then
+	HIGHLINE=$(echo  "$(echo "$LIST" | awk -F "[  ]{2,}" '{print $1}' | grep -Fxn -m 1 "$CURRSSID" | awk -F ":" '{print $1}') + 1" | bc )
 fi
 
-# Define the messages after parsing the CLI options so that it is possible to
-# configure them in the future.
+# HOPEFULLY you won't need this as often as I do
+# If there are more than 8 SSIDs, the menu will still only have 8 lines
+if [ "$LINENUM" -gt 8 ] && [[ "$CONSTATE" =~ "enabled" ]]; then
+	LINENUM=8
+elif [[ "$CONSTATE" =~ "disabled" ]]; then
+	LINENUM=1
+fi
 
-function write_message {
-  if [ -z ${symbols_font+x} ];
-  then
-    icon="<span font_size='large'>$1</span>"
-  else
-    icon="<span font=\"${symbols_font}\" font_size=\"medium\">$1</span>"
-  fi
-  text="<span font_size=\"medium\">$2</span>"
-  if [ "$showsymbols" = "true" ]
-  then
-    if [ "$showtext" = "true" ]
-    then
-      echo -n "\u200e$icon \u2068$text\u2069"
-    else
-      echo -n "\u200e$icon"
-    fi
-  else
-    echo -n "$text"
-  fi
-}
 
-function print_selection {
-  echo -e "$1" | $(read -r -d '' entry; echo "echo $entry")
-}
+if [[ "$CONSTATE" =~ "enabled" ]]; then
+	TOGGLE="toggle off"
+elif [[ "$CONSTATE" =~ "disabled" ]]; then
+	TOGGLE="toggle on"
+fi
 
-declare -A messages
-declare -A confirmationMessages
-for entry in "${all[@]}"
-do
-  messages[$entry]=$(write_message "${icons[$entry]}" "${texts[$entry]^}")
-done
-for entry in "${all[@]}"
-do
-  confirmationMessages[$entry]=$(write_message "${icons[$entry]}" "Yes, ${texts[$entry]}")
-done
-confirmationMessages[cancel]=$(write_message "${icons[cancel]}" "No, cancel")
 
-if [ $# -gt 0 ]
-then
-  # If arguments given, use those as the selection
-  selection="${@}"
+
+CHENTRY=$(echo -e "$TOGGLE\nmanual\n$LIST" | uniq -u | rofi -config $configFile -theme-str 'element-text { horizontal-align:0;}' -horizontal-align 0 -dmenu -p "Wi-Fi SSID: ")
+#echo "$CHENTRY"
+CHSSID=$(echo "$CHENTRY" | sed  's/\s\{2,\}/\|/g' | awk -F "|" '{print $1}')
+#echo "$CHSSID"
+
+# If the user inputs "manual" as their SSID in the start window, it will bring them to this screen
+if [ "$CHENTRY" = "manual" ] ; then
+	# Manual entry of the SSID and password (if appplicable)
+	MSSID=$(echo "enter the SSID of the network (SSID,password)" | rofi -config $configFile -theme-str 'element-text { horizontal-align:0;}' -dmenu -p "Manual Entry: " -lines 1)
+	# Separating the password from the entered string
+	MPASS=$(echo "$MSSID" | awk -F "," '{print $2}')
+
+	#echo "$MSSID"
+	#echo "$MPASS"
+
+	# If the user entered a manual password, then use the password nmcli command
+	if [ "$MPASS" = "" ]; then
+		nmcli dev wifi con "$MSSID"
+	else
+		nmcli dev wifi con "$MSSID" password "$MPASS"
+	fi
+
+elif [ "$CHENTRY" = "toggle on" ]; then
+	nmcli radio wifi on
+
+elif [ "$CHENTRY" = "toggle off" ]; then
+	nmcli radio wifi off
+
 else
-  # Otherwise, use the CLI passed choice if given
-  if [ -n "${selectionID+x}" ]
-  then
-    selection="${messages[$selectionID]}"
-  fi
-  fi
 
-# Don't allow custom entries
-echo -e "\0no-custom\x1ftrue"
-# Use markup
-echo -e "\0markup-rows\x1ftrue"
+	# If the connection is already in use, then this will still be able to get the SSID
+	if [ "$CHSSID" = "*" ]; then
+		CHSSID=$(echo "$CHENTRY" | sed  's/\s\{2,\}/\|/g' | awk -F "|" '{print $3}')
+	fi
 
-if [ -z "${selection+x}" ]
-then
-  echo -e "\0prompt\x1fpower menu"
-  for entry in "${show[@]}"
-  do
-    echo -e "${messages[$entry]}\0icon\x1f${icons[$entry]}"
-  done
-else
-  for entry in "${show[@]}"
-  do
-    if [ "$selection" = "$(print_selection "${messages[$entry]}")" ]
-    then
-      # Check if the selected entry is listed in confirmation requirements
-      for confirmation in "${confirmations[@]}"
-      do
-        if [ "$entry" = "$confirmation" ]
-        then
-          # Ask for confirmation
-          echo -e "\0prompt\x1fAre you sure"
-          echo -e "${confirmationMessages[$entry]}\0icon\x1f${icons[$entry]}"
-          echo -e "${confirmationMessages[cancel]}\0icon\x1f${icons[cancel]}"
-          exit 0
-        fi
-      done
-      # If not, then no confirmation is required, so mark confirmed
-      selection=$(print_selection "${confirmationMessages[$entry]}")
-      fi
-      if [ "$selection" = "$(print_selection "${confirmationMessages[$entry]}")" ]
-      then
-        if [ $dryrun = true ]
-        then
-          # Tell what would have been done
-          echo "Selected: $entry" >&2
-        else
-          # Perform the action
-          ${actions[$entry]}
-        fi
-        exit 0
-      fi
-      if [ "$selection" = "$(print_selection "${confirmationMessages[cancel]}")" ]
-      then
-        # Do nothing
-        exit 0
-      fi
-    done
-    # The selection didn't match anything, so raise an error
-    echo "Invalid selection: $selection" >&2
-    exit 1
-      fi
+	# Parses the list of preconfigured connections to see if it already contains the chosen SSID. This speeds up the connection process
+	if [[ $(echo "$KNOWNCON" | grep "$CHSSID") = "$CHSSID" ]]; then
+		nmcli con up "$CHSSID"
+	else
+		if [[ "$CHENTRY" =~ "WPA2" ]] || [[ "$CHENTRY" =~ "WEP" ]]; then
+			WIFIPASS=$(echo "if connection is stored, hit enter" | rofi -config $configFile -theme-str 'element-text { horizontal-align:0;}' -dmenu -p "password: " -lines 1)
+		fi
+		nmcli dev wifi con "$CHSSID" password "$WIFIPASS"
+	fi
+
+fi
