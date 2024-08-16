@@ -55,9 +55,7 @@ return {
     {
       t("\\uparrow")
     },
-    {
-      condition = non_letter
-    }
+    {}
   ),
   s( -- -r -> Right Arrow )
     {
@@ -66,9 +64,7 @@ return {
     {
       t("\\rightarrow")
     },
-    {
-      condition = non_letter
-    }
+    {}
   ),
   s( -- -d -> Down Arrow )
     {
@@ -77,9 +73,7 @@ return {
     {
       t("\\downarrow")
     },
-    {
-      condition = non_letter
-    }
+    {}
   ),
   s( -- -l -> Left Arrow )
     {
@@ -88,9 +82,7 @@ return {
     {
       t("\\leftarrow")
     },
-    {
-      condition = non_letter
-    }
+    {}
   ),
   s( -- -h -> Left-Right Arrow )
     {
@@ -99,9 +91,7 @@ return {
     {
       t("\\leftrightarrow")
     },
-    {
-      condition = non_letter
-    }
+    {}
   ),
   s( -- -v -> Up-Down Arrow )
     {
@@ -110,9 +100,7 @@ return {
     {
       t("\\updownarrow")
     },
-    {
-      condition = non_letter
-    }
+    {}
   ),
   s( -- -U -> Double Up Arrow )
     {
@@ -121,9 +109,7 @@ return {
     {
       t("\\Uparrow")
     },
-    {
-      condition = non_letter
-    }
+    {}
   ),
   s( -- -R -> Double Right Arrow )
     {
@@ -132,9 +118,7 @@ return {
     {
       t("\\Rightarrow")
     },
-    {
-      condition = non_letter
-    }
+    {}
   ),
   s( -- -D -> Double Down Arrow )
     {
@@ -143,9 +127,7 @@ return {
     {
       t("\\Downarrow")
     },
-    {
-      condition = non_letter
-    }
+    {}
   ),
   s( -- -L -> Double Left Arrow )
     {
@@ -154,9 +136,7 @@ return {
     {
       t("\\Leftarrow")
     },
-    {
-      condition = non_letter
-    }
+    {}
   ),
   s( -- -H -> Double Left-Right Arrow )
     {
@@ -165,9 +145,7 @@ return {
     {
       t("\\Leftrightarrow")
     },
-    {
-      condition = non_letter
-    }
+    {}
   ),
   s( -- -V -> Double Up-Down Arrow )
     {
@@ -176,8 +154,6 @@ return {
     {
       t("\\Updownarrow")
     },
-    {
-      condition = non_letter
-    }
+    {}
   ),
 }

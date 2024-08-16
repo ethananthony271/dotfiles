@@ -66,67 +66,6 @@ return {
     ),
     {}
   ),
-  s( -- ttb -> Longtable Environment )
-    {
-      trig = "ttb",
-    },
-    fmta(
-      [[
-        \begin{longtable}[c]{<>}
-          \caption{<>}
-          \label{table:<>}\\
-          \toprule
-          <>
-          \midrule
-          \endfirsthead
-          \toprule
-          <>
-          \midrule
-          \endhead
-          <>
-          \bottomrule
-        \end{longtable}
-      ]],
-      {
-        i(1, "Define Columns"),
-        i(2, "Caption"),
-        i(3),
-        i(4, "Table Heading"),
-        rep(4),
-        i(5, "Contents"),
-      }
-    ),
-    {}
-  ),
-  s( -- tb -> Table Environment )
-    {
-      trig = "tb",
-    },
-    fmta(
-      [[
-        \begin{table}[htbp]
-          \centering
-          \caption{<>}
-          \begin{tabular}{<>}
-            \toprule
-            <>
-            \midrule
-            <>
-            \bottomrule
-          \end{tabular}
-          \label{<>}
-        \end{table}
-      ]],
-      {
-        i(1, "Caption"),
-        i(3, "Define Columns"),
-        i(4, "Name Columns"),
-        i(5, "Contents"),
-        i(2, "Label")
-      }
-    ),
-    {}
-  ),
   s( -- eq -> Equation Environment )
     {
       trig = "eq",
@@ -148,18 +87,24 @@ return {
     ),
     {}
   ),
-  s( -- al -> Align Environment )
+  s( -- tb -> Tabularray Environment )
     {
-      trig = "al",
+      trig = "tb",
     },
     fmta(
       [[
-        \begin{align}
+        \begin{tblr}{<>}
+          \toprule
           <>
-        \end{align}
+          \midrule
+          <>
+          \bottomrule
+        \end{tblr}
       ]],
       {
-        i(0),
+        i(1, "columns"),
+        i(2, "column headers"),
+        i(0, "content"),
       }
     ),
     {}
@@ -176,32 +121,94 @@ return {
       ]],
       {
         c(1, {
-          t("H"),
-          t("h!"),
+          t("h"),
+          t("t"),
           t("b"),
           t("p"),
+          t("h!"),
+          t("t!"),
+          t("b!"),
+          t("p!"),
         }),
-        i(0),
+        c(2, {
+          fmta(
+            [[
+              <>
+              \caption{<>}
+              \label{fig:<>}
+            ]],
+            {
+              i(3),
+              i(1),
+              i(2),
+            }
+          ),
+          fmta(
+            [[
+              <>
+            ]],
+            {
+              i(1),
+            }
+          ),
+        }),
       }
     ),
     {}
   ),
-  s( -- sfg -> Subcaptionblock Environment )
+  s( -- sfg -> Subfigure Environment )
     {
       trig = "sfg",
     },
     fmta(
       [[
-        \begin{subcaptionblock}{<>}
+        \begin{subfigure}[<>]{<>}
           <>
-        \end{subcaptionblock}
+        \end{subfigure}
       ]],
       {
         c(1, {
-          t("\\textwidth"),
-          i(2),
+          t("h"),
+          t("t"),
+          t("b"),
+          t("p"),
+          t("h!"),
+          t("t!"),
+          t("b!"),
+          t("p!"),
         }),
-        i(0),
+        c(2, {
+          fmta(
+            [[
+              <>\textwidth
+            ]],
+            {
+              i(1),
+            }
+          ),
+        }),
+        c(3, {
+          fmta(
+            [[
+              <>
+              \caption{<>}
+              \label{fig:<>}
+            ]],
+            {
+              i(3),
+              i(1),
+              i(2),
+            }
+          ),
+          fmta(
+            [[
+              <>
+            ]],
+            {
+              i(1),
+            }
+          ),
+        }),
       }
     ),
     {}
@@ -217,9 +224,46 @@ return {
         \end{wrapfigure}
       ]],
       {
-        i(1, "alignment"),
-        i(2, "width"),
-        i(0),
+        c(1, {
+          t("r"),
+          t("R"),
+          t("l"),
+          t("L"),
+        }),
+        c(2, {
+          fmta(
+            [[
+              <>\textwidth
+            ]],
+            {
+              i(1),
+            }
+          ),
+          t("0pt"),
+          i(0),
+        }),
+        c(3, {
+          fmta(
+            [[
+              <>
+              \caption{<>}
+              \label{fig:<>}
+            ]],
+            {
+              i(3),
+              i(1),
+              i(2),
+            }
+          ),
+          fmta(
+            [[
+              <>
+            ]],
+            {
+              i(1),
+            }
+          ),
+        }),
       }
     ),
     {}
@@ -241,6 +285,39 @@ return {
     ),
     {}
   ),
+  s( -- fml -> Forumla Environment )
+    {
+      trig = "fml",
+    },
+    fmta(
+      [[
+        \begin{formula}
+          <>
+        \end{formula}
+      ]],
+      {
+        i(0),
+      }
+    ),
+    {}
+  ),
+  s( -- def -> Definition Environment )
+    {
+      trig = "def",
+    },
+    fmta(
+      [[
+        \begin{definition}{<>}
+          <>
+        \end{definition}
+      ]],
+      {
+        i(1),
+        i(0),
+      }
+    ),
+    {}
+  ),
   s( -- tk -> TikZ Environment )
     {
       trig = "tk",
@@ -257,24 +334,40 @@ return {
     ),
     {}
   ),
-  s( -- ax -> Axis Environment )
+  s( -- ax -> Axis Environment (Tikz) )
     {
       trig = "ax",
     },
     fmta(
       [[
         \begin{axis}[
-          axis lines = <>,
+          <>,
+          title = <>,
+          xmax = <>,
           xlabel = <>,
+          xtick = {<>},
+          xticklabels = {<>},
+          ymax = <>,
           ylabel = <>,
-        ]
+          ytick = {<>},
+          yticklabels = {<>},
+          ]
           <>
         \end{axis}
       ]],
       {
-        i(1),
+        c(1, {
+          t("basicAxis"),
+        }),
         i(2),
         i(3),
+        i(4),
+        i(5),
+        i(6),
+        i(7),
+        i(8),
+        i(9),
+        i(10),
         i(0),
       }
     ),

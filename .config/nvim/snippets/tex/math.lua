@@ -55,11 +55,12 @@ return {
     },
     fmta(
       [[
-        <>$<>$
+        <>$<>$<>
       ]],
       {
         f( function(_, snip) return snip.captures[1] end ),
         d(1, get_visual),
+        i(0),
       }
     ),
     {
@@ -73,12 +74,13 @@ return {
     },
     fmta(
       [[
-        <>\frac{<>}{<>}
+        <>\frac{<>}{<>}<>
       ]],
       {
         f( function(_, snip) return snip.captures[1] end ),
         d(1, get_visual),
         i(2),
+        i(0),
       }
     ),
     {
@@ -92,12 +94,13 @@ return {
     },
     fmta(
       [[
-        <>\frac{<>}{<>}
+        <>\frac{<>}{<>}<>
       ]],
       {
         f( function(_, snip) return snip.captures[1] end ),
         i(2),
         d(1, get_visual),
+        i(0),
       }
     ),
     {
@@ -111,15 +114,46 @@ return {
     },
     fmta(
       [[
-        <>\sqrt{<>}
+        <>\sqrt{<>}<>
       ]],
       {
         f( function(_, snip) return snip.captures[1] end ),
         d(1, get_visual),
+        i(0),
       }
     ),
     {
       condition = non_letter
     }
+  ),
+  s( -- o-r -> Over Right Arrow )
+    {
+      trig = "o-r",
+    },
+    fmta(
+      [[
+        \overrightarrow{<>}<>
+      ]],
+      {
+        i(1),
+        i(0),
+      }
+    ),
+    {}
+  ),
+  s( -- o-l -> Over Left Arrow )
+    {
+      trig = "o-l",
+    },
+    fmta(
+      [[
+        \overleftarrow{<>}<>
+      ]],
+      {
+        i(1),
+        i(0),
+      }
+    ),
+    {}
   ),
 }

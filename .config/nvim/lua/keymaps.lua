@@ -9,12 +9,16 @@ vim.keymap.set("n", "L",            "$",                                        
 vim.keymap.set("n", "H",            "0",                                          { noremap = true, silent = true,            desc = "Go to Front of Line"                 })
 vim.keymap.set("n", "<C-'>",        "<C-y>",                                      { noremap = true, silent = true,            desc = "Move Screen Up"                      })
 vim.keymap.set("n", "<C-;>",        "<C-e>",                                      { noremap = true, silent = true,            desc = "Move Screen Down"                    })
-vim.keymap.set("n", "<BS>",         "<C-o>",                                      { noremap = true, silent = true,            desc = "Move Cursor to Previous Place"       })
-vim.keymap.set("n", "+",            "gg=G<C-o>",                                  { noremap = true, silent = true,            desc = "Indent Entire Document"              })
+vim.keymap.set("n", "<BS>",         "<C-o>",                                      { noremap = true, silent = true,            desc = "Move Cursor to Previous Mark"        })
+-- vim.keymap.set("n", "+",            "gg=G<C-o>",                                  { noremap = true, silent = true,            desc = "Indent Entire Document"              })
 vim.keymap.set("n", "<leader>`",    ":Alpha<CR>",                                 { noremap = true, silent = true,            desc = "Return to Homepage"                  })
 vim.keymap.set("n", "<leader>?",    ":WhichKey<CR>",                              { noremap = true, silent = true,            desc = "Display Keymaps"                     })
 vim.keymap.set("n", "<leader>h",    ":Telescope help_tags hidden=true<CR>",       { noremap = true, silent = true,            desc = "Search Help Tags"                    })
 vim.keymap.set("n", "<C-S-f>",      ";",                                          { noremap = true, silent = true,            desc = "Repeat Find in Line"                 })
+vim.keymap.set("n", "<leader>w",    ":w<CR>",                                     { noremap = true, silent = true,            desc = "Write Current Buffer"                })
+vim.keymap.set("n", "<leader>W",    ":wa<CR>",                                    { noremap = true, silent = true,            desc = "Write All Buffers"                   })
+vim.keymap.set("n", "<leader>qq",   ":wq<CR>",                                    { noremap = true, silent = true,            desc = "Write Current Buffer and Quit"       })
+vim.keymap.set("n", "<leader>QQ",   ":wa<CR>:q<CR>",                              { noremap = true, silent = true,            desc = "Write All Buffers and Quit"          })
 
 -- VIEW MANAGEMENT                  
 vim.keymap.set("n", "<leader>vm",   ":RenderMarkdownToggle<CR>",                  { noremap = true, silent = true,            desc = "Toggle Markdown View"                })
@@ -102,11 +106,12 @@ end,                                                                            
 
 -- INSERT MODE --
 
-
 -- VISUAL MODE --
 -- MISCELLANEOUS
 vim.keymap.set("x", ">",            ">gv",                                        { noremap = true, silent = true,            desc = "Increase line indent"                })
 vim.keymap.set("x", "<",            "<gv",                                        { noremap = true, silent = true,            desc = "Decrease line indent"                })
+
+-- MOVEMENT
 vim.keymap.set("x", "L",            "$",                                          { noremap = true, silent = true,            desc = "Go to End of Line"                   })
 vim.keymap.set("x", "H",            "0",                                          { noremap = true, silent = true,            desc = "Go to Front of Line"                 })
 

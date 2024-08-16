@@ -60,9 +60,7 @@ return {
         i(0),
       }
     ),
-    {
-      -- condition = line_begin
-    }
+    {}
   ),
   s( -- p2 -> Subparagraph )
     {
@@ -76,9 +74,7 @@ return {
         i(0),
       }
     ),
-    {
-      condition = line_begin
-    }
+    {}
   ),
   s( -- s1 -> Section )
     {
@@ -92,9 +88,7 @@ return {
         i(0),
       }
     ),
-    {
-      condition = line_begin
-    }
+    {}
   ),
   s( -- s2 -> Subsection )
     {
@@ -108,9 +102,7 @@ return {
         i(0),
       }
     ),
-    {
-      condition = line_begin
-    }
+    {}
   ),
   s( -- s3 -> Subsubsection )
     {
@@ -124,14 +116,11 @@ return {
         i(0),
       }
     ),
-    {
-      condition = line_begin
-    }
+    {}
   ),
   s( -- fn -> Footnote )
     {
       trig = "fn",
-      snippetType = "autosnippet"
     },
     fmta(
       [[
@@ -143,9 +132,7 @@ return {
         d(2, get_visual),
       }
     ),
-    {
-      condition = line_begin_or_non_letter
-    }
+    {}
   ),
   s( -- `r -> Upright Text )
     {
@@ -339,9 +326,73 @@ return {
     ),
     {}
   ),
-  s( -- `2 -> Small Text (Inline) )
+  s( -- `2 -> Script Size Text (Inline) )
     {
       trig = "`2",
+      snippetType = "autosnippet"
+    },
+    fmta(
+      [[
+        {\scriptsize <>}
+      ]],
+      {
+        d(1, get_visual),
+      }
+    ),
+    {}
+  ),
+  s( -- `@ -> Script Size Text (Environment) )
+    {
+      trig = "`@",
+      snippetType = "autosnippet"
+    },
+    fmta(
+      [[
+        \begin{scriptsize}
+          <>
+        \end{scriptsize}
+      ]],
+      {
+        d(1, get_visual),
+      }
+    ),
+    {}
+  ),
+  s( -- `3 -> Footnote Size Text (Inline) )
+    {
+      trig = "`3",
+      snippetType = "autosnippet"
+    },
+    fmta(
+      [[
+        {\footnotesize <>}
+      ]],
+      {
+        d(1, get_visual),
+      }
+    ),
+    {}
+  ),
+  s( -- `# -> Footnote Size Text (Environment) )
+    {
+      trig = "`#",
+      snippetType = "autosnippet"
+    },
+    fmta(
+      [[
+        \begin{footnotesize}
+          <>
+        \end{footnotesize}
+      ]],
+      {
+        d(1, get_visual),
+      }
+    ),
+    {}
+  ),
+  s( -- `4 -> Small Text (Inline) )
+    {
+      trig = "`4",
       snippetType = "autosnippet"
     },
     fmta(
@@ -354,9 +405,9 @@ return {
     ),
     {}
   ),
-  s( -- `@ -> Small Text (Environment) )
+  s( -- `$ -> Small Text (Environment) )
     {
-      trig = "`@",
+      trig = "`$",
       snippetType = "autosnippet"
     },
     fmta(
@@ -371,9 +422,9 @@ return {
     ),
     {}
   ),
-  s( -- `3 -> Normal Text (Inline) )
+  s( -- `5 -> Normal Size Text (Inline) )
     {
-      trig = "`3",
+      trig = "`5",
       snippetType = "autosnippet"
     },
     fmta(
@@ -386,9 +437,9 @@ return {
     ),
     {}
   ),
-  s( -- `# -> Normal Text (Environment) )
+  s( -- `% -> Normal Size Text (Environment) )
     {
-      trig = "`#",
+      trig = "`%",
       snippetType = "autosnippet"
     },
     fmta(
@@ -403,9 +454,9 @@ return {
     ),
     {}
   ),
-  s( -- `4 -> Large Text (Inline) )
+  s( -- `6 -> Large Text (Inline) )
     {
-      trig = "`4",
+      trig = "`6",
       snippetType = "autosnippet"
     },
     fmta(
@@ -418,9 +469,9 @@ return {
     ),
     {}
   ),
-  s( -- `$ -> Large Text (Environment) )
+  s( -- `^ -> Large Text (Environment) )
     {
-      trig = "`$",
+      trig = "`^",
       snippetType = "autosnippet"
     },
     fmta(
@@ -435,9 +486,73 @@ return {
     ),
     {}
   ),
-  s( -- `5 -> Huge Text (Inline) )
+  s( -- `7 -> *L*arge Text (Inline) )
     {
-      trig = "`5",
+      trig = "`7",
+      snippetType = "autosnippet"
+    },
+    fmta(
+      [[
+        {\Large <>}
+      ]],
+      {
+        d(1, get_visual),
+      }
+    ),
+    {}
+  ),
+  s( -- `& -> *L*arge Text (Environment) )
+    {
+      trig = "`&",
+      snippetType = "autosnippet"
+    },
+    fmta(
+      [[
+        \begin{Large}
+          <>
+        \end{Large}
+      ]],
+      {
+        d(1, get_visual),
+      }
+    ),
+    {}
+  ),
+  s( -- `8 -> LARGE Text (Inline) )
+    {
+      trig = "`8",
+      snippetType = "autosnippet"
+    },
+    fmta(
+      [[
+        {\LARGE <>}
+      ]],
+      {
+        d(1, get_visual),
+      }
+    ),
+    {}
+  ),
+  s( -- `* -> LARGE Text (Environment) )
+    {
+      trig = "`*",
+      snippetType = "autosnippet"
+    },
+    fmta(
+      [[
+        \begin{LARGE}
+          <>
+        \end{LARGE}
+      ]],
+      {
+        d(1, get_visual),
+      }
+    ),
+    {}
+  ),
+  s( -- `9 -> Huge Text (Inline) )
+    {
+      trig = "`9",
       snippetType = "autosnippet"
     },
     fmta(
@@ -450,9 +565,9 @@ return {
     ),
     {}
   ),
-  s( -- `% -> Huge Text (Environment) )
+  s( -- `( -> Huge Text (Environment) )
     {
-      trig = "`%",
+      trig = "`(",
       snippetType = "autosnippet"
     },
     fmta(
@@ -460,6 +575,38 @@ return {
         \begin{huge}
           <>
         \end{huge}
+      ]],
+      {
+        d(1, get_visual),
+      }
+    ),
+    {}
+  ),
+  s( -- `0 -> *H*uge Text (Inline) )
+    {
+      trig = "`0",
+      snippetType = "autosnippet"
+    },
+    fmta(
+      [[
+        {\Huge <>}
+      ]],
+      {
+        d(1, get_visual),
+      }
+    ),
+    {}
+  ),
+  s( -- `) -> *H*uge Text (Environment) )
+    {
+      trig = "`)",
+      snippetType = "autosnippet"
+    },
+    fmta(
+      [[
+        \begin{Huge}
+          <>
+        \end{Huge}
       ]],
       {
         d(1, get_visual),

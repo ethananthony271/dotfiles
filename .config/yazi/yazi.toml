@@ -8,38 +8,38 @@ linemode = "mtime"
 
 [opener]
 open = [
-  { run = 'nvim "$@"',                      block = true,         desc = "neovim"       },
-  { run = 'zeditor "$@"',                   orphan = true,        desc = "Zed"          },
+  { run = 'nvim "$@"',                      block = true,         desc = "neovim"      },
+  { run = 'zeditor "$@"',                   orphan = true,        desc = "Zed"         },
 ]                                           
 edit = [                                    
-  { run = 'nvim "$@"',                      block = true,         desc = "neovim"       },
-  { run = 'zeditor "$@"',                   orphan = true,        desc = "Zed"          },
+  { run = 'nvim "$@"',                      block = true,         desc = "neovim"      },
+  { run = 'zeditor "$@"',                   orphan = true,        desc = "Zed"         },
 ]                                           
 pdf = [                                     
-  { run = 'zathura "$@"',                   orphan = true,        desc = "zathura"      },
-  { run = 'librewolf "$@"',                 orphan = true,        desc = "LibreWolf"    },
-  { run = 'libreoffice "$@"',               orphan = true,        desc = "LibreOffice"  },
+  { run = 'zathura "$@"',                   orphan = true,        desc = "zathura"     },
+  { run = 'librewolf "$@"',                 orphan = true,        desc = "LibreWolf"   },
+  { run = 'libreoffice "$@"',               orphan = true,        desc = "LibreOffice" },
 ]                                           
 video = [                                   
-  { run = 'mpv "$@"',                       orphan = true,        desc = "mpv"          },
-  { run = 'libreoffice "$@"',               orphan = true,        desc = "LibreOffice"  },
+  { run = 'mpv "$@"',                       orphan = true,        desc = "mpv"         },
+  { run = 'libreoffice "$@"',               orphan = true,        desc = "LibreOffice" },
 ]                                           
 audio = [                                   
-  { run = 'mpv "$@"',                       orphan = true,        desc = "mpv"          },
-  { run = 'libreoffice "$@"',               orphan = true,        desc = "LibreOffice"  },
+  { run = 'mpv "$@"',                       orphan = true,        desc = "mpv"         },
+  { run = 'libreoffice "$@"',               orphan = true,        desc = "LibreOffice" },
 ]                                           
 image = [                                   
-  { run = 'nsxiv -a "$@"',                  orphan = true,        desc = "nsxiv"        },
-  { run = 'libreoffice "$@"',               orphan = true,        desc = "LibreOffice"  },
+  { run = 'nsxiv -a "$@"',                  orphan = true,        desc = "nsxiv"       },
+  { run = 'libreoffice "$@"',               orphan = true,        desc = "LibreOffice" },
 ]                                           
 office = [                                  
-  { run = 'libreoffice "$@"',               orphan = true,        desc = "LibreOffice"  },
-  { run = 'librewolf "$@"',                 orphan = true,        desc = "LibreWolf"    },
+  { run = 'libreoffice "$@"',               orphan = true,        desc = "LibreOffice" },
+  { run = 'librewolf "$@"',                 orphan = true,        desc = "LibreWolf"   },
 ]                                           
 directory = [
-  { run = 'nvim "$@"',                      block = true,         desc = "neovim"       },
-  { run = 'foot -e yazi "$@"',              orpahn = true,        desc = "yazi"         },
-  { run = 'zeditor "$@"',                   orphan = true,        desc = "Zed"          },
+  { run = 'nvim "$@"',                      block = true,         desc = "neovim"      },
+  { run = 'foot -e yazi "$@"',              orpahn = true,        desc = "yazi"        },
+  { run = 'zeditor "$@"',                   orphan = true,        desc = "Zed"         },
 ]
                                             
 [open]                                      

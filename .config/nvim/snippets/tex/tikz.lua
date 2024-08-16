@@ -61,31 +61,56 @@ return {
         c(1, {
           fmta(
             [[
-              \draw[draw=<>]
+              \draw[draw=<>, <>]
             ]],
             {
-              i(1, "black"),
+              i(1),
+              i(2),
             }
           ),
           fmta(
             [[
-              \fill[fill=<>]
+              \fill[fill=<>, <>]
             ]],
             {
-              i(1, "black"),
+              i(1),
+              i(2),
             }
           ),
           fmta(
             [[
-              \filldraw[fill=<>, draw=<>]
+              \filldraw[fill=<>, draw=<>, <>]
             ]],
             {
-              i(1, "black"),
-              i(2, "black"),
+              i(1),
+              i(2),
+              i(3),
             }
           ),
         }),
         i(0),
+      }
+    ),
+    {
+      condition = line_begin
+    }
+  ),
+  s( -- nd -> TikZ Node )
+    {
+      trig = "nd",
+      snippetType = "autosnippet"
+    },
+    fmta(
+      [[
+        \draw[<>] (<>) node[rotate = <>, anchor = <>, <>] {<>};
+      ]],
+      {
+        i(1),
+        i(2),
+        i(3),
+        i(4),
+        i(5),
+        i(6),
       }
     ),
     {
@@ -302,25 +327,25 @@ return {
 
     \pgfmathsetmacro \xi {\x - \gridStep}
     \pgfmathsetmacro \xf {\xLen + \gridStep}
-    \pgfmathsetmacro \yi {\y - \gridStep}
-    \pgfmathsetmacro \yf {\yLen + \gridStep}
+    \pgfmathsetmacro \zi {\z - \gridStep}
+    \pgfmathsetmacro \zf {\zLen + \gridStep}
     \pgfmathsetmacro \negGridStep {\gridStep * -1}
     \foreach \a in {\xi,\x,...,\xf} {
-    \foreach \b in {\yi,\y,...,\yf} {
-    \draw[gridLines] (\a,\yi,\z) -- (\a,\yf,\z);
-    \draw[gridLines] (\xi,\b,\z) -- (\xf,\b,\z);
-    }
+      \foreach \b in {\zi,\z,...,\zf} {
+        \draw[gridLine] (\a,\y,\zi) -- (\a,\y,\zf);
+        \draw[gridLine] (\xi,\y,\b) -- (\xf,\y,\b);
+      }
     }
 
     \pgfmathsetmacro \X {\x + \xLen}
     \pgfmathsetmacro \Y {\y + \yLen}
     \pgfmathsetmacro \Z {\z + \zLen}
-    \draw[cubeBorder] (\x,\Y,\z) -- (\x,\Y,\Z) -- (\X,\Y,\Z) -- (\X,\Y,\z) -- cycle;
-    \fill[cubeFilling] (\x,\Y,\z) -- (\x,\Y,\Z) -- (\X,\Y,\Z) -- (\X,\Y,\z) -- cycle;
     \draw[cubeBorder] (\x,\y,\z) -- (\x,\Y,\z) -- (\X,\Y,\z) -- (\X,\y,\z) -- cycle;
     \fill[cubeFilling] (\x,\y,\z) -- (\x,\Y,\z) -- (\X,\Y,\z) -- (\X,\y,\z) -- cycle;
     \draw[cubeBorder] (\x,\y,\z) -- (\x,\Y,\z) -- (\x,\Y,\Z) -- (\x,\y,\Z) -- cycle;
     \fill[cubeFilling] (\x,\y,\z) -- (\x,\Y,\z) -- (\x,\Y,\Z) -- (\x,\y,\Z) -- cycle;
+    \draw[cubeBorder] (\x,\y,\z) -- (\x,\y,\Z) -- (\X,\y,\Z) -- (\X,\y,\z) -- cycle;
+    \fill[cubeFilling] (\x,\y,\z) -- (\x,\y,\Z) -- (\X,\y,\Z) -- (\X,\y,\z) -- cycle;
 
     <>
 
@@ -328,8 +353,8 @@ return {
     \fill[cubeFilling] (\X,\y,\z) -- (\X,\y,\Z) -- (\X,\Y,\Z) -- (\X,\Y,\z) -- cycle;
     \draw[cubeBorder] (\x,\y,\Z) -- (\x,\Y,\Z) -- (\X,\Y,\Z) -- (\X,\y,\Z) -- cycle;
     \fill[cubeFilling] (\x,\y,\Z) -- (\x,\Y,\Z) -- (\X,\Y,\Z) -- (\X,\y,\Z) -- cycle;
-    \draw[cubeBorder] (\x,\y,\z) -- (\x,\y,\Z) -- (\X,\y,\Z) -- (\X,\y,\z) -- cycle;
-    \fill[cubeFilling] (\x,\y,\z) -- (\x,\y,\Z) -- (\X,\y,\Z) -- (\X,\y,\z) -- cycle;
+    \draw[cubeBorder] (\x,\Y,\z) -- (\x,\Y,\Z) -- (\X,\Y,\Z) -- (\X,\Y,\z) -- cycle;
+    \fill[cubeFilling] (\x,\Y,\z) -- (\x,\Y,\Z) -- (\X,\Y,\Z) -- (\X,\Y,\z) -- cycle;
     ]],
       {
         i(1),
@@ -360,10 +385,10 @@ return {
     \def \zMax {<>}
     \def \radius {<>}
     \foreach \x in {1,...,\n} {
-    \pgfmathsetmacro \x {(rnd * (\xMax - \xMin)) + \xMin}
-    \pgfmathsetmacro \y {(rnd * (\yMax - \yMin)) + \yMin}
-    \pgfmathsetmacro \z {(rnd * (\zMax - \zMin)) + \zMin}
-    \filldraw[red!100!white] (\x,\y,\z) circle (\radius cm);
+      \pgfmathsetmacro \x {(rnd * (\xMax - \xMin)) + \xMin}
+      \pgfmathsetmacro \y {(rnd * (\yMax - \yMin)) + \yMin}
+      \pgfmathsetmacro \z {(rnd * (\zMax - \zMin)) + \zMin}
+      \filldraw[red!100!white] (\x,\y,\z) circle (\radius px);
     }
     ]],
       {
