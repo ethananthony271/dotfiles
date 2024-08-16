@@ -59,9 +59,8 @@ createFile () {
     line=$(cat $templatePath | rg \title)
     title=$(echo $line | sed 's/\\title{\(.*\)}/\1/')
 
-    notify-send "New $templateType Created" "$title
-$(basename $newFilePath) in $(getCurrentCourseInfo -s) - $(getCurrentCourseInfo -t)
-"
+    notify-send "New $templateType Created" "$title as $(basename $newFilePath) in
+$(courseInfo -s) - $(courseInfo -t)"
   else
     notify-send "New $templateType Not Created" "$newFilePath"
   fi
