@@ -14,6 +14,6 @@ while true; do
     notify-send "Battery at 20%" "Plug in your device"
   fi
 
-  sleep 20s
+  sleep 60s
 
 done
