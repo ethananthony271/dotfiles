@@ -89,6 +89,7 @@ alias go='git checkout '
 alias gp='git push '
 alias gm='git merge '
 alias gf='git fetch '
+alias gz='lazygit'
 
 alias z='zellij'
 alias za='zellij attach'
