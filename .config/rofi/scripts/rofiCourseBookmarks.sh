@@ -18,10 +18,10 @@ messages+=("Edit Last Lecture")
 commands+=("foot -e nvim $(courseInfo --last-lecture)")
 
 messages+=("View Course Notes (Compile)")
-commands+=("cd $CURRCOURSE/notes && pdflatex ./master.tex && courseTools -c && zathura ./master.pdf")
+commands+=("cd $(courseInfo --path)/notes && pdflatex ./master.tex && courseTools -c && zathura ./master.pdf")
 
 messages+=("View Course Notes (Don't Compile)")
-commands+=("zathura $CURRCOURSE/notes/master.pdf")
+commands+=("zathura $(courseInfo --path)/notes/master.pdf")
 
 messages+=("Clean Directory")
 commands+=("cleanDirectory")

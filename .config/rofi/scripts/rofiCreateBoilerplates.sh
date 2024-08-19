@@ -3,23 +3,31 @@
 TEMPLATES=$CURRQUARTER/xlatex/templates
 
 mapfile -t paths < <(find $TEMPLATES -mindepth 2 -maxdepth 2 -type f)
+
 declare -a messages
 declare -a commands
+
 for i in ${!paths[@]}; do
-  type=$(basename $(dirname "${paths[$i]}") | sed 's/\(...\).*/\1/')
-  name="$(echo $(cat "${paths[$i]}" | rg \title) | sed 's/\\title{\(.*\)}/\1/')"
-  messages+=("$type: $name <span weight='light' style='italic'>($(basename ${paths[$i]}))</span>")
+  templatePath="${paths[$i]}"
+  type=$(basename $(dirname "$templatePath") | sed 's/\(...\).*/\1/')
+  title="$(echo $(cat "$templatePath" | rg \title) | sed 's/\\title{\(.*\)}/\1/')"
+  messages+=("$type: $title <span weight='light' style='italic'>($(basename $templatePath))</span>")
+
   if [[ $type = "fig" ]]; then
-    commands+=("cp '${paths[$i]}' '$(courseInfo -F)' && notify-send 'Figure Created in $(courseInfo -s)' '$name as $(basename $(courseInfo -f))'")
+    newPath="$(courseInfo --next-figure)"
+    newName="$(echo $newPath | sed 's/^.*\/\(.*\)\.tex/\1/')"
+    commands+=("courseTools --create-figure '$templatePath' && echo -n '\includestandalone{figures/$newName}' | wl-copy")
   elif [[ $type = "lec" ]]; then
-    commands+=("cp '${paths[$i]}' '$(courseInfo -L)' && notify-send 'Lecture Created in $(courseInfo -s)' '$name as $(basename $(courseInfo -l))'")
+    newPath="$(courseInfo --next-lecture)"
+    newName="$(echo $newPath | sed 's/^.*\/\(.*\)\.tex/\1/')"
+    commands+=("courseTools --create-lecture '$templatePath' && echo -n '\includestandalone{figures/$newName}' | wl-copy")
   else
-    notify-send "Unsupported Template Type: $type" "${paths[$i]}"
+    notify-send "Unsupported Template Type: $type" "$templatePath"
     exit 1
   fi
 done
 
-# # Rofi Logic
+# Rofi Logic
 if [[ $# = 0 ]]; then
   for i in ${!messages[@]}; do
     echo -en "\0markup-rows\x1ftrue\n"

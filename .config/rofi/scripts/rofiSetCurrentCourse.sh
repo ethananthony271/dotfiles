@@ -3,7 +3,7 @@
 # Options
 all=(get refresh)
 
-options=(get)
+options=()
 
 p=$(find $CURRQUARTER -mindepth 1 -maxdepth 1 -type d)
 paths=()
@@ -31,10 +31,10 @@ for i in ${!courses[@]}; do
 done
 
 declare -A commands
-commands[refresh]="setCurrentCourse -a"
-commands[get]="setCurrentCourse -g"
+commands[refresh]="courseTools --auto-course"
+commands[get]="notify-send 'Current Course Information' '$(courseInfo --short) - $(courseInfo --title)'"
 for i in ${!paths[@]}; do
-  commands[class$i]="setCurrentCourse -s ${paths[$i]}"
+  commands[class$i]="courseTools --set-course ${paths[$i]}"
 done
 
 # Rofi Logic
