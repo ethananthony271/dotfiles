@@ -26,7 +26,7 @@ echoHelpMessage () {
   echo "  -d, --days          Days of the week the course meets. Formatted as a"
   echo "                      string of three letter days, eg. \"Mon Wed Fri\"."
   echo "                      From info.json"
-  echo "  -L, --has-lab       Returns true if a lab section exists, and false"
+  echo "  -x, --has-lab       Returns true if a lab section exists, and false"
   echo "                      otherwise. From info.json"
   echo "  -R, --lab-start     Start time of lab in 24 hour format. Returns -1 if"
   echo "                      no lab section exists. From info.json"
@@ -55,14 +55,14 @@ echoHelpMessage () {
 
 if [[ -d "$1" ]]; then
   if [[ $(find $1 -maxdepth 1 -mindepth 1 -type f -name info.json | wc -l) = 1 ]]; then
-    courseInfo="$(pwd)/$1"/info.json
+    coursePath="$1"
     shift
   else
     echo "Invalid directory: Specified directory must be direct parent to info.json file"
     exit 1
   fi
 else
-  courseInfo=$CURRCOURSE/info.json
+  coursePath="$(readlink -n $CURRCOURSE)"
 fi
 
 VALID_ARGS=$(getopt -o tscnredxREDpfFlLh --long title,short,code,number,start,end,days,has-lab,lab-start,lab-end,lab-days,path,last-figure,next-figure,last-lecture,next-lecture,help -- "$@")
@@ -74,48 +74,48 @@ eval set -- "$VALID_ARGS"
 while [ : ]; do
   case "$1" in
     -t | --title)
-      echo $(cat "$courseInfo" | jq -r .name.title)
+      echo $(cat "$coursePath/info.json" | jq -r .name.title)
       shift
       ;;
 
     -s | --short)
-      echo $(cat "$courseInfo" | jq -r .name.short)
+      echo $(cat "$coursePath/info.json" | jq -r .name.short)
       shift
       ;;
 
     -c | --code)
-      echo $(cat "$courseInfo" | jq -r .name.code)
+      echo $(cat "$coursePath/info.json" | jq -r .name.code)
       shift
       ;;
 
     -n | --number)
-      echo $(cat "$courseInfo" | jq -r .name.number)
+      echo $(cat "$coursePath/info.json" | jq -r .name.number)
       shift
       ;;
 
     -r | --start)
-      echo $(cat "$courseInfo" | jq -r .schedule.start)
+      echo $(cat "$coursePath/info.json" | jq -r .schedule.start)
       shift
       ;;
 
     -e | --end)
-      echo $(cat "$courseInfo" | jq -r .schedule.end)
+      echo $(cat "$coursePath/info.json" | jq -r .schedule.end)
       shift
       ;;
 
     -d | --days)
-      echo $(cat "$courseInfo" | jq -r .schedule.days)
+      echo $(cat "$coursePath/info.json" | jq -r .schedule.days)
       shift
       ;;
 
     -x | --has-lab)
-      echo $(cat "$courseInfo" | jq -r .hasLab)
+      echo $(cat "$coursePath/info.json" | jq -r .hasLab)
       shift
       ;;
 
     -R | --lab-start)
-      if [[ $(cat "$courseInfo" | jq -r .hasLab) = true ]]; then
-        echo $(cat "$courseInfo" | jq -r .schedule.labStart)
+      if [[ $(cat "$coursePath/info.json" | jq -r .hasLab) = true ]]; then
+        echo $(cat "$coursePath/info.json" | jq -r .schedule.labStart)
       else
         echo -1
       fi
@@ -123,8 +123,8 @@ while [ : ]; do
       ;;
 
     -E | --lab-end)
-      if [[ $(cat "$courseInfo" | jq -r .hasLab) = true ]]; then
-        echo $(cat "$courseInfo" | jq -r .schedule.labEnd)
+      if [[ $(cat "$coursePath/info.json" | jq -r .hasLab) = true ]]; then
+        echo $(cat "$coursePath/info.json" | jq -r .schedule.labEnd)
       else
         echo -1
       fi
@@ -132,8 +132,8 @@ while [ : ]; do
       ;;
 
     -D | --lab-days)
-      if [[ $(cat "$courseInfo" | jq -r .hasLab) = true ]]; then
-        echo $(cat "$courseInfo" | jq -r .schedule.labDays)
+      if [[ $(cat "$coursePath/info.json" | jq -r .hasLab) = true ]]; then
+        echo $(cat "$coursePath/info.json" | jq -r .schedule.labDays)
       else
         echo -1
       fi
@@ -141,12 +141,12 @@ while [ : ]; do
       ;;
 
     -p | --path)
-      echo $(readlink -n $CURRCOURSE)
+      echo "$coursePath"
       shift
       ;;
 
     -f | --last-figure)
-      mapfile -t figures < <(find $CURRCOURSE/notes/figures -regextype posix-extended -regex '.*fig_[0-9]{3}\.tex.*')
+      mapfile -t figures < <(find $coursePath/notes -regextype posix-extended -regex '.*fig_[0-9]{3}\.tex.*' | sort)
       if [[ ${#figures[@]} -gt 0 ]]; then
         echo "${figures[${#figures[@]} - 1]}"
       else
@@ -156,19 +156,19 @@ while [ : ]; do
       ;;
 
     -F | --next-figure)
-      mapfile -t figures < <(find $CURRCOURSE/notes -regextype posix-extended -regex '.*fig_[0-9]{3}\.tex.*')
+      mapfile -t figures < <(find $coursePath/notes -regextype posix-extended -regex '.*fig_[0-9]{3}\.tex.*' | sort)
       if [[ ${#figures[@]} -gt 0 ]]; then
-        lastNumber="$(echo ${figures[${#figures[@]} - 1]} | sed 's/.*\/fig_\([0-9]\{3\}\).tex/\1/')"
+        lastNumber="$(echo ${figures[${#figures[@]} - 1]} | sed 's/.*\/fig_\([0-9]\{3\}\).tex/\1/' | sed 's/[0]*\([1-9]*\)/\1/')"
         nextNumber=$(printf "%03d" $(($lastNumber + 1)))
-        echo "$CURRCOURSE/notes/figures/fig_$nextNumber.tex"
+        echo "$(readlink -n $CURRCOURSE)/notes/figures/fig_$nextNumber.tex"
       else
-        echo "$CURRCOURSE/notes/figures/fig_001.tex"
+        echo "$(readlink -n $CURRCOURSE)/notes/figures/fig_001.tex"
       fi
       shift
       ;;
 
     -l | --last-lecture)
-      mapfile -t lectures < <(find $CURRCOURSE/notes -regextype posix-extended -regex '.*lec_[0-9]{3}\.tex.*')
+      mapfile -t lectures < <(find $coursePath/notes -regextype posix-extended -regex '.*lec_[0-9]{3}\.tex.*' | sort)
       if [[ ${#lectures[@]} -gt 0 ]]; then
         echo "${lectures[${#lectures[@]} - 1]}"
       else
@@ -178,13 +178,13 @@ while [ : ]; do
       ;;
 
     -L | --next-lecture)
-      mapfile -t lectures < <(find $CURRCOURSE/notes -regextype posix-extended -regex '.*lec_[0-9]{3}\.tex.*')
+      mapfile -t lectures < <(find $coursePath/notes -regextype posix-extended -regex '.*lec_[0-9]{3}\.tex.*' | sort)
       if [[ ${#lectures[@]} -gt 0 ]]; then
-        lastNumber="$(echo ${lectures[${#lectures[@]} - 1]} | sed 's/.*\/lec_\([0-9]\{3\}\).tex/\1/')"
+        lastNumber="$(echo ${lectures[${#lectures[@]} - 1]} | sed 's/.*\/lec_\([0-9]\{3\}\).tex/\1/' | sed 's/[0]*\([1-9]*\)/\1/')"
         nextNumber=$(printf "%03d" $(($lastNumber + 1)))
-        echo "$CURRCOURSE/notes/lec_$nextNumber.tex"
+        echo "$(readlink -n $CURRCOURSE)/notes/lec_$nextNumber.tex"
       else
-        echo "$CURRCOURSE/notes/lec_001.tex"
+        echo "$(readlink -n $CURRCOURSE)/notes/lec_001.tex"
       fi
       shift
       ;;
