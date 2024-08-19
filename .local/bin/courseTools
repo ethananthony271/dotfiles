@@ -6,16 +6,33 @@ echoHelpMessage () {
   echo "Manipulate course directories from the command line. Prioritizes performing"
   echo "actions over fetching information."
   echo
-  echo "Usage: courseTools [DIRECTORY] [options"
+  echo "Usage: courseTools [DIRECTORY] [options]"
   echo "  Specifying the directory of the course is optional, and if no directory"
   echo "  is specified, the program will work with the current course information."
   echo "  Specified directories should be the direct parent of the info.json file."
   echo
   echo "Available Options:"
-  echo "  -c, --clean             Remove all master files except for .pdf and .tex. These"
-  echo "                          usually come from compiling master.tex with pdflatex"
-  echo "  -C, --full-clean        Remove all master files except for and .tex. These usually"
-  echo "                          come from compiling master.tex with pdflatex"
+  echo "  -c, --clean                 Remove all files except for .pdf and .tex. These"
+  echo "                              usually come from compiling tex files with pdflatex"
+  echo "  -C, --full-clean            Remove all files except for .tex. These usually"
+  echo "                              come from compiling tex files with pdflatex"
+  echo "  -f, --create-figure         Takes a single argument as a path to a figure template."
+  echo "                              Copies the template into the next figure in the"
+  echo "                              current course's notes/figures/ directory."
+  echo "  -F, --create-basic-figure   Copies the basic_figure.tex template from the templates/"
+  echo "                              directory into the next figure in the current course's"
+  echo "                              notes/figures/ directory."
+  echo "  -l, --create-lecture        Takes a single argument as a path to a lecture template."
+  echo "                              Copies the template into the next lecture in the"
+  echo "                              current course's notes/ directory."
+  echo "  -L, --create-basic-lecture  Copies the basic_lecture.tex template from the templates/"
+  echo "                              directory into the next lecture in the current course's"
+  echo "                              notes/ directory."
+  echo "  -a, --auto-course           Read course information from info.json files in course"
+  echo "                              directories and automatically update current course if"
+  echo "                              applicable"
+  echo "  -s, --set-course DIRECTORY  Sets the current course to DIRECTORY. DIRECTORY must be"
+  echo "                              a child of \$CURRCOURSE environment variable."
 }
 
 if [[ -d "$1" ]]; then
@@ -27,10 +44,10 @@ if [[ -d "$1" ]]; then
     exit 1
   fi
 else
-  courseDirectory=$CURRCOURSE
+  courseDirectory=$(courseInfo --path)
 fi
 
-VALID_ARGS=$(getopt -o bcC --long clean,full-clean,add-boilerplate -- "$@")
+VALID_ARGS=$(getopt -o hcCf:Fl:Las: --long clean,full-clean,create-figure:,create-basic-figure,create-lecture:,create-basic-lecture,auto-course,set-course: -- "$@")
 if [[ $? -ne 0 ]]; then
   exit 1;
 fi
@@ -39,16 +56,129 @@ eval set -- "$VALID_ARGS"
 while [ : ]; do
   case "$1" in
     -c | --clean)
-      for file in $(find $courseDirectory/notes -mindepth 1 -maxdepth 1 -type f -name "master.*" ! -name "master.tex" ! -name "master.pdf"); do 
+      for file in $(find $courseDirectory/notes -mindepth 1 -maxdepth 1 -type f -name "*.*" ! -name "*.tex" ! -name "*.pdf"); do 
         rm "$file"
       done
       shift
       ;;
 
     -C | --full-clean)
-      for file in $(find $courseDirectory/notes -mindepth 1 -maxdepth 1 -type f -name "master.*" ! -name "master.tex"); do 
+      for file in $(find $courseDirectory/notes -mindepth 1 -maxdepth 1 -type f -name "*.*" ! -name "*.tex"); do 
         rm "$file"
       done
+      shift
+      ;;
+
+    -f | --create-figure)
+      templatePath="$2"
+      if [[ -f "$CURRQUARTER/xlatex/templates/figure/$(basename $templatePath)" ]]; then
+        newPath="$(courseInfo --next-figure)"
+        cp "$templatePath" "$newPath"
+        notify-send "Figure Created in $(courseInfo --short)" "$(basename $newPath)"
+      else
+        echo "Error: template doesn't exist"
+        exit 1
+      fi
+      shift
+      shift
+      ;;
+
+    -F | --create-basic-figure)
+      templatePath="$CURRQUARTER/xlatex/templates/figure/basic_figure.tex"
+      if [[ -f "$templatePath" ]]; then
+        newPath="$(courseInfo --next-figure)"
+        cp "$templatePath" "$newPath"
+        notify-send "Figure Created in $(courseInfo --short)" "$(basename $newPath)"
+      else
+        echo "Error: basic_figure.tex doesn't exist"
+        exit 1
+      fi
+      shift
+      ;;
+
+    -l | --create-lecture)
+      templatePath="$(pwd)/$2"
+      if [[ -f "$CURRQUARTER/xlatex/templates/lecture/$(basename $templatePath)" ]]; then
+        newPath="$(courseInfo --next-lecture)"
+        cp "$templatePath" "$newPath"
+        notify-send "Lecture Created in $(courseInfo -short)" "$(basename $newPath)"
+      else
+        echo "Error: template doesn't exist"
+        exit 1
+      fi
+      shift
+      shift
+      ;;
+
+    -L | --create-basic-lecture)
+      templatePath="$CURRQUARTER/xlatex/templates/lecture/basic_lecture.tex"
+      if [[ -f "$templatePath" ]]; then
+        newPath="$(courseInfo --next-lecture)"
+        cp "$templatePath" "$newPath"
+        notify-send "Lecture Created in $(courseInfo --short)" "$(basename $newPath)"
+      else
+        echo "Error: basic_lecture.tex doesn't exist"
+        exit 1
+      fi
+      shift
+      ;;
+
+    -a | --auto-course)
+      newCourseDirectory=1
+
+      time=$(date +"%H%M" | sed 's/^0*//')
+      day=$(date +"%a")
+
+      mapfile -t coursePaths < <(find $CURRQUARTER -mindepth 1 -maxdepth 1 -type d ! -name xlatex)
+      for path in ${coursePaths[@]}; do
+        start=$(courseInfo "$path" --start)
+        end=$(courseInfo "$path" --end)
+        days="$(courseInfo "$path" --days)"
+
+        if [[ $start -le $time && $end -gt $time && $days =~ $day ]]; then
+          newCourseDirectory="$path"
+          break
+        fi
+
+        if [[ "$(courseInfo "$path" --has-lab)" = true ]]; then
+          labStart=$(courseInfo "$path" --lab-start)
+          labEnd=$(courseInfo "$path" --lab-end)
+          labDays="$(courseInfo "$path" --lab-days)"
+
+          if [[ $labStart -le $time && $labEnd -gt $time && $labDays =~ $day ]]; then
+            newCourseDirectory="$path"
+            break
+          fi
+        fi
+      done
+
+      if [ -d "$newCourseDirectory" ]; then
+        ln -sfn "$newCourseDirectory" "$CURRCOURSE"
+        title=$(courseInfo -t)
+        short=$(courseInfo -s)
+        notify-send "Current Course Changed" "$short - $title"
+      else
+        title=$(courseInfo -t)
+        short=$(courseInfo -s)
+        notify-send "Current Course Unchanged" "$short - $title"
+      fi
+      shift
+      ;;
+
+    -s | --set-course)
+      newCourseDirectory="$(pwd)/$2"
+      result=$(find "$CURRQUARTER" -type d -wholename "$newCourseDirectory")
+      if [[ -n $result ]]; then
+        ln -sfn "$newCourseDirectory" "$CURRCOURSE"
+        title=$(courseInfo --title)
+        short=$(courseInfo --short)
+        notify-send "Current Course Changed" "$short - $title"
+      else
+        title=$(courseInfo --title)
+        short=$(courseInfo --short)
+        notify-send "Current Course Unchanged" "$short - $title"
+      fi
+      shift
       shift
       ;;
 
