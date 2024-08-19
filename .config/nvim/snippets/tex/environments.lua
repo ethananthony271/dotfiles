@@ -80,6 +80,12 @@ return {
         c(1, {
           t("equation"),
           t("equation*"),
+          t("align"),
+          t("align*"),
+          t("multiline"),
+          t("multiline*"),
+          t("gather"),
+          t("gather*"),
         }),
         i(0),
         rep(1),
@@ -121,6 +127,7 @@ return {
       ]],
       {
         c(1, {
+          t("H"),
           t("h"),
           t("t"),
           t("b"),
@@ -135,12 +142,29 @@ return {
             [[
               <>
               \caption{<>}
-              \label{fig:<>}
+              \label{<>}
             ]],
             {
               i(3),
               i(1),
-              i(2),
+              c(2, {
+                fmta(
+                  [[
+                    fig:<>
+                  ]],
+                  {
+                    i(1),
+                  }
+                ),
+                fmta(
+                  [[
+                    tbl:<>
+                  ]],
+                  {
+                    i(1),
+                  }
+                ),
+              }),
             }
           ),
           fmta(
@@ -168,6 +192,7 @@ return {
       ]],
       {
         c(1, {
+          t("H"),
           t("h"),
           t("t"),
           t("b"),
@@ -197,7 +222,24 @@ return {
             {
               i(3),
               i(1),
-              i(2),
+              c(2, {
+                fmta(
+                  [[
+                    fig:<>
+                  ]],
+                  {
+                    i(1),
+                  }
+                ),
+                fmta(
+                  [[
+                    tbl:<>
+                  ]],
+                  {
+                    i(1),
+                  }
+                ),
+              }),
             }
           ),
           fmta(
@@ -252,7 +294,24 @@ return {
             {
               i(3),
               i(1),
-              i(2),
+              c(2, {
+                fmta(
+                  [[
+                    fig:<>
+                  ]],
+                  {
+                    i(1),
+                  }
+                ),
+                fmta(
+                  [[
+                    tbl:<>
+                  ]],
+                  {
+                    i(1),
+                  }
+                ),
+              }),
             }
           ),
           fmta(

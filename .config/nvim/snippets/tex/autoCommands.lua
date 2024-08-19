@@ -38,4 +38,5 @@ return {
   s({ trig = ";w", snippetType = "autosnippet"  }, { t("\\omega")      }),
   s({ trig = ";W", snippetType = "autosnippet"  }, { t("\\Omega")      }),
   s({ trig = ";~", snippetType = "autosnippet"  }, { t("\\sim")        }),
+  s({ trig = ";*", snippetType = "autosnippet"  }, { t("\\cdot")       }),
 }

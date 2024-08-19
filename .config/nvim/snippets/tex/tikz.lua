@@ -117,6 +117,25 @@ return {
       condition = line_begin
     }
   ),
+  s( -- arc -> TikZ Arc )
+    {
+      trig = "arc",
+      snippetType = "autosnippet"
+    },
+    fmta(
+      [[
+        \draw[domain=<>] plot ({<>+cos(\x)} {<>+sin(\x)});
+      ]],
+      {
+        i(1),
+        i(2),
+        i(3),
+      }
+    ),
+    {
+      condition = line_begin
+    }
+  ),
   s( -- ap -> Add Plot )
     {
       trig = "ap",
