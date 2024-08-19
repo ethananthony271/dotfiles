@@ -27,7 +27,8 @@ require("luasnip.loaders.from_lua").load({
   store_selection_keys = "<c-k>",
 })
 
-vim.cmd("unmap <CR>")
+-- vim.keymap.del("i", "]]")
+vim.keymap.del("n", "<CR>")
 
 vim.filetype.add({
   pattern = { [".*/hypr/.*%.conf"] = "hyprlang" },

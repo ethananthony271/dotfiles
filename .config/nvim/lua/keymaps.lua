@@ -1,9 +1,10 @@
--- KEYMAP SETTINGS --
+--%%% KEYMAP SETTINGS %%%--
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
--- NORMAL MODE --
--- MISCELLANEOUS
+--%%% NORMAL MODE %%%--
+
+-- Miscellaneous
 vim.keymap.set("n", "U",            "<C-r>",                                      { noremap = true, silent = true,            desc = "Redo"                                })
 vim.keymap.set("n", "L",            "$",                                          { noremap = true, silent = true,            desc = "Go to End of Line"                   })
 vim.keymap.set("n", "H",            "0",                                          { noremap = true, silent = true,            desc = "Go to Front of Line"                 })
@@ -20,13 +21,13 @@ vim.keymap.set("n", "<leader>W",    ":wa<CR>",                                  
 vim.keymap.set("n", "<leader>qq",   ":wq<CR>",                                    { noremap = true, silent = true,            desc = "Write Current Buffer and Quit"       })
 vim.keymap.set("n", "<leader>QQ",   ":wa<CR>:q<CR>",                              { noremap = true, silent = true,            desc = "Write All Buffers and Quit"          })
 
--- VIEW MANAGEMENT                  
+-- View Management                  
 vim.keymap.set("n", "<leader>vm",   ":RenderMarkdownToggle<CR>",                  { noremap = true, silent = true,            desc = "Toggle Markdown View"                })
 vim.keymap.set("n", "<leader>vs",   ":Neominimap bufToggle<CR>",                  { noremap = true, silent = true,            desc = "Toggle Side Code View"               })
 vim.keymap.set("n", "<leader>vh",   ":nohl<CR>",                                  { noremap = true, silent = true,            desc = "Clear Highlighting"                  })
 vim.keymap.set("n", "<leader>vu",   ":UndotreeToggle<CR>:UndotreeFocus<CR>",      { noremap = true, silent = true,            desc = "Toggle UndoTree"                     })
 
--- WINDOW MANAGEMENT                
+-- Window Management                
 vim.keymap.set("n", "<C-h>",        "<C-w>h",                                     { noremap = true, silent = true,            desc = "Move Window Focus Left"              })
 vim.keymap.set("n", "<C-j>",        "<C-w>j",                                     { noremap = true, silent = true,            desc = "Move Window Focus Down"              })
 vim.keymap.set("n", "<C-k>",        "<C-w>k",                                     { noremap = true, silent = true,            desc = "Move Window Focus Up"                })
@@ -39,7 +40,7 @@ vim.keymap.set("n", "<C-S-j>",      ":resize -2<CR>",                           
 vim.keymap.set("n", "<C-S-h>",      ":vertical resize -2<CR>",                    { noremap = true, silent = true,            desc = "Horizontally Grow Focused Window"    })
 vim.keymap.set("n", "<C-S-l>",      ":vertical resize +2<CR>",                    { noremap = true, silent = true,            desc = "Vertically Grow Focused Window"      })
 
--- FILE MANAGEMENT                        
+-- File Management                        
 vim.keymap.set("n", "<leader>ff",   ":Telescope find_files hidden=true<CR>",      { noremap = true, silent = true,            desc = "Find Files"                          })
 vim.keymap.set("n", "<leader>fg",   ":Telescope live_grep hidden=true<CR>",       { noremap = true, silent = true,            desc = "Live Grep"                           })
 vim.keymap.set("n", "<leader>fr",   ":Telescope oldfiles hidden=true<CR>",        { noremap = true, silent = true,            desc = "Recent Files"                        })
@@ -52,10 +53,10 @@ vim.keymap.set("n", "<leader>fm",   ":Move ",                                   
 vim.keymap.set("n", "<leader>fc",   ":Copy ",                                     { noremap = true, silent = true,            desc = "Copy File"                           })
 vim.keymap.set("n", "<leader>fk",   ":Mkdir ",                                    { noremap = true, silent = true,            desc = "Make Directory"                      })
 
--- GIT                              
+-- Git                              
 vim.keymap.set("n", "<leader>gh",   ":Gitsigns preview_hunk<CR>",                 { noremap = true, silent = true,            desc = "Preview Hunk"                        })
 
--- SNIPPETS
+-- Snippets
 vim.keymap.set({ "i", "s" }, "<c-k>", function()
   if require("luasnip").expand_or_jumpable() then
     require("luasnip").expand_or_jump()
@@ -73,7 +74,7 @@ vim.keymap.set({ "i", "s" }, "<c-s-k>", function()
 end,                                                                              { noremap = true, silent = true,            desc = "Change Choice Within Snippet"        })
 vim.keymap.set("n", "<leader><leader>s", "<cmd>source ~/.config/nvim/lua/plugins/luasnip.lua<CR>", { desc = "Source luasnip snippets"                                      })
 
--- ALIGN
+-- Align
 vim.keymap.set('x', 'aa',function()
   require'align'.align_to_char({length = 1,                                                                                                                                })
 end,                                                                              { noremap = true, silent = true,            desc = "Align to Single Character"           })
@@ -104,18 +105,19 @@ vim.keymap.set('n', 'gaa', function()
     a.operator(a.align_to_char)
 end,                                                                              { noremap = true, silent = true,            desc = "Align Paragraph to Single Character" })
 
--- INSERT MODE --
+--%%% INSERT MODE %%%--
+-- vim.keymap.del("i", "]]")
 
--- VISUAL MODE --
--- MISCELLANEOUS
+--%%% VISUAL MODE %%%--
+-- Miscellaneous
 vim.keymap.set("x", ">",            ">gv",                                        { noremap = true, silent = true,            desc = "Increase line indent"                })
 vim.keymap.set("x", "<",            "<gv",                                        { noremap = true, silent = true,            desc = "Decrease line indent"                })
 
--- MOVEMENT
+-- Movement
 vim.keymap.set("x", "L",            "$",                                          { noremap = true, silent = true,            desc = "Go to End of Line"                   })
 vim.keymap.set("x", "H",            "0",                                          { noremap = true, silent = true,            desc = "Go to Front of Line"                 })
 
--- MULTI  MODE --
+-- Multi  Mode --
 vim.keymap.set({'n', 'x', 'o'}, '\'',  '<Plug>(leap-forward)',                    { noremap = true, silent = true,            desc = "Leap Forward"                        })
 vim.keymap.set({'n', 'x', 'o'}, ';',   '<Plug>(leap-backward)',                   { noremap = true, silent = true,            desc = "Leap Backward"                       })
 vim.keymap.set({'n', 'x', 'o'}, 'g\'',  '<Plug>(leap-from-window)',               { noremap = true, silent = true,            desc = "Leap From Window"                    })
