@@ -17,14 +17,17 @@ commands+=("foot -e yazi $(courseInfo --path)")
 messages+=("Edit Last Lecture")
 commands+=("foot -e nvim $(courseInfo --last-lecture)")
 
-messages+=("View Course Notes (Compile)")
-commands+=("cd $(courseInfo --path)/notes && pdflatex ./master.tex && courseTools -c && zathura ./master.pdf")
+messages+=("View Course Notes (Full Compile)")
+commands+=("courseTools --update-main-full && cd $(courseInfo --path)/notes && pdflatex ./main.tex && pdflatex ./main.tex && courseTools -c && zathura ./main.pdf")
+
+messages+=("View Course Notes (Recent Compile)")
+commands+=("courseTools --update-main-new 3 && cd $(courseInfo --path)/notes && pdflatex ./main.tex && pdflatex ./main.tex && courseTools -c && zathura ./main.pdf")
 
 messages+=("View Course Notes (Don't Compile)")
-commands+=("zathura $(courseInfo --path)/notes/master.pdf")
+commands+=("zathura $(courseInfo --path)/notes/main.pdf")
 
 messages+=("Clean Directory")
-commands+=("cleanDirectory")
+commands+=("courseTools -C")
 
 # Rofi Logic
 if [[ $# = 0 ]]; then
