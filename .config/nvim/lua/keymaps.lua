@@ -106,7 +106,6 @@ vim.keymap.set('n', 'gaa', function()
 end,                                                                              { noremap = true, silent = true,            desc = "Align Paragraph to Single Character" })
 
 --%%% INSERT MODE %%%--
--- vim.keymap.del("i", "]]")
 
 --%%% VISUAL MODE %%%--
 -- Miscellaneous
