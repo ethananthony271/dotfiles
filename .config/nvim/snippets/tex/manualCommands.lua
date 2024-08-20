@@ -156,27 +156,27 @@ return {
     },
     {}
   ),
-  s( -- c -> Centering Command )
+  s( -- CC -> Centering Command )
     {
-      trig = "c",
+      trig = "CC",
     },
     {
       t("\\centering")
     },
     {}
   ),
-  s( -- h -> Hrule Command )
+  s( -- HH -> Hrule Command )
     {
-      trig = "h",
+      trig = "HH",
     },
     {
       t("\\hrule")
     },
     {}
   ),
-  s( -- r -> Reference (hyperref) )
+  s( -- RR -> Reference (hyperref) )
     {
-      trig = "r",
+      trig = "RR",
     },
     fmta(
       [[
@@ -213,9 +213,9 @@ return {
     ),
     {}
   ),
-  s( -- v -> Vspace Command )
+  s( -- VV -> Vspace Command )
     {
-      trig = "v",
+      trig = "VV",
     },
     fmta(
       [[

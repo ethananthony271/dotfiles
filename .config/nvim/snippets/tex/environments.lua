@@ -350,11 +350,12 @@ return {
     },
     fmta(
       [[
-        \begin{formula}
+        \begin{formula}{<>}
           <>
         \end{formula}
       ]],
       {
+        i(1),
         i(0),
       }
     ),
