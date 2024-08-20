@@ -60,7 +60,7 @@ return {
       ]],
       {
         i(1),
-        i(0),
+        d(2, get_visual),
         rep(1),
       }
     ),
@@ -87,7 +87,7 @@ return {
           t("gather"),
           t("gather*"),
         }),
-        i(0),
+        d(2, get_visual),
         rep(1),
       }
     ),
@@ -145,7 +145,7 @@ return {
               \label{<>}
             ]],
             {
-              i(3),
+              d(3, get_visual),
               i(1),
               c(2, {
                 fmta(
@@ -172,7 +172,7 @@ return {
               <>
             ]],
             {
-              i(1),
+              d(1, get_visual),
             }
           ),
         }),
@@ -220,7 +220,7 @@ return {
               \label{fig:<>}
             ]],
             {
-              i(3),
+              d(3, get_visual),
               i(1),
               c(2, {
                 fmta(
@@ -247,7 +247,7 @@ return {
               <>
             ]],
             {
-              i(1),
+              d(1, get_visual),
             }
           ),
         }),
@@ -292,7 +292,7 @@ return {
               \label{fig:<>}
             ]],
             {
-              i(3),
+              d(3, get_visual),
               i(1),
               c(2, {
                 fmta(
@@ -319,7 +319,7 @@ return {
               <>
             ]],
             {
-              i(1),
+              d(1, get_visual),
             }
           ),
         }),
@@ -356,7 +356,7 @@ return {
       ]],
       {
         i(1),
-        i(0),
+        d(2, get_visual),
       }
     ),
     {}
@@ -373,7 +373,7 @@ return {
       ]],
       {
         i(1),
-        i(0),
+        d(2, get_visual),
       }
     ),
     {}
@@ -389,7 +389,7 @@ return {
         \end{tikzpicture}
       ]],
       {
-        i(1)
+        d(1, get_visual),
       }
     ),
     {}
