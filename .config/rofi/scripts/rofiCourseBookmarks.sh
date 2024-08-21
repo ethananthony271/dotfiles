@@ -18,10 +18,10 @@ messages+=("Edit Last Lecture")
 commands+=("foot -e nvim $(courseInfo --last-lecture)")
 
 messages+=("View Course Notes (Full Compile)")
-commands+=("courseTools --update-main-full && cd $(courseInfo --path)/notes && pdflatex ./main.tex && pdflatex ./main.tex && courseTools -c && zathura ./main.pdf")
+commands+=("courseTools --update-main-full && cd $(courseInfo --path)/notes && pdflatex --shell-escape ./main.tex && pdflatex --shell-escape ./main.tex && courseTools -c && zathura ./main.pdf")
 
 messages+=("View Course Notes (Recent Compile)")
-commands+=("courseTools --update-main-new 3 && cd $(courseInfo --path)/notes && pdflatex ./main.tex && pdflatex ./main.tex && courseTools -c && zathura ./main.pdf")
+commands+=("courseTools --update-main-new 3 && cd $(courseInfo --path)/notes && pdflatex --shell-escape ./main.tex && pdflatex --shell-escape ./main.tex && courseTools -c && zathura ./main.pdf")
 
 messages+=("View Course Notes (Don't Compile)")
 commands+=("zathura $(courseInfo --path)/notes/main.pdf")
