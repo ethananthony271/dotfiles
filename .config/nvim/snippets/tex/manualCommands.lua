@@ -174,45 +174,6 @@ return {
     },
     {}
   ),
-  s( -- RR -> Reference (hyperref) )
-    {
-      trig = "RR",
-    },
-    fmta(
-      [[
-        <>
-      ]],
-      {
-        c(1, {
-          fmta(
-            [[
-              Figure \ref{fig:<>}
-            ]],
-            {
-              i(1),
-            }
-          ),
-          fmta(
-            [[
-              Figure \ref{tbl:<>}
-            ]],
-            {
-              i(1),
-            }
-          ),
-          fmta(
-            [[
-              \ref{<>}
-            ]],
-            {
-              i(1),
-            }
-          ),
-        }),
-      }
-    ),
-    {}
-  ),
   s( -- VV -> Vspace Command )
     {
       trig = "VV",
@@ -223,6 +184,56 @@ return {
       ]],
       {
         i(0, "12pt"),
+      }
+    ),
+    {}
+  ),
+  s( -- rf -> \ref (hyperref) )
+    {
+      trig = "rf",
+    },
+    fmta(
+      [[
+        <>
+      ]],
+      {
+        c(1, {
+          fmta(
+            [[
+              \href{<>}{<>}
+            ]],
+            {
+              i(1, "link"),
+              i(2, "text"),
+            }
+          ),
+          fmta(
+            [[
+              \url{<>}
+            ]],
+            {
+              i(1, "link"),
+            }
+          ),
+          fmta(
+            [[
+              \hypertarget{tgt:<>}{<>}
+            ]],
+            {
+              i(1, "id"),
+              i(2, "text"),
+            }
+          ),
+          fmta(
+            [[
+              \hyperlink{tgt:<>}{<>}
+            ]],
+            {
+              i(1, "id"),
+              i(2, "text"),
+            }
+          ),
+        }),
       }
     ),
     {}

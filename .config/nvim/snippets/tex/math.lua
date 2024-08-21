@@ -126,6 +126,67 @@ return {
       condition = non_letter
     }
   ),
+  s( -- ii -> Integral )
+    {
+      trig = "ii",
+      snippetType = "autosnippet"
+    },
+    fmta(
+      [[
+        <>\int_{<>}^{<>} <> \,<>
+      ]],
+      {
+        f( function(_, snip) return snip.captures[1] end ),
+        i(1),
+        i(2),
+        d(3, get_visual),
+        i(4),
+      }
+    ),
+    {
+      condition = non_letter
+    }
+  ),
+  s( -- ss -> Sigma Sum )
+    {
+      trig = "ss",
+      snippetType = "autosnippet"
+    },
+    fmta(
+      [[
+        <>\sum_{<>}^{<>} <>
+      ]],
+      {
+        f( function(_, snip) return snip.captures[1] end ),
+        i(1),
+        i(2),
+        d(3, get_visual),
+      }
+    ),
+    {
+      condition = non_letter
+    }
+  ),
+  s( -- ll -> Limit )
+    {
+      trig = "ll",
+      snippetType = "autosnippet"
+    },
+    fmta(
+      [[
+        <>\lim_{<> \to <>} <>
+      ]],
+      {
+        f( function(_, snip) return snip.captures[1] end ),
+        i(1),
+        i(2),
+        d(3, get_visual),
+      }
+    ),
+    {
+      condition = non_letter
+    }
+  ),
   s( -- o-r -> Over Right Arrow )
     {
       trig = "o-r",
@@ -156,44 +217,16 @@ return {
     ),
     {}
   ),
-  s( -- mcr -> pgfmathsetmacro )
+  s( -- inf -> Infinity )
     {
-      trig = "mcr",
-      snippetType = "autosnippet"
+      trig = "inf",
     },
     fmta(
       [[
-        <><>
+        \infty
       ]],
-      {
-        c(1, {
-          fmta(
-            [[
-              \pgfmathsetmacro{\<>}{<>}
-            ]],
-            {
-              i(1),
-              i(2),
-            }
-          ),
-          fmta(
-            [[
-              \pgfmathsetmacro{\<>}{<>}
-              \pgfmathprintnumberto{\<>}{\<>Pretty}
-            ]],
-            {
-              i(1),
-              i(2),
-              rep(1),
-              rep(1),
-            }
-          ),
-        }),
-        i(0),
-      }
+      {}
     ),
-    {
-      condition = line_begin
-    }
+    {}
   ),
 }

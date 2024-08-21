@@ -217,7 +217,7 @@ return {
             [[
               <>
               \caption{<>}
-              \label{fig:<>}
+              \label{<>}
             ]],
             {
               d(3, get_visual),
@@ -289,7 +289,7 @@ return {
             [[
               <>
               \caption{<>}
-              \label{fig:<>}
+              \label{<>}
             ]],
             {
               d(3, get_visual),
@@ -327,9 +327,9 @@ return {
     ),
     {}
   ),
-  s( -- enu -> Enumerate Environment )
+  s( -- en -> Enumerate Environment )
     {
-      trig = "enu",
+      trig = "en",
     },
     fmta(
       [[
@@ -344,9 +344,9 @@ return {
     ),
     {}
   ),
-  s( -- fml -> Forumla Environment )
+  s( -- fm -> Forumla Environment )
     {
-      trig = "fml",
+      trig = "fm",
     },
     fmta(
       [[
@@ -357,6 +357,22 @@ return {
       {
         i(1),
         d(2, get_visual),
+      }
+    ),
+    {}
+  ),
+  s( -- ex -> Forumla Environment )
+    {
+      trig = "ex",
+    },
+    fmta(
+      [[
+        \begin{example}
+          <>
+        \end{example}
+      ]],
+      {
+        d(1, get_visual),
       }
     ),
     {}
@@ -428,6 +444,36 @@ return {
         i(8),
         i(9),
         i(10),
+        i(0),
+      }
+    ),
+    {}
+  ),
+  s( -- kv -> Known Values Example Split Tcolorbox )
+    {
+      trig = "kv",
+    },
+    fmta(
+      [[
+        \begin{tcolorbox}[
+          standard jigsaw, % Allows opacity
+          colframe=fg,
+          boxrule=0px,
+          opacityback=0,
+          sidebyside,
+          lefthand width=75px,
+          coltext=fg,
+        ]
+        \textbf{Known Values}
+        \begin{align*}
+          <>
+        \end{align*}
+        \tcblower
+        <>
+        \end{tcolorbox}
+      ]],
+      {
+        i(1),
         i(0),
       }
     ),
