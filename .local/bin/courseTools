@@ -80,6 +80,15 @@ while [ : ]; do
       if [[ -f "$CURRQUARTER/xlatex/templates/figure/$(basename $templatePath)" ]]; then
         newPath="$(courseInfo --next-figure)"
         cp "$templatePath" "$newPath"
+
+        titleLineNumber=$(grep -n "\\\title{" "$newPath" | cut -d : -f 1)
+        newTitle=$(echo $newPath | sed 's/.*\/fig_\([0-9]\{3\}\)\.tex/Figure \1/')
+        sed -i "$(($titleLineNumber))s/\(\\\title{\).*\(}\)/\1$newTitle\2/" "$newPath"
+
+        dateLineNumber=$(grep -n "\\\date{" "$newPath" | cut -d : -f 1)
+        newDate=$(date +"%B %d, %Y")
+        sed -i "$(($dateLineNumber))s/\(\\\date{\).*\(}\)/\1$newDate\2/" "$newPath"
+
         notify-send "Figure Created in $(courseInfo --short)" "$(basename $newPath)"
       else
         echo "Error: template doesn't exist"
@@ -94,6 +103,15 @@ while [ : ]; do
       if [[ -f "$templatePath" ]]; then
         newPath="$(courseInfo --next-figure)"
         cp "$templatePath" "$newPath"
+
+        titleLineNumber=$(grep -n "\\\title{" "$newPath" | cut -d : -f 1)
+        newTitle=$(echo $newPath | sed 's/.*\/fig_\([0-9]\{3\}\)\.tex/Figure \1/')
+        sed -i "$(($titleLineNumber))s/\(\\\title{\).*\(}\)/\1$newTitle\2/" "$newPath"
+
+        dateLineNumber=$(grep -n "\\\date{" "$newPath" | cut -d : -f 1)
+        newDate=$(date +"%B %d, %Y")
+        sed -i "$(($dateLineNumber))s/\(\\\date{\).*\(}\)/\1$newDate\2/" "$newPath"
+
         notify-send "Figure Created in $(courseInfo --short)" "$(basename $newPath)"
       else
         echo "Error: basic_figure.tex doesn't exist"
@@ -107,6 +125,15 @@ while [ : ]; do
       if [[ -f "$CURRQUARTER/xlatex/templates/lecture/$(basename $templatePath)" ]]; then
         newPath="$(courseInfo --next-lecture)"
         cp "$templatePath" "$newPath"
+
+        titleLineNumber=$(grep -n "\\\title{" "$newPath" | cut -d : -f 1)
+        newTitle=$(echo $newPath | sed 's/.*\/lec_\([0-9]\{3\}\)\.tex/Lecture \1/')
+        sed -i "$(($titleLineNumber))s/\(\\\title{\).*\(}\)/\1$newTitle\2/" "$newPath"
+
+        dateLineNumber=$(grep -n "\\\date{" "$newPath" | cut -d : -f 1)
+        newDate=$(date +"%B %d, %Y")
+        sed -i "$(($dateLineNumber))s/\(\\\date{\).*\(}\)/\1$newDate\2/" "$newPath"
+
         notify-send "Lecture Created in $(courseInfo -short)" "$(basename $newPath)"
       else
         echo "Error: template doesn't exist"
@@ -121,6 +148,15 @@ while [ : ]; do
       if [[ -f "$templatePath" ]]; then
         newPath="$(courseInfo --next-lecture)"
         cp "$templatePath" "$newPath"
+
+        titleLineNumber=$(grep -n "\\\title{" "$newPath" | cut -d : -f 1)
+        newTitle=$(echo $newPath | sed 's/.*\/lec_\([0-9]\{3\}\)\.tex/Lecture \1/')
+        sed -i "$(($titleLineNumber))s/\(\\\title{\).*\(}\)/\1$newTitle\2/" "$newPath"
+
+        dateLineNumber=$(grep -n "\\\date{" "$newPath" | cut -d : -f 1)
+        newDate=$(date +"%B %d, %Y")
+        sed -i "$(($dateLineNumber))s/\(\\\date{\).*\(}\)/\1$newDate\2/" "$newPath"
+
         notify-send "Lecture Created in $(courseInfo --short)" "$(basename $newPath)"
       else
         echo "Error: basic_lecture.tex doesn't exist"
