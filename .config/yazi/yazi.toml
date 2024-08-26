@@ -37,8 +37,9 @@ office = [
   { run = 'librewolf "$@"',                 orphan = true,        desc = "LibreWolf"   },
 ]                                           
 directory = [
+  { run = 'foot -D "$@"',                   orphan = true,        desc = "terminal"    },
   { run = 'nvim "$@"',                      block = true,         desc = "neovim"      },
-  { run = 'foot -e yazi "$@"',              orpahn = true,        desc = "yazi"        },
+  { run = 'foot -e yazi "$@"',              orphan = true,        desc = "yazi"        },
   { run = 'zeditor "$@"',                   orphan = true,        desc = "Zed"         },
 ]
                                             
