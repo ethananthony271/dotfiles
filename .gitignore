@@ -9,3 +9,4 @@
 .config/ncmpcpp/error.log
 .config/beets/library.db
 .config/state.pickle
+.config/nvim/cd-project.nvim.json
