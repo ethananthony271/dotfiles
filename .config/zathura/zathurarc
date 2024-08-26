@@ -46,6 +46,8 @@ set selection-clipboard         "clipboard"
 map u scroll page-top
 map d scroll page-bottom
 map D toggle_page_mode
+map S adjust-open width
+map A adjust-open best-fit
 map R reload
 map = zoom in
 map - zoom out
