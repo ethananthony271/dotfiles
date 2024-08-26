@@ -11,6 +11,8 @@ configuration {
   kb-row-down: "Down,Control+j";
   kb-mode-next: "Control+l";
   kb-mode-previous: "Control+h";
+
+	terminal: "foot";
 }
 
 @theme "~/.config/rofi/themes/mojiMenuTheme.rasi"
