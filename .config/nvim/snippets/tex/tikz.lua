@@ -168,7 +168,7 @@ return {
     fmta(
       [[
     \foreach \<> in {<>} {
-    <>
+      <>
     }
     ]],
       {

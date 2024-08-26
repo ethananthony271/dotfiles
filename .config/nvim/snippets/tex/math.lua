@@ -51,7 +51,6 @@ return {
   s( -- mm -> Inline Math )
     {
       trig = "mm",
-      snippetType = "autosnippet"
     },
     fmta(
       [[
@@ -63,14 +62,11 @@ return {
         i(0),
       }
     ),
-    {
-      condition = non_letter
-    }
+    {}
   ),
   s( -- ff -> Fraction )
     {
       trig = "ff",
-      snippetType = "autosnippet"
     },
     fmta(
       [[
@@ -83,14 +79,11 @@ return {
         i(0),
       }
     ),
-    {
-      condition = non_letter
-    }
+    {}
   ),
   s( -- fF -> Fraction (Denominator) )
     {
       trig = "fF",
-      snippetType = "autosnippet"
     },
     fmta(
       [[
@@ -103,14 +96,11 @@ return {
         i(0),
       }
     ),
-    {
-      condition = non_letter
-    }
+    {}
   ),
   s( -- sq -> Square Root )
     {
       trig = "sq",
-      snippetType = "autosnippet"
     },
     fmta(
       [[
@@ -122,14 +112,11 @@ return {
         i(0),
       }
     ),
-    {
-      condition = non_letter
-    }
+    {}
   ),
   s( -- ii -> Integral )
     {
       trig = "ii",
-      snippetType = "autosnippet"
     },
     fmta(
       [[
@@ -143,14 +130,11 @@ return {
         i(4),
       }
     ),
-    {
-      condition = non_letter
-    }
+    {}
   ),
   s( -- ss -> Sigma Sum )
     {
       trig = "ss",
-      snippetType = "autosnippet"
     },
     fmta(
       [[
@@ -163,14 +147,11 @@ return {
         d(3, get_visual),
       }
     ),
-    {
-      condition = non_letter
-    }
+    {}
   ),
   s( -- ll -> Limit )
     {
       trig = "ll",
-      snippetType = "autosnippet"
     },
     fmta(
       [[
@@ -183,9 +164,22 @@ return {
         d(3, get_visual),
       }
     ),
+    {}
+  ),
+  s( -- o^ -> Hat )
     {
-      condition = non_letter
-    }
+      trig = "o^",
+    },
+    fmta(
+      [[
+        \hat{<>}<>
+      ]],
+      {
+        i(1),
+        i(0),
+      }
+    ),
+    {}
   ),
   s( -- o-r -> Over Right Arrow )
     {

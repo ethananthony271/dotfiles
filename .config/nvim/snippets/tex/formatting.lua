@@ -83,8 +83,11 @@ return {
     fmta(
       [[
         \section{<>}
+        \label{sec:<>}<>
       ]],
       {
+        i(1),
+        i(2),
         i(0),
       }
     ),
@@ -97,8 +100,11 @@ return {
     fmta(
       [[
         \subsection{<>}
+        \label{ssec:<>}<>
       ]],
       {
+        i(1),
+        i(2),
         i(0),
       }
     ),
@@ -111,8 +117,11 @@ return {
     fmta(
       [[
         \subsubsection{<>}
+        \label{sssec:<>}<>
       ]],
       {
+        i(1),
+        i(2),
         i(0),
       }
     ),

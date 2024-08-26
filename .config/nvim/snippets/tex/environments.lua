@@ -64,7 +64,9 @@ return {
         rep(1),
       }
     ),
-    {}
+    {
+      condition = line_begin
+    }
   ),
   s( -- eq -> Equation Environment )
     {
@@ -91,7 +93,9 @@ return {
         rep(1),
       }
     ),
-    {}
+    {
+      condition = line_begin
+    }
   ),
   s( -- tb -> Tabularray Environment )
     {
@@ -113,7 +117,9 @@ return {
         i(0, "content"),
       }
     ),
-    {}
+    {
+      condition = line_begin
+    }
   ),
   s( -- fg -> Figure Environment )
     {
@@ -178,7 +184,9 @@ return {
         }),
       }
     ),
-    {}
+    {
+      condition = line_begin
+    }
   ),
   s( -- sfg -> Subfigure Environment )
     {
@@ -253,7 +261,9 @@ return {
         }),
       }
     ),
-    {}
+    {
+      condition = line_begin
+    }
   ),
   s( -- wfg -> Wrapfigure Environment )
     {
@@ -325,7 +335,9 @@ return {
         }),
       }
     ),
-    {}
+    {
+      condition = line_begin
+    }
   ),
   s( -- en -> Enumerate Environment )
     {
@@ -342,7 +354,9 @@ return {
         i(0),
       }
     ),
-    {}
+    {
+      condition = line_begin
+    }
   ),
   s( -- fm -> Forumla Environment )
     {
@@ -359,7 +373,9 @@ return {
         d(2, get_visual),
       }
     ),
-    {}
+    {
+      condition = line_begin
+    }
   ),
   s( -- ex -> Forumla Environment )
     {
@@ -375,7 +391,9 @@ return {
         d(1, get_visual),
       }
     ),
-    {}
+    {
+      condition = line_begin
+    }
   ),
   s( -- def -> Definition Environment )
     {
@@ -392,7 +410,9 @@ return {
         d(2, get_visual),
       }
     ),
-    {}
+    {
+      condition = line_begin
+    }
   ),
   s( -- tk -> TikZ Environment )
     {
@@ -408,7 +428,9 @@ return {
         d(1, get_visual),
       }
     ),
-    {}
+    {
+      condition = line_begin
+    }
   ),
   s( -- ax -> Axis Environment (Tikz) )
     {
@@ -447,7 +469,9 @@ return {
         i(0),
       }
     ),
-    {}
+    {
+      condition = line_begin
+    }
   ),
   s( -- kv -> Known Values Example Split Tcolorbox )
     {
@@ -461,7 +485,7 @@ return {
           boxrule=0px,
           opacityback=0,
           sidebyside,
-          lefthand width=75px,
+          lefthand width=100px,
           coltext=fg,
         ]
         \textbf{Known Values}
@@ -477,6 +501,8 @@ return {
         i(0),
       }
     ),
-    {}
+    {
+      condition = line_begin
+    }
   ),
 }
