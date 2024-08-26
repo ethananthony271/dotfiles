@@ -29,7 +29,7 @@ if [[ $# = 0 ]]; then
     echo -e "${messages[$i]}"
   done
 else
-  coproc ( bash -c "librewolf $(echo $1 | sed -E 's/.*\(([^)]*)\).*/\1/')"  > /dev/null  2>&1 )
+  coproc ( bash -c "librewolf '$(echo $1 | sed -E 's/.*\(([^)]*)\).*/\1/')'"  > /dev/null  2>&1 )
   exit 0
 fi
 
