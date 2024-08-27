@@ -83,6 +83,7 @@ return {
           vim.keymap.set("n", "<leader>gd",  gitsigns.toggle_deleted,                                                { desc = "Toggle Deleted View"       })
           vim.keymap.set("n", "<leader>gD",  gitsigns.diffthis,                                                      { desc = "Preview Buffer Diff"       })
           vim.keymap.set("n", "<leader>gc",  "<cmd>Git commit<CR>",                                                  { desc = "Unstage Current Buffer"    })
+          vim.keymap.set("n", "<leader>gz",  "<cmd>LazyGit<CR>",                                                     { desc = "Open LazyGit"              })
 
           -- Text object
           map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
@@ -93,4 +94,20 @@ return {
   {
     "tpope/vim-fugitive",
   },
+  return {
+    "kdheepak/lazygit.nvim",
+    cmd = {
+      "LazyGit",
+      "LazyGitConfig",
+      "LazyGitCurrentFile",
+      "LazyGitFilter",
+      "LazyGitFilterCurrentFile",
+    },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    keys = {
+      { "<leader>gz", "<cmd>LazyGit<cr>", desc = "Open lazy git" },
+    },
+  }
 }
