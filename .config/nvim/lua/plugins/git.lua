@@ -46,5 +46,5 @@ return {
   },
   {
     "tpope/vim-fugitive",
-  }
+  },
 }
