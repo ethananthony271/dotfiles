@@ -20,7 +20,6 @@ end
 
 reqs()
 
--- Load snippets from ~/.config/nvim/LuaSnip/
 require("luasnip.loaders.from_lua").load({
   paths = "~/.config/nvim/snippets/",
   enable_autosnippets = true,
