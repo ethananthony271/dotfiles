@@ -2,6 +2,7 @@ return {
   {
     "lewis6991/gitsigns.nvim",
     config = function()
+      vim.cmd("highlight SignColumn guibg=NONE")
       require('gitsigns').setup {
         signs = {
           add          = { text = '┃' },
@@ -20,7 +21,7 @@ return {
         },
         auto_attach = true,
         attach_to_untracked = false,
-        current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
+        current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
         current_line_blame_opts = {
           virt_text = true,
           virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
@@ -41,6 +42,50 @@ return {
           row = 0,
           col = 1
         },
+        on_attach = function(bufnr)
+          local gitsigns = require('gitsigns')
+
+          local function map(mode, l, r, opts)
+            opts = opts or {}
+            opts.buffer = bufnr
+            vim.keymap.set(mode, l, r, opts)
+          end
+
+          -- Navigation
+          map('n', ']c', function()
+            if vim.wo.diff then
+              vim.cmd.normal({']c', bang = true})
+            else
+              gitsigns.nav_hunk('next')
+            end
+          end)
+
+          map('n', '[c', function()
+            if vim.wo.diff then
+              vim.cmd.normal({'[c', bang = true})
+            else
+              gitsigns.nav_hunk('prev')
+            end
+          end)
+
+          -- Actions
+          vim.keymap.set("n", "<leader>ghs", gitsigns.stage_hunk,                                                    { desc = "Stage Hunk"                })
+          vim.keymap.set("n", "<leader>ghr", gitsigns.reset_hunk,                                                    { desc = "Reset Hunk"                })
+          vim.keymap.set("v", "<leader>ghs", function() gitsigns.stage_hunk{vim.fn.line('.'), vim.fn.line('v')} end, { desc = "Stage Hunk"                })
+          vim.keymap.set("v", "<leader>ghr", function() gitsigns.reset_hunk{vim.fn.line('.'), vim.fn.line('v')} end, { desc = "Reset Hunk"                })
+          vim.keymap.set("n", "<leader>ghu", gitsigns.undo_stage_hunk,                                               { desc = "Undo Stage Hunk"           })
+          vim.keymap.set("n", "<leader>ghp", gitsigns.preview_hunk,                                                  { desc = "Preview Hunk"              })
+          vim.keymap.set("n", "<leader>gs",  gitsigns.stage_buffer,                                                  { desc = "Stage Buffer"              })
+          vim.keymap.set("n", "<leader>gR",  gitsigns.reset_buffer,                                                  { desc = "Reset Buffer"              })
+          vim.keymap.set("n", "<leader>gb",  function() gitsigns.blame_line{full=true} end,                          { desc = "Blame Link"                })
+          vim.keymap.set("n", "<leader>gB",  gitsigns.toggle_current_line_blame,                                     { desc = "Toggle Current Line Blame" })
+          vim.keymap.set("n", "<leader>gd",  gitsigns.diffthis,                                                      { desc = "Diff Current Buffer"       })
+          vim.keymap.set("n", "<leader>gD",  function() gitsigns.diffthis('~') end,                                  { desc = "Diff Current Buffer"       })
+          vim.keymap.set("n", "<leader>gd",  gitsigns.toggle_deleted,                                                { desc = "Toggle Deleted View"       })
+
+          -- Text object
+          map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+        end
       }
     end
   },
