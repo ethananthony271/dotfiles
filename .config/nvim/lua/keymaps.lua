@@ -3,6 +3,13 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 --%%% NORMAL MODE %%%--
+-- vim.keymap.del({"n", "x"}, "gcc")
+-- vim.keymap.del({"n", "x"}, "gbc")
+-- vim.keymap.del({"n", "x"}, "gc")
+-- vim.keymap.del({"n", "x"}, "gb")
+-- vim.keymap.del({"n", "x"}, "gcO")
+-- vim.keymap.del({"n", "x"}, "gco")
+-- vim.keymap.del({"n", "x"}, "gcA")
 
 -- Miscellaneous
 vim.keymap.set("n", "U",            "<C-r>",                                        { noremap = true, silent = true,            desc = "Redo"                                })
@@ -11,19 +18,14 @@ vim.keymap.set("n", "H",            "0",                                        
 vim.keymap.set("n", "<C-'>",        "<C-y>",                                        { noremap = true, silent = true,            desc = "Move Screen Up"                      })
 vim.keymap.set("n", "<C-;>",        "<C-e>",                                        { noremap = true, silent = true,            desc = "Move Screen Down"                    })
 vim.keymap.set("n", "<BS>",         "<C-o>",                                        { noremap = true, silent = true,            desc = "Move Cursor to Previous Mark"        })
+
 -- vim.keymap.set("n", "+",            "gg=G<C-o>",                                    { noremap = true, silent = true,            desc = "Indent Entire Document"              })
 vim.keymap.set("n", "<leader>`",    "<cmd>Alpha<CR>",                               { noremap = true, silent = true,            desc = "Return to Homepage"                  })
 vim.keymap.set("n", "<leader>?",    "<cmd>WhichKey<CR>",                            { noremap = true, silent = true,            desc = "Display Keymaps"                     })
 vim.keymap.set("n", "<leader>h",    "<cmd>Telescope help_tags hidden=true<CR>",     { noremap = true, silent = true,            desc = "Search Help Tags"                    })
 vim.keymap.set("n", "<C-S-f>",      ";",                                            { noremap = true, silent = true,            desc = "Repeat Find in Line"                 })
-vim.keymap.set("n", "<leader>w",    "<cmd>w<CR>",                                   { noremap = true, silent = true,            desc = "Write Current Buffer"                })
-vim.keymap.set("n", "<leader>W",    "<cmd>wa<CR>",                                  { noremap = true, silent = true,            desc = "Write All Buffers"                   })
-vim.keymap.set("n", "<leader>qq",   "<cmd>wq<CR>",                                  { noremap = true, silent = true,            desc = "Write Current Buffer and Quit"       })
-vim.keymap.set("n", "<leader>QQ",   "<cmd>wa<CR><cmd>q<CR>",                        { noremap = true, silent = true,            desc = "Write All Buffers and Quit"          })
 
 -- View Management                  
-vim.keymap.set("n", "<leader>vm",   "<cmd>RenderMarkdownToggle<CR>",                { noremap = true, silent = true,            desc = "Toggle Markdown View"                })
-vim.keymap.set("n", "<leader>vs",   "<cmd>Neominimap bufToggle<CR>",                { noremap = true, silent = true,            desc = "Toggle Side Code View"               })
 vim.keymap.set("n", "<leader>vh",   "<cmd>nohl<CR>",                                { noremap = true, silent = true,            desc = "Clear Highlighting"                  })
 vim.keymap.set("n", "<leader>vu",   "<cmd>UndotreeToggle<CR><cmd>UndotreeFocus<CR>",{ noremap = true, silent = true,            desc = "Toggle UndoTree"                     })
 
@@ -40,7 +42,7 @@ vim.keymap.set("n", "<C-S-j>",      "<cmd>resize -2<CR>",                       
 vim.keymap.set("n", "<C-S-h>",      "<cmd>vertical resize -2<CR>",                  { noremap = true, silent = true,            desc = "Horizontally Grow Focused Window"    })
 vim.keymap.set("n", "<C-S-l>",      "<cmd>vertical resize +2<CR>",                  { noremap = true, silent = true,            desc = "Vertically Grow Focused Window"      })
 
--- File Management                        
+-- Buffer Management                        
 vim.keymap.set("n", "<leader>ff",   "<cmd>Telescope find_files hidden=true<CR>",    { noremap = true, silent = true,            desc = "Find Files"                          })
 vim.keymap.set("n", "<leader>fg",   "<cmd>Telescope live_grep hidden=true<CR>",     { noremap = true, silent = true,            desc = "Live Grep"                           })
 vim.keymap.set("n", "<leader>fr",   "<cmd>Telescope oldfiles hidden=true<CR>",      { noremap = true, silent = true,            desc = "Recent Files"                        })
@@ -48,10 +50,11 @@ vim.keymap.set("n", "<leader>fb",   "<cmd>Telescope buffers hidden=true<CR>",   
 vim.keymap.set("n", "<leader>fo",   "<cmd>Yazi<CR>",                                { noremap = true, silent = true,            desc = "Open Yazi"                           })
 vim.keymap.set("n", "<leader>fO",   "<cmd>Oil<CR>",                                 { noremap = true, silent = true,            desc = "Open Oil"                            })
 vim.keymap.set("n", "<leader>fd!",  "<cmd>Delete!<CR>",                             { noremap = true, silent = true,            desc = "Delete File"                         })
--- vim.keymap.set("n", "<leader>fn",   "<cmd>Rename ",                                 { noremap = true, silent = true,            desc = "Rename File"                         })
--- vim.keymap.set("n", "<leader>fm",   "<cmd>Move ",                                   { noremap = true, silent = true,            desc = "Move File"                           })
--- vim.keymap.set("n", "<leader>fc",   "<cmd>Copy ",                                   { noremap = true, silent = true,            desc = "Copy File"                           })
--- vim.keymap.set("n", "<leader>fk",   "<cmd>Mkdir ",                                  { noremap = true, silent = true,            desc = "Make Directory"                      })
+vim.keymap.set("n", "<leader>fw",   "<cmd>w<CR>",                                   { noremap = true, silent = true,            desc = "Write Current Buffer"                })
+vim.keymap.set("n", "<leader>fW",   "<cmd>wa<CR>",                                  { noremap = true, silent = true,            desc = "Write All Buffers"                   })
+vim.keymap.set("n", "<leader>fq",   "<cmd>wq<CR>",                                  { noremap = true, silent = true,            desc = "Write Current Buffer and Quit"       })
+vim.keymap.set("n", "<leader>fQ",   "<cmd>wa<CR><cmd>q<CR>",                        { noremap = true, silent = true,            desc = "Write All Buffers and Quit"          })
+
 
 -- Directory Management
 -- vim.keymap.set("n", "<leader>cc",   "<cmd>CdProject<CR>",                           { noremap = true, silent = true,            desc = "Change Working Directory"            })

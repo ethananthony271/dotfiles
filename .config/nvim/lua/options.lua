@@ -11,6 +11,7 @@ vim.cmd("set sidescrolloff=10")
 vim.cmd("set colorcolumn=90")
 vim.cmd("set ignorecase")
 vim.cmd("set smartcase")
+vim.cmd("set formatoptions-=cro")
 
 -- CODE FOLDING SETTINGS
 vim.cmd("set foldcolumn=1")
