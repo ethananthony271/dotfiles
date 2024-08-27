@@ -94,7 +94,7 @@ return {
   {
     "tpope/vim-fugitive",
   },
-  return {
+  {
     "kdheepak/lazygit.nvim",
     cmd = {
       "LazyGit",
@@ -105,9 +105,6 @@ return {
     },
     dependencies = {
       "nvim-lua/plenary.nvim",
-    },
-    keys = {
-      { "<leader>gz", "<cmd>LazyGit<cr>", desc = "Open lazy git" },
     },
   }
 }
