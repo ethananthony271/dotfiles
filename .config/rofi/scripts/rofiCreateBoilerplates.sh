@@ -10,7 +10,7 @@ declare -a commands
 for i in ${!paths[@]}; do
   templatePath="${paths[$i]}"
   type=$(basename $(dirname "$templatePath") | sed 's/\(...\).*/\1/')
-  title="$(echo $(cat "$templatePath" | rg \title) | sed 's/\\title{\(.*\)}/\1/')"
+  title="$(echo $(cat "$templatePath" | rg '\\title') | sed 's/\\title{\(.*\)}/\1/')"
   messages+=("$type: $title <span weight='light' style='italic'>($(basename $templatePath))</span>")
 
   if [[ $type = "fig" ]]; then
