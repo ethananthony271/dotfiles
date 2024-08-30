@@ -37,7 +37,7 @@ elif [[ i=$(isFolder $1) -ge 0 ]]; then
     echo -e "${names[$i]} <span weight='light' style='italic'>(${urls[$i]})</span>"
   done
 else
-  coproc ( bash -c "librewolf $(echo $1 | sed -E 's/.*\(([^)]*)\).*/\1/')"  > /dev/null  2>&1 )
+  coproc ( bash -c "xdg-open $(echo $1 | sed -E 's/.*\(([^)]*)\).*/\1/')"  > /dev/null  2>&1 )
 fi
 
 IFS="$BIFS"

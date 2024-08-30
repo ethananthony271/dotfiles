@@ -18,7 +18,7 @@ all=(shutdown reboot suspend hibernate logout lockscreen)
 # By default, show all (i.e., just copy the array)
 # show=("${all[@]}")
 
-show=(shutdown suspend hibernate logout lockscreen)
+show=(shutdown suspend hibernate reboot logout lockscreen)
 
 declare -A texts
 texts[lockscreen]="lock screen"

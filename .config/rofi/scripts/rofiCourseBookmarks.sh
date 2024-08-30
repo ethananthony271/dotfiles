@@ -1,30 +1,19 @@
 #!/usr/bin/env bash
 
-mapfile -t messages< <(cat $CURRCOURSE/info.json | jq -r '.bookmarks | keys[]')
-mapfile -t addresses< <(cat $CURRCOURSE/info.json | jq -r '.bookmarks[]')
-
-commands=()
-for address in ${addresses[@]}; do
-  commands+=("librewolf $address")
-done
+mapfile -t messages< <(jq -r '.bookmarks | keys[]' $(courseInfo --path)/info.json)
+mapfile -t commands< <(jq -r '.bookmarks[]' $(courseInfo --path)/info.json | sed "s/^\(.*\)$/xdg-open '\1'/")
 
 messages+=("Open in Terminal")
 commands+=("foot -D $(courseInfo --path)")
 
 messages+=("Open in File Browser")
-commands+=("foot -e yazi $(courseInfo --path)")
-
-messages+=("Edit Last Lecture")
-commands+=("foot -e nvim $(courseInfo --last-lecture)")
+commands+=("xdg-open '$(courseInfo --path)'")
 
 messages+=("View Course Notes (Full Compile)")
-commands+=("courseTools --update-main-full && cd $(courseInfo --path)/notes && pdflatex --shell-escape ./main.tex && pdflatex --shell-escape ./main.tex && courseTools -c && zathura ./main.pdf")
-
-messages+=("View Course Notes (Recent Compile)")
-commands+=("courseTools --update-main-new 3 && cd $(courseInfo --path)/notes && pdflatex --shell-escape ./main.tex && pdflatex --shell-escape ./main.tex && courseTools -c && zathura ./main.pdf")
+commands+=("courseTools --update-main-full && cd $(courseInfo --path)/notes && pdflatex --shell-escape ./main.tex && pdflatex --shell-escape ./main.tex && courseTools -c && xdg-open ./main.pdf")
 
 messages+=("View Course Notes (Don't Compile)")
-commands+=("zathura $(courseInfo --path)/notes/main.pdf")
+commands+=("xdg-open $(courseInfo --path)/notes/main.pdf")
 
 messages+=("Clean Directory")
 commands+=("courseTools -C")
