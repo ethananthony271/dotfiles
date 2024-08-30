@@ -18,7 +18,6 @@ vim.keymap.set("n", "H",            "0",                                        
 vim.keymap.set("n", "<C-'>",        "<C-y>",                                        { noremap = true, silent = true,            desc = "Move Screen Up"                      })
 vim.keymap.set("n", "<C-;>",        "<C-e>",                                        { noremap = true, silent = true,            desc = "Move Screen Down"                    })
 
--- vim.keymap.set("n", "+",            "gg=G<C-o>",                                    { noremap = true, silent = true,            desc = "Indent Entire Document"              })
 vim.keymap.set("n", "<leader>`",    "<cmd>Alpha<CR>",                               { noremap = true, silent = true,            desc = "Return to Homepage"                  })
 vim.keymap.set("n", "<leader>?",    "<cmd>WhichKey<CR>",                            { noremap = true, silent = true,            desc = "Display Keymaps"                     })
 vim.keymap.set("n", "<leader>h",    "<cmd>Telescope help_tags hidden=true<CR>",     { noremap = true, silent = true,            desc = "Search Help Tags"                    })
