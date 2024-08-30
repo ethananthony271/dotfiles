@@ -93,6 +93,10 @@ return {
   },
   {
     "tpope/vim-fugitive",
+    cmd = {
+      "Git",
+      "G",
+    },
   },
   {
     "kdheepak/lazygit.nvim",
