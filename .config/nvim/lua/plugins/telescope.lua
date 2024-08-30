@@ -7,7 +7,7 @@ return {
       "nvim-lua/plenary.nvim"
     },
     config = function()
-      local builtin = require("telescope.builtin")
+      -- local builtin = require("telescope.builtin")
       require('telescope').setup{
         defaults = {
           mappings = {
