@@ -17,8 +17,9 @@ edit = [
 ]                                           
 pdf = [                                     
   { run = 'zathura "$@"',                   orphan = true,        desc = "zathura"     },
-  { run = 'librewolf "$@"',                 orphan = true,        desc = "LibreWolf"   },
+  { run = 'zen-browser "$@"',               orphan = true,        desc = "Zen Browser" },
   { run = 'libreoffice "$@"',               orphan = true,        desc = "LibreOffice" },
+  # { run = 'librewolf "$@"',                 orphan = true,        desc = "LibreWolf"   },
 ]                                           
 video = [                                   
   { run = 'mpv "$@"',                       orphan = true,        desc = "mpv"         },
@@ -34,7 +35,8 @@ image = [
 ]                                           
 office = [                                  
   { run = 'libreoffice "$@"',               orphan = true,        desc = "LibreOffice" },
-  { run = 'librewolf "$@"',                 orphan = true,        desc = "LibreWolf"   },
+  { run = 'zen-browser "$@"',               orphan = true,        desc = "Zen Browser" },
+  # { run = 'librewolf "$@"',                 orphan = true,        desc = "LibreWolf"   },
 ]                                           
 directory = [
   { run = 'foot -D "$@"',                   orphan = true,        desc = "terminal"    },
