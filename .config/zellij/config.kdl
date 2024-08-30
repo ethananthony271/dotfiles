@@ -1,5 +1,5 @@
 pane_frames false
-default_layout "compact"
+default_layout "default"
 copy_command "wl-copy"
 
 theme "gruvbox-dark"
@@ -39,6 +39,11 @@ keybinds clear-defaults=true {
     bind "Alt j"     { MoveFocus "Down"                    ;                         }
     bind "Alt k"     { MoveFocus "Up"                      ;                         }
 
+    bind "Alt H"     { Resize "Increase Right"             ;                         }
+    bind "Alt J"     { Resize "Increase Up"                ;                         }
+    bind "Alt K"     { Resize "Increase Down"              ;                         }
+    bind "Alt L"     { Resize "Increase Left"              ;                         }
+
     bind "Alt n"     { NewPane "Down"                      ; SwitchToMode "Normal" ; }
     bind "Alt m"     { NewPane "Right"                     ; SwitchToMode "Normal" ; }
     bind "Alt w"     { CloseFocus                          ; SwitchToMode "Normal" ; }
@@ -72,10 +77,10 @@ keybinds clear-defaults=true {
     bind "j"         { MoveFocus "Down"                    ;                         }
     bind "k"         { MoveFocus "Up"                      ;                         }
     bind "l"         { MoveFocus "Right"                   ;                         }
-    bind "H"         { Resize "Decrease Left"              ;                         }
-    bind "J"         { Resize "Decrease Down"              ;                         }
-    bind "K"         { Resize "Decrease Up"                ;                         }
-    bind "L"         { Resize "Decrease Right"             ;                         }
+    bind "H"         { Resize "Increase Right"             ;                         }
+    bind "J"         { Resize "Increase Up"                ;                         }
+    bind "K"         { Resize "Increase Down"              ;                         }
+    bind "L"         { Resize "Increase Left"              ;                         }
     bind "Tab"       { SwitchFocus                         ;                         }
     bind "n"         { NewPane "Down"                      ; SwitchToMode "Normal" ; }
     bind "m"         { NewPane "Right"                     ; SwitchToMode "Normal" ; }
