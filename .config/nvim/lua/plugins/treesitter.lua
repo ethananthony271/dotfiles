@@ -6,12 +6,21 @@ return {
     local config = require("nvim-treesitter.configs")
     config.setup({
       ensure_installed = {
-        "lua",
-        "python",
+        "bash",
         "c",
         "cpp",
-        "rasi",
+        "css",
         "hyprlang",
+        "json",
+        "kdl",
+        "lua",
+        "markdown",
+        "markdown_inline",
+        "python",
+        "query",
+        "rasi",
+        "vim",
+        "vimdoc",
       },
       highlight = {
         enable = true,
