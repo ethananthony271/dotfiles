@@ -53,6 +53,13 @@ vim.keymap.set("n", "<leader>fW",   "<cmd>wa<CR>",                              
 vim.keymap.set("n", "<leader>fq",   "<cmd>wq<CR>",                                  { noremap = true, silent = true,            desc = "Write Current Buffer and Quit"       })
 vim.keymap.set("n", "<leader>fQ",   "<cmd>wa<CR><cmd>q<CR>",                        { noremap = true, silent = true,            desc = "Write All Buffers and Quit"          })
 
+-- LSP Usage
+vim.keymap.set("n", "<leader>ck",   vim.lsp.buf.hover,                              { noremap = true, silent = true,            desc = "Get LSP Hover Message"               })
+vim.keymap.set("n", "<leader>cd",   vim.lsp.buf.definition,                         { noremap = true, silent = true,            desc = "Get LSP Definition"                  })
+vim.keymap.set("n", "<leader>ca",   vim.lsp.buf.code_action,                        { noremap = true, silent = true,            desc = "LSP Code Action"                     })
+vim.keymap.set('n', '<leader>ch', function()
+  vim.diagnostic.enable(not vim.diagnostic.is_enabled())
+end,                                                                                { silent = true, noremap = true,            desc = "Hide LSP Diagnostics"                })
 
 -- Directory Management
 -- vim.keymap.set("n", "<leader>cc",   "<cmd>CdProject<CR>",                           { noremap = true, silent = true,            desc = "Change Working Directory"            })
