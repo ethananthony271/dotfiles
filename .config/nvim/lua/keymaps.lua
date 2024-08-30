@@ -138,6 +138,6 @@ vim.keymap.set("x", "L",            "$",                                        
 vim.keymap.set("x", "H",            "0",                                            { noremap = true, silent = true,            desc = "Go to Front of Line"                 })
 
 -- Multi  Mode --
-vim.keymap.set({'n', 'x', 'o'}, '\'',  '<Plug>(leap-forward)',                      { noremap = true, silent = true,            desc = "Leap Forward"                        })
-vim.keymap.set({'n', 'x', 'o'}, ';',   '<Plug>(leap-backward)',                     { noremap = true, silent = true,            desc = "Leap Backward"                       })
-vim.keymap.set({'n', 'x', 'o'}, 'g\'',  '<Plug>(leap-from-window)',                 { noremap = true, silent = true,            desc = "Leap From Window"                    })
+vim.keymap.set({'n', 'x', 'o'}, 's',  '<Plug>(leap-forward)',                      { noremap = true, silent = true,            desc = "Leap Forward"                        })
+vim.keymap.set({'n', 'x', 'o'}, 'S',   '<Plug>(leap-backward)',                     { noremap = true, silent = true,            desc = "Leap Backward"                       })
+vim.keymap.set({'n', 'x', 'o'}, 'gs',  '<Plug>(leap-from-window)',                 { noremap = true, silent = true,            desc = "Leap From Window"                    })
