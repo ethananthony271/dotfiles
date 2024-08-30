@@ -147,8 +147,8 @@ return {
           fmta(
             [[
               <>
-              \caption{<>}
-              \label{<>}
+                \caption{<>}
+                \label{<>}
             ]],
             {
               d(3, get_visual),
@@ -224,8 +224,8 @@ return {
           fmta(
             [[
               <>
-              \caption{<>}
-              \label{<>}
+                \caption{<>}
+                \label{<>}
             ]],
             {
               d(3, get_visual),
@@ -271,7 +271,7 @@ return {
     },
     fmta(
       [[
-        \begin{wrapfigure}{<>}{<>}
+        \begin{wrapfigure}[]{<>}{<>}
           <>
         \end{wrapfigure}
       ]],
@@ -298,8 +298,8 @@ return {
           fmta(
             [[
               <>
-              \caption{<>}
-              \label{<>}
+                \caption{<>}
+                \label{<>}
             ]],
             {
               d(3, get_visual),
@@ -339,19 +339,24 @@ return {
       condition = line_begin
     }
   ),
-  s( -- en -> Enumerate Environment )
+  s( -- ls -> List Environment )
     {
-      trig = "en",
+      trig = "ls",
     },
     fmta(
       [[
-        \begin{enumerate}
+        \begin{<>}
           \itemsep0em
           \item <>
-        \end{enumerate}
+        \end{<>}
       ]],
       {
+        c(1, {
+          t("itemize"),
+          t("enumerate"),
+        }),
         i(0),
+        rep(1)
       }
     ),
     {

@@ -156,27 +156,27 @@ return {
     },
     {}
   ),
-  s( -- CC -> Centering Command )
+  s( -- \c -> Centering Command )
     {
-      trig = "CC",
+      trig = "\\c",
     },
     {
       t("\\centering")
     },
     {}
   ),
-  s( -- HH -> Hrule Command )
+  s( -- \h -> Hrule Command )
     {
-      trig = "HH",
+      trig = "\\h",
     },
     {
       t("\\hrule")
     },
     {}
   ),
-  s( -- VV -> Vspace Command )
+  s( -- \v -> Vspace Command )
     {
-      trig = "VV",
+      trig = "\\v",
     },
     fmta(
       [[
