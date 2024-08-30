@@ -88,6 +88,11 @@ vim.keymap.set({ "i", "s" }, "<c-s-k>", function()
     require("luasnip").change_choice(1)
   end
 end,                                                                                { noremap = true, silent = true,            desc = "Change Choice Within Snippet"        })
+vim.keymap.set({ "i", "s" }, "<c-s-j>", function()
+  if require("luasnip").choice_active() then
+    require("luasnip").change_choice(-1)
+  end
+end,                                                                                { noremap = true, silent = true,            desc = "Change Choice Within Snippet"        })
 vim.keymap.set("n", "<leader><leader>s", "<cmd>source ~/.config/nvim/lua/plugins/luasnip.lua<CR>", { desc = "Source luasnip snippets"                                      })
 
 -- Align
