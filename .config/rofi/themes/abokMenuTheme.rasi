@@ -6,8 +6,8 @@ window {
     location:                    center;
     anchor:                      center;
     fullscreen:                  false;
-    width:                       50%;
-    height:                      218px; //27px increments per list item
+    width:                       15%;
+    height:                      326px; //27px increments per list item
     x-offset:                    0px;
     y-offset:                    0px;
 
