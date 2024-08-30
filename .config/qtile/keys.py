@@ -7,7 +7,7 @@ from libqtile.lazy import lazy
 mod = "mod4"
 
 terminal = "kitty"
-browser = "librewolf"
+browser = "zen-browser"
 fileManager = "kitty -e yazi"
 musicPlayer = "kitty -e ncmpcpp"
 messager = "beeper"
