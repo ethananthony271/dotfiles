@@ -21,7 +21,7 @@ vim.keymap.set("n", "<C-;>",        "<C-e>",                                    
 vim.keymap.set("n", "<leader>`",    "<cmd>Alpha<CR>",                               { noremap = true, silent = true,            desc = "Return to Homepage"                  })
 vim.keymap.set("n", "<leader>?",    "<cmd>WhichKey<CR>",                            { noremap = true, silent = true,            desc = "Display Keymaps"                     })
 vim.keymap.set("n", "<leader>h",    "<cmd>Telescope help_tags hidden=true<CR>",     { noremap = true, silent = true,            desc = "Search Help Tags"                    })
-vim.keymap.set("n", "<C-S-f>",      ";",                                            { noremap = true, silent = true,            desc = "Repeat Find in Line"                 })
+vim.keymap.set("n", ",",            ";",                                            { noremap = true, silent = true,            desc = "Repeat Find in Line"                 })
 
 -- View Management                  
 vim.keymap.set("n", "<leader>vh",   "<cmd>nohl<CR>",                                { noremap = true, silent = true,            desc = "Clear Highlighting"                  })
