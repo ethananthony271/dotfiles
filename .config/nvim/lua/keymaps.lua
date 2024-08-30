@@ -17,7 +17,6 @@ vim.keymap.set("n", "L",            "$",                                        
 vim.keymap.set("n", "H",            "0",                                            { noremap = true, silent = true,            desc = "Go to Front of Line"                 })
 vim.keymap.set("n", "<C-'>",        "<C-y>",                                        { noremap = true, silent = true,            desc = "Move Screen Up"                      })
 vim.keymap.set("n", "<C-;>",        "<C-e>",                                        { noremap = true, silent = true,            desc = "Move Screen Down"                    })
-vim.keymap.set("n", "<BS>",         "<C-o>",                                        { noremap = true, silent = true,            desc = "Move Cursor to Previous Mark"        })
 
 -- vim.keymap.set("n", "+",            "gg=G<C-o>",                                    { noremap = true, silent = true,            desc = "Indent Entire Document"              })
 vim.keymap.set("n", "<leader>`",    "<cmd>Alpha<CR>",                               { noremap = true, silent = true,            desc = "Return to Homepage"                  })
