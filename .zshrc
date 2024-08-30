@@ -115,11 +115,7 @@ alias d='yazi'
 alias n='ncmpcpp'
 alias f='fzf --preview "bat --color=always {}"'
 
-alias ta='todo add '
-alias tm='todo rm '
-alias td='todo done '
-alias tl='todo list'
-alias ts='todo sort'
+alias btl='bluetoothctl'
 
 alias yt-dlp-a='yt-dlp --config-locations ~/.config/yt-dlp/albumconfig.conf '
 alias convert='/usr/local/bin/convert_files.sh '
