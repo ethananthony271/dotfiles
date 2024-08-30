@@ -39,6 +39,7 @@ echoHelpMessage () {
   echo "                                shared directory, including the newest lectures first."
   echo "      --update-main-old [n]     Updates the main.tex file to include n lectures in the"
   echo "                                shared directory, including the oldest lectures first."
+  echo "      --edit-current-lecture    Opens the most recent lecture in \$VISUAL"
 }
 
 if [[ -d "$1" ]]; then
@@ -53,7 +54,7 @@ else
   courseDirectory=$(courseInfo --path)
 fi
 
-VALID_ARGS=$(getopt -o hcCf:Fl:Las: --long clean,full-clean,create-figure:,create-basic-figure,create-lecture:,create-basic-lecture,auto-course,set-course:,update-main-full,update-main-new:,update-main-old: -- "$@")
+VALID_ARGS=$(getopt -o hcCf:Fl:Las: --long clean,full-clean,create-figure:,create-basic-figure,create-lecture:,create-basic-lecture,auto-course,set-course:,update-main-full,update-main-new:,update-main-old:,edit-current-lecture -- "$@")
 if [[ $? -ne 0 ]]; then
   exit 1;
 fi
@@ -312,6 +313,14 @@ while [ : ]; do
         done
       fi
       shift
+      shift
+      ;;
+
+    --edit-current-lecture)
+      lecturePath=$(courseInfo --last-lecture)
+      cursorLineNumber=$(( $(grep -n "\\\end{document}" "$lecturePath" | cut -d : -f 1) - 1 ))
+      # foot -e $VISUAL "+$cursorLineNumber" "$lecturePath"
+      foot -e nvim "+$cursorLineNumber" "$lecturePath"
       shift
       ;;
 
